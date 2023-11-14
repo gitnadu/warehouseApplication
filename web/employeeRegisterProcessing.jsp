@@ -13,7 +13,7 @@
         <title>Register Inventory Employee Processing</title>
     </head>
     <body>
-        <jsp:useBean id="obj" class="invEmpMgmt.inventoryEmployee" scope="session" />
+        <jsp:useBean id="obj" class="employee_management.employee" scope="session" />
         <%
             obj.last_name  = request.getParameter("employee_lastname");
             obj.first_name = request.getParameter("employee_firstname");
