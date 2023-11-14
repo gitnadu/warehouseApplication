@@ -1,4 +1,4 @@
-package warehouseManagement;
+package warehouseMgmt;
 
 public class Warehouse {
     public int warehouseID;

@@ -1,4 +1,4 @@
-package productManagement;
+package productMgmt;
 
 import java.util.*;
 

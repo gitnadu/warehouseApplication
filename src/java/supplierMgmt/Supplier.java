@@ -1,4 +1,4 @@
-package supplierManagement;
+package supplierMgmt;
 
 public class Supplier {
     public int supplierID;
@@ -19,6 +19,6 @@ public class Supplier {
     public static void main() {
 
 
-        
+
     }
 }
