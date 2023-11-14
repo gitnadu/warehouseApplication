@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title> Register a New Product Line </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h2> Register a New Product Line </h2>
+        <form action="productLineRegisterProcessing.jsp"> 
+            Product Line Name:
+            <input type="text" id="product_line_name" name="product_line_name"><br>
+
+            Brand Name:
+            <input type="text" id="brand" name="brand"><br>
+
+            Category:
+            <input type="text" id="category" name="category"><br>
+            <!-- We can display a list of unique categories here. -->
+
+            Product Line Description:
+            <input type="text" id="product_line_description" name="product_line_description"><br>
+            
+            <input type="submit" value="Register">
+        </form>
+    </body>
+</html>
