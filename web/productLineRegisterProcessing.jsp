@@ -13,7 +13,7 @@
         <title> Register Product Line Processing </title>
     </head>
     <body>
-        <jsp:useBean id="obj" class="product_management.product_line" scope="session" />
+        <jsp:useBean id="obj" class="productMgmt.product_line" scope="session" />
         <%
             obj.product_line_name = request.getParameter("product_line_name");
             obj.brand = request.getParameter("brand");
