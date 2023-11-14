@@ -1,6 +1,6 @@
 package warehouseMgmt;
 
-public class Warehouse {
+public class Warehouses {
     public int warehouseID;
     public String city;
     public String phoneNumber;
@@ -15,7 +15,7 @@ public class Warehouse {
     public int maxBinNumber;
 
     //Constructor
-    public Warehouse(int warehouseID, String city, String phoneNumber, String firstAddress,
+    public Warehouses(int warehouseID, String city, String phoneNumber, String firstAddress,
                      String state, String country, String postalCode, boolean isFunctional,
                      int maxRow, int maxBay, int maxLevel, int maxBinNumber) {
                         this.warehouseID = warehouseID;

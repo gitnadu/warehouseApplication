@@ -7,13 +7,7 @@ public class Suppliers {
     public String officePhoneNumber;
 
     //Constructor
-    public Suppliers(int supplierID, String supplierContactNumber,
-                    String officeAddress, String officePhoneNumber) {
-                        this.supplierID = supplierID;
-                        this.supplierContactNumber = supplierContactNumber;
-                        this.officeAddress = officeAddress;
-                        this.officePhoneNumber = officePhoneNumber;
-                    }
+    public Suppliers() {}
 
     public int registerSupplier() {
         try {
