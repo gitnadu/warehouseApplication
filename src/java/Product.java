@@ -19,7 +19,7 @@ enum statusEnum {
     DISPOSED;
 }
 
-public class product {
+public class Product {
     
     //Fields
     public int productID; //public
@@ -37,25 +37,23 @@ public class product {
     //Default constructor
 
     //Constructor
-    public product(int productID, int warehouseID, Date dateReceived, int productLineID,
+    public Product(int productID, int warehouseID, Date dateReceived, int productLineID,
                    condEnum productCond, String reason, double stockPrice, int supplierID,
                    measureEnum unitMeasure, boolean isReceivedFromWarehouse, statusEnum status) 
                    {
-                    this.productID = productID;
-                    this.warehouseID = warehouseID;
-                    this.dateReceived = dateReceived;
-                    this.productLineID = productLineID;
-                    this.productCond = productCond;
-                    this.reason = reason;
-                    this.stockPrice = stockPrice;
-                    this.supplierID = supplierID;
-                    this.unitMeasure = unitMeasure;
-                    this.isReceivedFromWarehouse = isReceivedFromWarehouse;
-                    this.status = status;
+                        this.productID = productID;
+                        this.warehouseID = warehouseID;
+                        this.dateReceived = dateReceived;
+                        this.productLineID = productLineID;
+                        this.productCond = productCond;
+                        this.reason = reason;
+                        this.stockPrice = stockPrice;
+                        this.supplierID = supplierID;
+                        this.unitMeasure = unitMeasure;
+                        this.isReceivedFromWarehouse = isReceivedFromWarehouse;
+                        this.status = status;
     }
     
-    //Setters and getters
-
     //Testing
     public static void main() {
 

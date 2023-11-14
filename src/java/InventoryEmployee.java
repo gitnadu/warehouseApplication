@@ -13,7 +13,7 @@ package inventoryEmployeeManagement;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-public class inventoryEmployee {
+public class InventoryEmployee {
     
     // fields of inventory employee
     public String first_name;
@@ -25,7 +25,7 @@ public class inventoryEmployee {
     public Date birthday = new Date();
     DateFormat df=new SimpleDateFormat("yyyy-MM-dd");
     
-    public inventoryEmployee(){}
+    public InventoryEmployee(){}
     
     public int register_employee(){
         
