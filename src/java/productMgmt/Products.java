@@ -87,6 +87,8 @@ public class Products {
 
             pstmt.close();
             conn.close();
+
+            return 1;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return 0;
@@ -119,6 +121,8 @@ public class Products {
 
             pstmt.close();
             conn.close();
+
+            return 1;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return 0;
@@ -151,6 +155,8 @@ public class Products {
 
             pstmt.close();
             conn.close();
+
+            return 1;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return 0;
@@ -210,6 +216,8 @@ public class Products {
 
             pstmt.close();
             conn.close();
+
+            return 1;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return 0;
