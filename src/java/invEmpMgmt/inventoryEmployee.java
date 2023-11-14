@@ -27,14 +27,14 @@ public class inventoryEmployee {
     public String curr_address;
     public String gender;
     
-    String temp_birthday;
+    public String temp_birthday;
     public Date birthday = new Date();
     DateFormat df=new SimpleDateFormat("yyyy-MM-dd");
     
     public String emailaddress;
     
-    String temp_employement_startdate;
-    String temp_employement_enddate;
+    public String temp_employement_startdate;
+    public String temp_employement_enddate;
     public Date employement_startdate = new Date();
     public Date employement_enddate = new Date();
     
@@ -42,8 +42,16 @@ public class inventoryEmployee {
     
     public inventoryEmployee(){}
     
-    public int register_employee(){
+    public void birthdayDate(String temp)
+    {
+        try{
+            this.birthday = df.parse(temp); 
+        } catch(Exception o){
+            o.printStackTrace();
+        }
         
+    }
+    public int register_employee(){
         try {
             // 1. Instantiate a connection variable
             Connection conn;     
@@ -60,7 +68,7 @@ public class inventoryEmployee {
                 employeeID = rst.getInt("newID");
             }
             
-            pstmt = conn.prepareStatement("INSERT INTO inventoryemployees (employeeID, lastName, firstName, middleName, permanentAddress, currentAddress, gender, birthday, emailAddress, employmentStartDate,employmentEndDate, phoneNumber VALUE (?,?,?,?,?,?,?,?,?,?,?,?)");
+            pstmt = conn.prepareStatement("INSERT INTO inventoryemployees (employeeID, lastName, firstName, middleName, permanentAddress, currentAddress, gender, birthday, emailAddress, employmentStartDate,employmentEndDate, phoneNumber) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
             pstmt.setInt(1, employeeID);
             pstmt.setString(2, last_name);
             pstmt.setString(3, first_name);
@@ -68,24 +76,23 @@ public class inventoryEmployee {
             pstmt.setString(5, perm_address);
             pstmt.setString(6, curr_address);
             pstmt.setString(7, gender);
+            System.out.println("before birthday");
             
-            try{
-      
-                birthday = df.parse(temp_birthday);
-                employement_startdate = df.parse(temp_employement_startdate);
-                employement_enddate = df.parse(temp_employement_enddate);
-            } catch(Exception e){
-                e.printStackTrace();
-            }
+            birthdayDate(temp_birthday);
+            
+            System.out.println("after birthday");
+            employement_startdate = new Date();
+            employement_enddate = null;
             
             pstmt.setDate(8, new java.sql.Date(birthday.getTime()));
             pstmt.setString(9, emailaddress);
             
             pstmt.setDate(10, new java.sql.Date(employement_startdate.getTime()));
-            pstmt.setDate(11, new java.sql.Date(employement_enddate.getTime()));
+            pstmt.setDate(11, null);
             pstmt.setString(12, phonenumber);
+
             pstmt.executeUpdate();   
-            
+   
             pstmt.close();
             conn.close();
             return 1;
@@ -99,8 +106,25 @@ public class inventoryEmployee {
         
         
     }
-    public static void main( String argcs[])
+    public static void main(String args[])
     {
+        
+        
+        inventoryEmployee A = new inventoryEmployee();
+        A.last_name= "F";
+        A.first_name= "F";
+        A.middle_name= "F";
+        A.perm_address= "F";
+        A.curr_address= "F";
+        A.gender= "F";
+
+        A.birthday = null;
+        A.emailaddress ="F";
+        A.employement_enddate= null;
+
+        A.phonenumber= "12345678911";
+        A.register_employee();
+        
         
     }
 }
