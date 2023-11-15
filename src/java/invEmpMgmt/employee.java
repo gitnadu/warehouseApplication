@@ -130,6 +130,25 @@ public class employee {
         }
     }
     
+    public int delete_employee(){
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            
+            PreparedStatement pstmt = conn.prepareStatement("DELETE FROM inventoryemployees WHERE employeeID = ?");
+            pstmt.setInt(1, employee_ID);
+            
+            pstmt.executeUpdate();   
+   
+            // Closing Statements
+            pstmt.close();
+            conn.close();
+            return 1;
+        } catch(SQLException e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    
     // Method: Converting Birthdays String to Date
     public void convert_birthday_date(String birthday_temporary) {
         try{
