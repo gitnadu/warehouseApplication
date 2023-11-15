@@ -16,7 +16,6 @@
     <body>
         <jsp:useBean id="obj" class="invEmpMgmt.employee" scope="session" />
         <form action="employeeUpdateProcessing.jsp"> 
-            <%= obj.birthday %>
             <% 
                 obj.last_name  = request.getParameter("employee_lastnameU");
                 obj.first_name = request.getParameter("employee_firstnameU");

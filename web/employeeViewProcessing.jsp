@@ -35,7 +35,7 @@
             Employee Gender:<%=obj.gender %> <br>
             Employee Birthday:<%=obj.birthday%> <br>
             Employee Email Address: <%=obj.email_address %>  <br>
-            Employee Start of Employment Date: <%=obj.employment_start_date %S>  <br>
+            Employee Start of Employment Date: <%=obj.employment_start_date %>  <br>
             Employee End of Employment Date: 
             <% if (obj.employment_end_date == null) { %>
             --- <% } else { %> <%=obj.employment_end_date%> <% } %>

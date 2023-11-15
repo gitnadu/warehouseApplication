@@ -13,7 +13,7 @@
     </head>
     <body>
         <h2> Update Employee </h2>
-        <form action="employeeViewForm.jsp"> 
+        <form action="employeeViewProcessing.jsp"> 
             <jsp:useBean id="obj" class="invEmpMgmt.employee" scope="session" />
             Employee ID: <select id="employee_idV" name="employee_idV"> 
             <%  obj.get_employees();
