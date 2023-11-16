@@ -18,38 +18,54 @@
         <form action="employeeUpdateProcessing.jsp"> 
      
             <% 
-                obj.last_name_holder  = request.getParameter("employee_lastnameV");
-                obj.first_name_holder = request.getParameter("employee_firstnameV");
-                obj.middle_name_holder = request.getParameter("employee_middlenameV");
-                obj.permanent_address_holder = request.getParameter("employee_permaddressV");
-                obj.current_address_holder = request.getParameter("employee_currddressV");
-                obj.gender_holder = request.getParameter("employee_genderV");
+                obj.last_name_holder  = request.getParameter("employee_lastnameS");
+                obj.first_name_holder = request.getParameter("employee_firstnameS");
+                obj.middle_name_holder = request.getParameter("employee_middlenameS");
+                obj.permanent_address_holder = request.getParameter("employee_permaddressS");
+                obj.current_address_holder = request.getParameter("employee_currddressS");
+                obj.gender_holder = request.getParameter("employee_genderS");
                 
-                obj.birthday_temporary = request.getParameter("employee_birthdayV");
-                obj.employment_start_date_temporary = request.getParameter("employee_startdateV");
+                obj.birthday_temporary = request.getParameter("employee_birthdayS");
+                obj.employment_start_date_temporary = request.getParameter("employee_startdateS");
                 // obj.employment_end_date_temporary = request.getParameter("employee_enddateV");
                 int status = obj.search_employees();
                 if (status == 1){
             %>
             <h1> Search Results </h1>
-            <ins> First Name &nbsp; First Name &nbsp; Middle Name &nbsp; Permanent Address &nbsp;
-                Current Address &nbsp; Gender &nbsp; Birthday &nbsp; Employment Start Date &nbsp;&nbsp; Employment End Date </ins><br>
-            <% 
-               for(int i=0;i<obj.search_count;i++)
-               { %>
-               <%=obj.last_nameList.get(i) %> &nbsp;
-               <%=obj.first_nameList.get(i) %> &nbsp;
-               <%=obj.middle_nameList.get(i) %> &nbsp;
-               <%=obj.permanent_addressList.get(i) %> &nbsp;
-               <%=obj.current_addressList.get(i) %> &nbsp;
-               <%=obj.genderList.get(i) %> &nbsp; 
-               <%=obj.birthdayList.get(i) %> &nbsp;
-               <%=obj.employment_start_dateList.get(i) %> &nbsp;
-               <%=obj.employment_end_dateList.get(i) %> &nbsp; <br>
-            %>
-            <% } } else { %>
+            <table>
+                <tr> 
+                    <th> Last Name </th> &nbsp;
+                    <th> First Name </th> &nbsp;
+                    <th> Middle Name </th> &nbsp;
+                    <th> Permanent Address </th> &nbsp;
+                    <th> Current Address </th> &nbsp;
+                    <th> Gender </th> &nbsp;
+                    <th> Birthday </th> &nbsp;
+                    <th> Employment Start Date </th> &nbsp;
+                    <th> Employment End Date </th> &nbsp;
+                </tr>
+                    <% 
+                       for(int i=0;i<obj.search_count;i++)
+                       { %>
+                       <tr> 
+                        <td> <%=obj.last_nameList.get(i) %> </td> &nbsp;
+                        <td><%=obj.first_nameList.get(i) %> </td> &nbsp;
+                        <td><%=obj.middle_nameList.get(i) %></td>&nbsp;
+                        <td><%=obj.permanent_addressList.get(i) %> </td>&nbsp;
+                        <td><%=obj.current_addressList.get(i) %> </td>&nbsp;
+                        <td><%=obj.genderList.get(i) %>  </td>&nbsp;
+                        <td><%=obj.birthdayList.get(i) %> </td>&nbsp;
+                        <td><%=obj.employment_start_dateList.get(i) %></td>&nbsp;
+                        <td><%=obj.employment_end_dateList.get(i) %></td> &nbsp;
+                       <tr>
+                    <% } %> 
+            </table>
+            
+            
+            <% } else { %>
             <h1>Search Failed </h1>
             <% } %>
+            <%=obj.temp_employeeIDList.size() %>
            
         </form>
         <input type="submit" value="Return too Menu">

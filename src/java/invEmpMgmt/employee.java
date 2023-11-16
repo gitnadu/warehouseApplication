@@ -18,6 +18,8 @@ public class employee {
     public String gender;
     public String email_address;
     public String phone_number;
+    public String job_title;
+    public int warehouse_ID;
     
     // Inventory Employee Field: Birthday
     public String birthday_temporary;
@@ -61,12 +63,15 @@ public class employee {
     public Date employment_start_date_holder = new Date();
     public Date employment_end_date_holder = new Date();
     
+    public ArrayList<String> temp_employeeIDList = new ArrayList<>();
+    int temp_container;
+    
     public int search_count = 0;
     
     public void get_employees(){
         try{
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
-            PreparedStatement pstmt = conn.prepareStatement("SELECT employeeID AS employeeID FROM inventoryemployees");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT employeeID AS employeeID FROM inventoryemployees WHERE employmentEndDate IS NULL ORDER BY employeeID ASC");
             ResultSet rst= pstmt.executeQuery();
             
             int temp;
@@ -95,6 +100,7 @@ public class employee {
             pstmt.setInt(1, employee_ID);
             
             ResultSet rst= pstmt.executeQuery();
+            
             
             while (rst.next()) {
                 last_name = rst.getString("lastName");
@@ -234,18 +240,36 @@ public class employee {
             convert_birthday_date(birthday_temporary);
             
             employment_start_date = new Date();
-            employment_end_date = null;
+            employment_end_date = new Date();
+            
+            convert_end_date(employment_end_date_temporary);
             
             pstmt.setDate(8, new java.sql.Date(birthday.getTime()));
             pstmt.setString(9, email_address);
             
             pstmt.setDate(10, new java.sql.Date(employment_start_date.getTime()));
-            pstmt.setDate(11, null);
-            pstmt.setString(12, phone_number);
+            pstmt.setDate(11, new java.sql.Date(employment_end_date.getTime()));
+            String temp = "0";
+            temp.concat(phone_number);
+            pstmt.setString(12, temp);
 
             // Push Update to Database
             pstmt.executeUpdate();   
-   
+            
+            if(job_title.equals("Worker"))
+            {   
+                pstmt = conn.prepareStatement("INSERT INTO worker (employeeNumber, warehouseID) VALUES (?,?)");
+                pstmt.setInt(1, employee_ID);
+                pstmt.setInt(2, 3001);
+            }
+            else
+            {   
+                pstmt = conn.prepareStatement("INSERT INTO manager (employeeID, warehouseID) VALUES (?,?)");
+                pstmt.setInt(1, employee_ID);
+                pstmt.setInt(2, 3001);
+            }
+            
+            pstmt.executeUpdate(); 
             // Closing Statements
             pstmt.close();
             conn.close();
@@ -262,100 +286,296 @@ public class employee {
         try{
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
             
-            PreparedStatement pstmt = conn.prepareStatement("SELECT lastName,firstName,middleName,permanentAddress,currentAddress, gender, birthday, employmentStartDate, employmentEndDate"
-            + "  FROM inventoryemployees \n" +
-            "WHERE CASE \n" +
-            "    WHEN ? != '0' THEN lastName = ?\n" +
-            "    WHEN ? != '0' THEN firstName = ?\n" +
-            "    WHEN ? != '0' THEN middleName = ?\n" +
-            "    WHEN ? != '0' THEN permanentAddress LIKE CONCAT('%', ?, '%')\n" +
-            "    WHEN ? != '0' THEN currentAddress LIKE CONCAT('%', ?, '%')\n" +
-            "    WHEN ? != '0' THEN gender = ?\n" +
-            "    WHEN ? != '0' THEN birthday = ?\n" +
-            "    WHEN ? != '0' THEN employmentStartDate = ?\n" +
-            "    WHEN ? != '0' THEN employmentEndDate = ?\n" +
-            "END");
-            
-            if(last_name_holder == "")
-                last_name = "0";
-            else
-                last_name = last_name_holder;
-            
-            pstmt.setString(1, last_name);
-            pstmt.setString(2, last_name_holder);
-            
-            if(first_name_holder == "")
-                first_name = "0";
-            else
-                first_name = first_name_holder;
-            
-            pstmt.setString(3, first_name);
-            pstmt.setString(4, first_name_holder);
-            
-            if(middle_name_holder == "")
-                middle_name = "0";
-            else
-                middle_name = middle_name_holder;
-            
-            pstmt.setString(5, middle_name);
-            pstmt.setString(6, middle_name_holder);
-            
-            if(permanent_address_holder == "")
-                permanent_address = "0";
-            else
-                permanent_address = permanent_address_holder;
-            
-            pstmt.setString(7, permanent_address);
-            pstmt.setString(8, permanent_address_holder);
-            
-            if(current_address_holder == "")
-                current_address = "0";
-            else
-                current_address = current_address_holder;
-            
-            pstmt.setString(9, current_address);
-            pstmt.setString(10, current_address_holder);
-            
-            if(gender_holder == "")
-                gender = "0";
-            else
-                gender = gender_holder;
-            
-            pstmt.setString(11, gender);
-            pstmt.setString(12, gender_holder);
-            
-            convert_birthday_date(birthday_temporary);
-            convert_start_date(employment_start_date_temporary);
-            convert_end_date(employment_end_date_temporary);
 
-            if(birthday_temporary == "")
-                pstmt.setString(13, "0");
-            else
-                pstmt.setString(13, "1");
-  
-            pstmt.setDate(14, new java.sql.Date(birthday.getTime()));
+            temp_employeeIDList.clear();
             
-            if(employment_start_date_temporary == "")
-                pstmt.setString(15, "0");
-            else
-                pstmt.setString(15, "1");
-            
-                
-            pstmt.setDate(16, new java.sql.Date(employment_start_date.getTime()));
-            
-            if(employment_end_date_temporary == "" || employment_end_date == null )
+
+            PreparedStatement pstmt = conn.prepareStatement("SELECT employeeID FROM inventoryemployees WHERE (CASE WHEN ? = 0 THEN lastName = ? ELSE lastName != '' END)");
+
+            if(last_name_holder == "")
             {
-                pstmt.setString(17, "0");
-                pstmt.setDate(18, null);
-            }   
+                pstmt.setInt(1, 1);
+                pstmt.setString(2, null);
+            }
             else
             {
-                pstmt.setString(17, "1");
-                pstmt.setDate(18, new java.sql.Date(employment_end_date.getTime()));
+                pstmt.setInt(1, 0);
+                pstmt.setString(2, last_name_holder);
             }
                 
+            ResultSet rst = pstmt.executeQuery();
+
+            while (rst.next())
+            {
+                temp_container = rst.getInt("employeeID");
+                temp_employeeIDList.add(Integer.toString(temp_container));
+            }
+
+            // 2
+            StringBuilder sql = new StringBuilder("SELECT employeeID FROM inventoryemployees WHERE (CASE WHEN ? = 0 THEN firstName = ? ELSE firstName != '' END) AND employeeID IN (");
             
-            ResultSet rst= pstmt.executeQuery();
+            for (int i = 0; i < temp_employeeIDList.size(); i++) {
+                sql.append("?");
+                if (i < temp_employeeIDList.size() - 1) {
+                    sql.append(",");
+                }
+            }
+            
+            sql.append(")");
+            
+            pstmt = conn.prepareStatement(sql.toString());
+
+            if(first_name_holder.equals(""))
+            {
+                pstmt.setInt(1, 1);
+                pstmt.setNull(2, java.sql.Types.VARCHAR);   
+                
+                for (int i = 0; i < temp_employeeIDList.size(); i++) 
+                {
+                    pstmt.setString(i+3,temp_employeeIDList.get(i));
+                    
+                }
+                
+                temp_employeeIDList.clear();
+            }
+            else
+            {
+                pstmt.setInt(1, 0);
+                pstmt.setString(2, first_name_holder);
+                
+                for (int i = 0; i < temp_employeeIDList.size(); i++) 
+                {
+                    pstmt.setString(i+3,temp_employeeIDList.get(i));
+                    
+                }
+                temp_employeeIDList.clear();
+            }
+         
+            rst = pstmt.executeQuery();
+
+            while (rst.next())
+            {
+                temp_container = rst.getInt("employeeID");
+                temp_employeeIDList.add(Integer.toString(temp_container));
+            }
+
+
+             // 3
+            sql = new StringBuilder("SELECT employeeID FROM inventoryemployees WHERE (CASE WHEN ? = 0 THEN middleName = ? ELSE middleName != '' END) AND employeeID IN (");
+            
+            for (int i = 0; i < temp_employeeIDList.size(); i++) {
+                sql.append("?");
+                if (i < temp_employeeIDList.size() - 1) {
+                    sql.append(",");
+                }
+            }
+            
+            sql.append(")");
+            
+            pstmt = conn.prepareStatement(sql.toString());
+
+            if(middle_name_holder.equals(""))
+            {
+                pstmt.setInt(1, 1);
+                pstmt.setNull(2, java.sql.Types.VARCHAR);   
+                
+                for (int i = 0; i < temp_employeeIDList.size(); i++) 
+                {
+                    pstmt.setString(i+3,temp_employeeIDList.get(i));
+                    
+                }
+                
+                temp_employeeIDList.clear();
+            }
+            else
+            {
+                pstmt.setInt(1, 0);
+                pstmt.setString(2, middle_name_holder);
+                
+                for (int i = 0; i < temp_employeeIDList.size(); i++) 
+                {
+                    pstmt.setString(i+3,temp_employeeIDList.get(i));
+                    
+                }
+                temp_employeeIDList.clear();
+            }
+         
+            rst = pstmt.executeQuery();
+
+            while (rst.next())
+            {
+                temp_container = rst.getInt("employeeID");
+                temp_employeeIDList.add(Integer.toString(temp_container));
+            }
+            
+            
+            // 4
+            sql = new StringBuilder("SELECT employeeID FROM inventoryemployees WHERE (CASE WHEN ? = 0 THEN permanentAddress LIKE CONCAT('%', ?, '%') ELSE permanentAddress != '' END) AND employeeID in (");
+            
+            for (int i = 0; i < temp_employeeIDList.size(); i++) {
+                sql.append("?");
+                if (i < temp_employeeIDList.size() - 1) {
+                    sql.append(",");
+                }
+            }
+            
+            sql.append(")");
+            
+            pstmt = conn.prepareStatement(sql.toString());
+
+            if(permanent_address_holder.equals(""))
+            {
+                pstmt.setInt(1, 1);
+                pstmt.setNull(2, java.sql.Types.VARCHAR);   
+                
+                for (int i = 0; i < temp_employeeIDList.size(); i++) 
+                {
+                    pstmt.setString(i+3,temp_employeeIDList.get(i));
+                    
+                }
+                
+                temp_employeeIDList.clear();
+            }
+            else
+            {
+                pstmt.setInt(1, 0);
+                pstmt.setString(2, permanent_address_holder);
+                
+                for (int i = 0; i < temp_employeeIDList.size(); i++) 
+                {
+                    pstmt.setString(i+3,temp_employeeIDList.get(i));
+                    
+                }
+                temp_employeeIDList.clear();
+            }
+         
+            rst = pstmt.executeQuery();
+
+            while (rst.next())
+            {
+                temp_container = rst.getInt("employeeID");
+                temp_employeeIDList.add(Integer.toString(temp_container));
+            }
+            
+            // 5
+            sql = new StringBuilder("SELECT employeeID FROM inventoryemployees WHERE (CASE WHEN ? = 0 THEN currentAddress LIKE CONCAT('%', ?, '%') ELSE currentAddress!= '' END) AND employeeID in (");
+            
+            for (int i = 0; i < temp_employeeIDList.size(); i++) {
+                sql.append("?");
+                if (i < temp_employeeIDList.size() - 1) {
+                    sql.append(",");
+                }
+            }
+            
+            sql.append(")");
+            
+            pstmt = conn.prepareStatement(sql.toString());
+
+            if(current_address_holder.equals(""))
+            {
+                pstmt.setInt(1, 1);
+                pstmt.setNull(2, java.sql.Types.VARCHAR);   
+                
+                for (int i = 0; i < temp_employeeIDList.size(); i++) 
+                {
+                    pstmt.setString(i+3,temp_employeeIDList.get(i));
+                    
+                }
+                
+                temp_employeeIDList.clear();
+            }
+            else
+            {
+                pstmt.setInt(1, 0);
+                pstmt.setString(2, current_address_holder);
+                
+                for (int i = 0; i < temp_employeeIDList.size(); i++) 
+                {
+                    pstmt.setString(i+3,temp_employeeIDList.get(i));
+                    
+                }
+                temp_employeeIDList.clear();
+            }
+         
+            rst = pstmt.executeQuery();
+
+            while (rst.next())
+            {
+                temp_container = rst.getInt("employeeID");
+                temp_employeeIDList.add(Integer.toString(temp_container));
+            }
+            
+            // 6 
+            
+            sql = new StringBuilder("SELECT employeeID FROM inventoryemployees WHERE (CASE WHEN ? = 0 THEN gender = ? ELSE gender != '' END) AND employeeID in (");
+            
+            for (int i = 0; i < temp_employeeIDList.size(); i++) {
+                sql.append("?");
+                if (i < temp_employeeIDList.size() - 1) {
+                    sql.append(",");
+                }
+            }
+            
+            sql.append(")");
+            
+            pstmt = conn.prepareStatement(sql.toString());
+
+            if(gender_holder.equals(""))
+            {
+                pstmt.setInt(1, 1);
+                pstmt.setNull(2, java.sql.Types.VARCHAR);   
+                
+                for (int i = 0; i < temp_employeeIDList.size(); i++) 
+                {
+                    pstmt.setString(i+3,temp_employeeIDList.get(i));
+                    
+                }
+                
+                temp_employeeIDList.clear();
+            }
+            else
+            {
+                pstmt.setInt(1, 0);
+                pstmt.setString(2, gender_holder);
+                
+                for (int i = 0; i < temp_employeeIDList.size(); i++) 
+                {
+                    pstmt.setString(i+3,temp_employeeIDList.get(i));
+                    
+                }
+                temp_employeeIDList.clear();
+            }
+         
+            rst = pstmt.executeQuery();
+
+            while (rst.next())
+            {
+                temp_container = rst.getInt("employeeID");
+                temp_employeeIDList.add(Integer.toString(temp_container));
+            }
+            
+            
+            
+            sql = new StringBuilder("SELECT lastName, firstName, middleName, permanentAddress, currentAddress, gender, birthday, employmentStartDate, employmentEndDate " +
+                "FROM inventoryemployees " +
+                "WHERE employeeID IN (");
+            
+            for (int i = 0; i < temp_employeeIDList.size(); i++) {
+                sql.append("?");
+                if (i < temp_employeeIDList.size() - 1) {
+                    sql.append(",");
+                }
+            }
+            
+            sql.append(")");
+
+            pstmt = conn.prepareStatement(sql.toString());
+            
+            for (int i = 0; i < temp_employeeIDList.size(); i++) 
+                pstmt.setString(i+1,temp_employeeIDList.get(i));
+                    
+            
+            rst= pstmt.executeQuery();
             
             search_count = 0;
             

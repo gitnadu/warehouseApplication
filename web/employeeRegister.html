@@ -9,44 +9,68 @@ and open the template in the editor.
         <title> Register a new inventory employee </title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+        
+        <script> 
+              function getCurrentDate() {
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth()).padStart(2, '0');
+                const day = String(today.getDate()).padStart(2, '0');
+                return '${year}-${month}-${day}';
+              }
+
+        </script>
     <body>
         <h2> Register a New Inventory Employee </h2>
-        <form action="employeeRegisterProcessing.jsp"> 
+        <form action="employeeRegisterProcessing.jsp" method="post" > 
             Employee First Name: 
-            <input type="text" id ="employee_firstname" name="employee_firstname"> <br>
+            <input type="text" id ="employee_firstname" name="employee_firstname" required> <br>
             
             Employee Last Name: 
-            <input type="text" id ="employee_lastname" name="employee_lastname"> <br>
+            <input type="text" id ="employee_lastname" name="employee_lastname" required> <br>
             
             Employee Middle Name: 
-            <input type="text" id ="employee_middlename" name="employee_middlename"> <br>
+            <input type="text" id ="employee_middlename" name="employee_middlename" required> <br>
             
             Employee Permanent Address: 
-            <input type="text" id ="employee_permaddress" name="employee_permaddress"> <br>
+            <input type="text" id ="employee_permaddress" name="employee_permaddress" required> <br>
             
             Employee Current Address:  
-            <input type="text" id ="employee_currddress" name="employee_currddress"> <br>
+            <input type="text" id ="employee_currddress" name="employee_currddress" required> <br>
             
             Employee Gender: 
-            <select id="employee_gender" name="employee_gender"> 
+            <select id="employee_gender" name="employee_gender" required>
+                <option value ="">  </option>
                 <option value ="M"> M </option>
                 <option value ="F"> F </option>
             </select> <br>
             
             Employee Birthday:
-            <input type="date" id ="employee_birthday" name="employee_birthday"> <br>
+            <input type="date" id ="employee_birthday" name="employee_birthday" required> <br>
             
             Employee Email Address:
-            <input type="text" id ="employee_emailadd" name="employee_emailadd"> <br>
+            <input type="text" id ="employee_emailadd" name="employee_emailadd" required> <br>
+            
             
             Employee End Date:
-            <input type="date" id ="employee_enddate" name="employee_enddate"> <br>
+            <input type="date" id ="employee_enddate" name="employee_enddate" min="getCurrentDate();" required> <br>
             
             Employee Phone Number:
-            <input type="text" id ="employee_phonenumber" name="employee_phonenumber"> <br>
+            <input type="number" id ="employee_phonenumber" name="employee_phonenumber" min="1000000000" max="9999999999" required> <br>
             
-            <input type="submit" value="Submit">
+            Employee Job Title: 
+            <select id="employee_jobtitle" name="employee_jobtitle" required>
+                <option value ="">  </option>
+                <option value ="Worker"> Worker </option>
+                <option value ="Manager"> Manager </option>
+            </select> <br>
+           
+            <br>
+            <input type="submit" value="Register"> 
         </form>
+        <br>
+            <button onclick = "window.location.href = 'employee.html';"> Cancel </button>
+        
+        
     </body>
 </html>
