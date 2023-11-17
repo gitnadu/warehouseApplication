@@ -43,17 +43,19 @@
                 New Employee Gender:<%=obj.gender %> <br>
                 New Employee Birthday:<%=obj.birthday%> <br>
                 New Employee Email Address: <%=obj.email_address %>  <br>
+                New Employee Phone Number: <% if(obj.phone_number.length() == 10) {%> 0<%=obj.phone_number%> <% } else {%> <%=obj.phone_number%> <%} %> <br>
                 New Employee Start of Employment Date: <%=obj.employment_start_date %>  <br>
                 New Employee End of Employment Date: 
-                <% if (obj.employment_end_date == null) { %>
-                --- <% } %>
+                <% if (obj.employment_end_date == null) { %> 
+                --- <% } %> <br>
                 
-                <button onclick = "window.location.href = 'employeeRegister.html';"> Again </button>
+                <button onclick = "window.location.href = 'employee.html';"> Back to Employee Menu </button>
+                <button onclick = "window.location.href = 'employeeRegister.html';"> Register Another Employee </button>
                 <% 
             } else { 
                 %>
                 <h1>Registering Inventory Employee Unsuccessful </h1>
-                <button onclick = "window.location.href = 'employeeRegister';"> Again </button>
+                <button onclick = "window.location.href = 'employeeRegister.html';"> Retry </button>
             <% } 
         %>
     </body>

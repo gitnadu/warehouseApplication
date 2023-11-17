@@ -71,9 +71,15 @@ public class employee {
     
     public String convert_phonenumber(String number)
     {
-        String temp = "0";
-        temp = temp.concat(number);
-        return temp;
+        if (number.charAt(0) != '0')
+        {
+            String temp = "0";
+            temp = temp.concat(number);
+            return temp;
+        }
+        
+        return number;
+        
     }
     
     public void get_employees(){
@@ -99,6 +105,31 @@ public class employee {
         }
         
     }
+    
+    public void get_abled_employees(){
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT employeeID AS employeeID FROM inventoryemployees WHERE employmentEndDate IS NULL ORDER BY employeeID ASC");
+            ResultSet rst= pstmt.executeQuery();
+            
+            int temp;
+            employee_IDList.clear();
+            while (rst.next()){
+                temp = rst.getInt("employeeID");
+                employee_IDList.add(temp);
+            }
+            
+            // Closing Statements
+            pstmt.close();
+            conn.close();
+            
+            
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+    }
+    
     
     public int get_employee_record(){
         try{
@@ -177,10 +208,7 @@ public class employee {
             
             pstmt.setDate(9, new java.sql.Date(employment_start_date.getTime()));
             
-            if (!employment_end_date_temporary.equals(""))
-                pstmt.setDate(10, new java.sql.Date(employment_end_date_holder.getTime()));
-            else
-                pstmt.setDate(10, null);
+            pstmt.setDate(10, null);
             
             pstmt.setString(11, convert_phonenumber(phone_number_holder));
             pstmt.setInt(12, employee_ID);
@@ -277,6 +305,7 @@ public class employee {
             pstmt.setString(9, email_address);
             
             pstmt.setDate(10, new java.sql.Date(employment_start_date.getTime()));
+            employment_end_date = null;
             pstmt.setDate(11, null);
 
             pstmt.setString(12, convert_phonenumber(phone_number));
@@ -298,6 +327,7 @@ public class employee {
             }
             
             pstmt.executeUpdate(); 
+            
             // Closing Statements
             pstmt.close();
             conn.close();
