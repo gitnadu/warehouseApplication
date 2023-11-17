@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>Register Supplier</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script> 
+        function getSupplierNumber()
+         {
+             let number = document.getElementById("supplier_contact_number").value;
+
+             if((number.length == 11 && number[0] == 0)|| (number.length == 10 && number[0] != 0))
+             {
+                for(let i=0 ;i < number.length;i++)
+                    if (isNaN(number[i]))
+                    {
+                        alert("Invalid phone number");
+                        return false;
+                    }
+
+
+                return true;
+             }
+
+             alert("Invalid Supplier phone number");
+             return false;
+         }
+         
+         function getOfficeNumber()
+         {
+             let number = document.getElementById("office_phone_number").value;
+
+             if((number.length == 11 && number[0] == 0)|| (number.length == 10 && number[0] != 0))
+             {
+                for(let i=0 ;i < number.length;i++)
+                    if (isNaN(number[i]))
+                    {
+                        alert("Invalid phone number");
+                        return false;
+                    }
+                return true;
+             }
+
+             alert("Invalid Office phone number");
+             return false;
+         }
+         
+         function validateForm(){
+                  
+                if(!getSupplierNumber())
+                    return false;
+                  
+                if(!getOfficeNumber())
+                    return false;
+                    
+                  return true;
+              }
+        </script>
+    </head>
+    <body>
+        <h2> Register Supplier </h2>
+        <form action="supplierRegisterProcessing.jsp" onsubmit="return validateForm();" method="post">
+            Supplier Name: <input type="text" id="supplier_name" name="supplier_name"><br>
+            Supplier Contact Number: <input type="text" id="supplier_contact_number" name="supplier_contact_number"><br>
+            Office Address: <input type="text" id="office_address" name="office_address"><br>
+            Office Phone Number: <input type="text" id="office_phone_number" name="office_phone_number"><br>
+            <input type="submit" value="Proceed">
+        </form>
+        <button onclick = "window.location.href = 'supplier.html';">Cancel</button>
+    </body>
+</html>
