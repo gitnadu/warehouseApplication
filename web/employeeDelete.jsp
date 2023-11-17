@@ -10,13 +10,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Update Employee</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
         <h2> Delete Employee </h2>
-        <form action="employeeDeleteForm.jsp"> 
+        <form action="employeeDeleteForm.jsp">
             <jsp:useBean id="obj" class="invEmpMgmt.employee" scope="session" />
             Employee ID: <select id="employee_idD" name="employee_idD"> 
-            <%  obj.get_employees();
+            <%  
+                obj.get_employees();
                 for(int i=0;i<obj.employee_IDList.size();i++){
             %>
             <option value="<%=obj.employee_IDList.get(i) %>" > <%=obj.employee_IDList.get(i) %> </option>

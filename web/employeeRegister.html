@@ -9,6 +9,7 @@ and open the template in the editor.
         <title> Register a new inventory employee </title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
         
         <script> 
               function getCurrentDate() {
@@ -22,55 +23,52 @@ and open the template in the editor.
         </script>
     <body>
         <h2> Register a New Inventory Employee </h2>
+        <hr><br>
         <form action="employeeRegisterProcessing.jsp" method="post" > 
             Employee First Name: 
-            <input type="text" id ="employee_firstname" name="employee_firstname" required> <br>
+            <input type="text" id ="employee_firstname" name="employee_firstname" required><br><br>
             
             Employee Last Name: 
-            <input type="text" id ="employee_lastname" name="employee_lastname" required> <br>
+            <input type="text" id ="employee_lastname" name="employee_lastname" required><br><br>
             
             Employee Middle Name: 
-            <input type="text" id ="employee_middlename" name="employee_middlename" required> <br>
+            <input type="text" id ="employee_middlename" name="employee_middlename" required><br><br>
             
             Employee Permanent Address: 
-            <input type="text" id ="employee_permaddress" name="employee_permaddress" required> <br>
+            <input type="text" id ="employee_permaddress" name="employee_permaddress" required><br><br>
             
             Employee Current Address:  
-            <input type="text" id ="employee_currddress" name="employee_currddress" required> <br>
+            <input type="text" id ="employee_currddress" name="employee_currddress" required><br><br>
             
             Employee Gender: 
             <select id="employee_gender" name="employee_gender" required>
-                <option value ="">  </option>
-                <option value ="M"> M </option>
-                <option value ="F"> F </option>
-            </select> <br>
+                <option value =""></option>
+                <option value ="M">M</option>
+                <option value ="F">F</option>
+            </select><br><br>
             
             Employee Birthday:
-            <input type="date" id ="employee_birthday" name="employee_birthday" required> <br>
+            <input type="date" id ="employee_birthday" name="employee_birthday" required><br><br>
             
             Employee Email Address:
-            <input type="text" id ="employee_emailadd" name="employee_emailadd" required> <br>
+            <input type="text" id ="employee_emailadd" name="employee_emailadd" required><br><br>
             
             
             Employee End Date:
-            <input type="date" id ="employee_enddate" name="employee_enddate" min="getCurrentDate();" required> <br>
+            <input type="date" id ="employee_enddate" name="employee_enddate" min="getCurrentDate();" required><br><br>
             
             Employee Phone Number:
-            <input type="number" id ="employee_phonenumber" name="employee_phonenumber" min="1000000000" max="9999999999" required> <br>
+            <input type="number" id ="employee_phonenumber" name="employee_phonenumber" min="1000000000" max="9999999999" required><br><br>
             
             Employee Job Title: 
             <select id="employee_jobtitle" name="employee_jobtitle" required>
-                <option value ="">  </option>
-                <option value ="Worker"> Worker </option>
-                <option value ="Manager"> Manager </option>
-            </select> <br>
+                <option value =""></option>
+                <option value ="Worker">Worker</option>
+                <option value ="Manager">Manager</option>
+            </select><br><br>
            
-            <br>
-            <input type="submit" value="Register"> 
+            <input type="submit" value="Register"><br><br>
         </form>
-        <br>
-            <button onclick = "window.location.href = 'employee.html';"> Cancel </button>
-        
-        
+        <button onclick = "window.location.href = 'employee.html';">Go Back</button>
     </body>
 </html>

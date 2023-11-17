@@ -1,0 +1,18 @@
+* {
+    font-family: "Verdana";
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+a, a:visited, a:hover, a:active {
+    color: inherit;
+}
+
+a, a:visited, a:hover, a:active, h1, h2 {
+    text-align: center;
+}
+
+.short {
+    margin-left: 35%;
+    margin-right: 35%;
+}

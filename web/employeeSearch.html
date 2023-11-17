@@ -1,4 +1,4 @@
-S<!DOCTYPE html>
+<!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -9,39 +9,42 @@ and open the template in the editor.
         <title> Register a new inventory employee </title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
         <h2> Search For Inventory Employee </h2>
+        <hr><br>
         <form action="employeeSearchProcessing.jsp"> 
             Employee First Name: 
-            <input type="text" id ="employee_firstnameS" name="employee_firstnameS"> <br>
+            <input type="text" id ="employee_firstnameS" name="employee_firstnameS"> <br><br>
             
             Employee Last Name: 
-            <input type="text" id ="employee_lastnameS" name="employee_lastnameS"> <br>
+            <input type="text" id ="employee_lastnameS" name="employee_lastnameS"> <br><br>
             
             Employee Middle Name: 
-            <input type="text" id ="employee_middlenameS" name="employee_middlenameS"> <br>
+            <input type="text" id ="employee_middlenameS" name="employee_middlenameS"> <br><br>
             
             Employee Permanent Address: 
-            <input type="text" id ="employee_permaddressS" name="employee_permaddressV"> <br>
+            <input type="text" id ="employee_permaddressS" name="employee_permaddressV"> <br><br>
             
             Employee Current Address:  
-            <input type="text" id ="employee_currddressS" name="employee_currddressS"> <br>
+            <input type="text" id ="employee_currddressS" name="employee_currddressS"> <br><br>
             
             Employee Gender: 
             <select id="employee_genderS" name="employee_genderS"> 
                 <option value ="M"> M </option>
                 <option value ="F"> F </option>
-            </select> <br>
+            </select> <br><br>
             
             Employee Birthday:
-            <input type="date" id ="employee_birthdayS" name="employee_birthdayS"> <br>
+            <input type="date" id ="employee_birthdayS" name="employee_birthdayS"> <br><br>
             
             Employee Start Date:
-            <input type="date" id ="employee_startdateS" name="employee_startdateS"> <br>
+            <input type="date" id ="employee_startdateS" name="employee_startdateS"> <br><br>
             
             
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit"><br><br>
         </form>
+        <button onclick = "window.location.href = 'employee.html';">Go Back</button>
     </body>
 </html>
