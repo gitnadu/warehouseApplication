@@ -15,19 +15,8 @@
     </head>
     <body>
         <jsp:useBean id="obj" class="invEmpMgmt.employee" scope="session" />
-        <form action="employeeUpdateProcessing.jsp"> 
-            <% 
-                obj.last_name  = request.getParameter("employee_lastnameU");
-                obj.first_name = request.getParameter("employee_firstnameU");
-                obj.middle_name = request.getParameter("employee_middlenameU");
-                obj.permanent_address = request.getParameter("employee_permaddressU");
-                obj.current_address = request.getParameter("employee_currddressU");
-                obj.gender = request.getParameter("employee_genderU");
-                
-                obj.birthday_temporary = request.getParameter("employee_birthdayU");  
-
-                obj.email_address = request.getParameter("employee_emailaddU");
-                obj.phone_number = request.getParameter("employee_phonenumberU");
+        <form action="employeeUpdate.jsp"> 
+            <%              
                 int status = obj.update_employee();
                 if (status == 1){
             %>
@@ -37,8 +26,9 @@
             <% } %>
             
 
-        
+            <input type="submit" value="Update a record again">
         </form>
-        <input type="submit" value="Return too Menu">
+        
+        <button onclick = "window.location.href = 'employee.html';"> Back to Main Menu </button>
     </body>
 </html>

@@ -10,8 +10,8 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        
-        <script> 
+
+        <script type="text/javascript"> 
               function getCurrentDate() {
                 const today = new Date();
                 const year = today.getFullYear();
@@ -20,11 +20,39 @@ and open the template in the editor.
                 return '${year}-${month}-${day}';
               }
 
+              function getEmail(){
+                  let text = document.getElementById('employee_emailadd').value;
+                  const array = text.split(".");
+                  console.log(text);
+               
+
+                  if (array[array.length - 1].localeCompare("com") == 0 || array[array.length - 1].localeCompare("org") == 0 || array[array.length - 1].localeCompare("cc") == 0)
+                      return true;
+                  
+                  return false;
+              }
+              
+              
+              function validateForm(){
+                  
+                  if(!getEmail())
+                  {
+                      alert("Invalid email address");
+                      return false;
+                  }
+ 
+                  return true;
+              }
+              
+              
+
         </script>
     <body>
         <h2> Register a New Inventory Employee </h2>
         <hr><br>
-        <form action="employeeRegisterProcessing.jsp" method="post" > 
+        
+        <form action="employeeRegisterProcessing.jsp" onsubmit="return validateForm();" method="post" > 
+
             Employee First Name: 
             <input type="text" id ="employee_firstname" name="employee_firstname" required><br><br>
             

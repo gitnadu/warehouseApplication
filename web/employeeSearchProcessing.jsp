@@ -24,10 +24,8 @@
                 obj.permanent_address_holder = request.getParameter("employee_permaddressS");
                 obj.current_address_holder = request.getParameter("employee_currddressS");
                 obj.gender_holder = request.getParameter("employee_genderS");
-                
-                obj.birthday_temporary = request.getParameter("employee_birthdayS");
-                obj.employment_start_date_temporary = request.getParameter("employee_startdateS");
-                // obj.employment_end_date_temporary = request.getParameter("employee_enddateV");
+                obj.birthday_temporary_holder = request.getParameter("employee_birthdayS");
+
                 int status = obj.search_employees();
                 if (status == 1){
             %>

@@ -9,7 +9,7 @@ public class Suppliers {
     public String officePhoneNumber;
 
     //Arraylists
-    public ArrayList<int>           supplierIDList = new ArrayList<>();
+    public ArrayList<Integer>           supplierIDList = new ArrayList<>();
     public ArrayList<String>        supplierNameList = new ArrayList<>();
     public ArrayList<String>        contactNumList = new ArrayList<>(); //supplierContactNumberList
     public ArrayList<String>        officeAddressList = new ArrayList<>();

@@ -25,7 +25,6 @@
             obj.email_address = request.getParameter("employee_emailadd");
             obj.phone_number = request.getParameter("employee_phonenumber");
             obj.job_title = request.getParameter("employee_jobtitle");
-            obj.employment_end_date_temporary = request.getParameter("employee_enddate");
             
             int status = obj.register_employee();
             if (status==1) {
@@ -47,8 +46,7 @@
                 New Employee Start of Employment Date: <%=obj.employment_start_date %>  <br>
                 New Employee End of Employment Date: 
                 <% if (obj.employment_end_date == null) { %>
-                --- <% } else { %> <%=obj.employment_end_date%> <% } %> <br>
-                Employee Phone Number: <%=obj.phone_number %> <br><br>
+                --- <% } %>
                 
                 <button onclick = "window.location.href = 'employeeRegister.html';"> Again </button>
                 <% 
