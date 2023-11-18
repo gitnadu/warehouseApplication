@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Register New Warehouse</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <script type="text/javascript"> 
+        function getPhoneNumber() {
+            let number = document.getElementById("warehouse_phonenumber").value;
+            
+            if((number.length == 11 && number[0] == 0)|| (number.length == 10 && number[0] != 0)) {
+                for(let i=0 ;i < number.length;i++)
+                    if (isNaN(number[i])) {
+                    alert("Invalid phone number");
+                    return false;
+                    }
+                return true;
+            }
+
+            alert("Invalid phone number");
+            return false;
+        }
+            
+            
+        function validateForm() {
+            if(!getPhoneNumber()) return false;
+            return true;
+        }
+        </script>
+    </head>
+    <body>
+        <h2>Register a New Warehouse</h2>
+        <hr><br>
+        
+        <form action="warehouseRegisterProcessing.jsp" onsubmit="return validateForm();" method="post" > 
+
+            City: 
+            <input type="text" id ="warehouse_city" name="warehouse_city" required><br><br>
+            
+            Warehouse Phone Number:
+            <input type="text" id ="warehouse_phonenumber" name="warehouse_phonenumber" required><br><br>
+
+            First Address: 
+            <input type="text" id ="warehouse_first_address" name="warehouse_first_address" required><br><br>
+
+            State: 
+            <input type="text" id ="warehouse_state" name="warehouse_state" required><br><br>
+
+            Country: 
+            <input type="text" id ="warehouse_country" name="warehouse_country" required><br><br>
+
+            Postal Code: 
+            <input type="text" id ="warehouse_postalcode" name="warehouse_postalcode" required min="1000" max="9999"><br><br>
+
+            Max Capacity Rows:
+            <input type="number" id="warehouse_maxrow" name="warehouse_maxrow" required min="0" max="9"><br><br>
+
+            Max Capacity Bays:
+            <input type="number" id="warehouse_maxbay" name="warehouse_maxbay" required min="0" max="9"><br><br>
+
+            Max Capacity Levels:
+            <input type="number" id="warehouse_maxlevel" name="warehouse_maxlevel" required min="0" max="9"><br><br>
+
+            Max Capacity Bins:
+            <input type="number" id="warehouse_maxbin" name="warehouse_maxbin" required min="0" max="9"><br><br>
+           
+            <input type="submit" value="Proceed"><br><br>
+        </form>
+        <button onclick = "window.location.href = 'warehouse.html';">Cancel</button>
+    </body>
+</html>

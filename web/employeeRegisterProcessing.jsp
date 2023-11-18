@@ -24,7 +24,8 @@
             obj.birthday_temporary = request.getParameter("employee_birthday");
             obj.email_address = request.getParameter("employee_emailadd");
             obj.phone_number = request.getParameter("employee_phonenumber");
-            obj.job_title = request.getParameter("employee_jobtitle");
+            obj.job_title = request.getParameter("employee_jobtitle"); 
+            obj.employee_warehouse_ID_temporary = request.getParameter("employee_warehouseID");
             
             int status = obj.register_employee();
             if (status==1) {

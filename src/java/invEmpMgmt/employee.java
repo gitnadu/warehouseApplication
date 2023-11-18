@@ -19,7 +19,10 @@ public class employee {
     public String email_address;
     public String phone_number;
     public String job_title;
-    public int warehouse_ID;
+    public int employee_warehouse_ID;
+    
+    // used to get number input from html
+    public String employee_warehouse_ID_temporary;
     
     // Inventory Employee Field: Birthday
     public String birthday_temporary;
@@ -312,18 +315,19 @@ public class employee {
 
             // Push Update to Database
             pstmt.executeUpdate();   
-            
+           
+            employee_warehouse_ID = Integer.parseInt(employee_warehouse_ID_temporary);
             if(job_title.equals("Worker"))
             {   
                 pstmt = conn.prepareStatement("INSERT INTO worker (employeeNumber, warehouseID) VALUES (?,?)");
                 pstmt.setInt(1, employee_ID);
-                pstmt.setInt(2, 3001);
+                pstmt.setInt(2, employee_warehouse_ID);
             }
             else
             {   
                 pstmt = conn.prepareStatement("INSERT INTO manager (employeeID, warehouseID) VALUES (?,?)");
                 pstmt.setInt(1, employee_ID);
-                pstmt.setInt(2, 3001);
+                pstmt.setInt(2, employee_warehouse_ID);
             }
             
             pstmt.executeUpdate(); 
