@@ -15,13 +15,13 @@
     <body>
         <h2> Delete Employee </h2>
         <form action="employeeDeleteForm.jsp">
-            <jsp:useBean id="obj" class="invEmpMgmt.employee" scope="session" />
+            <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
             Employee ID: <select id="employee_idD" name="employee_idD"> 
             <%  
-                obj.get_employees();
-                for(int i=0;i<obj.employee_IDList.size();i++){
+                emp.get_employees();
+                for(int i=0;i<emp.employee_IDList.size();i++){
             %>
-            <option value="<%=obj.employee_IDList.get(i) %>" > <%=obj.employee_IDList.get(i) %> </option>
+            <option value="<%=emp.employee_IDList.get(i) %>" > <%=emp.employee_IDList.get(i) %> </option>
             <% } %>
             </select> <br>
             <input type="submit" value="Submit">

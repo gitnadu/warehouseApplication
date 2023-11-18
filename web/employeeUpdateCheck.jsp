@@ -14,21 +14,21 @@
         <title>Update Employee Check</title>
     </head>
     <body>
-        <jsp:useBean id="obj" class="invEmpMgmt.employee" scope="session" />
+        <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
         <form action="employeeUpdateProcessing.jsp"> 
-            <%  obj.last_name_holder  = request.getParameter("employee_lastnameU");
-                obj.first_name_holder = request.getParameter("employee_firstnameU");
-                obj.middle_name_holder = request.getParameter("employee_middlenameU");
-                obj.permanent_address_holder = request.getParameter("employee_permaddressU");
-                obj.current_address_holder = request.getParameter("employee_currddressU");
-                obj.gender_holder = request.getParameter("employee_genderU");
+            <%  emp.last_name_holder  = request.getParameter("employee_lastnameU");
+                emp.first_name_holder = request.getParameter("employee_firstnameU");
+                emp.middle_name_holder = request.getParameter("employee_middlenameU");
+                emp.permanent_address_holder = request.getParameter("employee_permaddressU");
+                emp.current_address_holder = request.getParameter("employee_currddressU");
+                emp.gender_holder = request.getParameter("employee_genderU");
                 
-                obj.birthday_temporary_holder = request.getParameter("employee_birthdayU");  
+                emp.birthday_temporary_holder = request.getParameter("employee_birthdayU");  
 
-                obj.email_address_holder = request.getParameter("employee_emailaddU");
-                obj.phone_number_holder = request.getParameter("employee_phonenumberU");
-                obj.employment_end_date_temporary = request.getParameter("employee_enddateU");
-                obj.get_employee_record();
+                emp.email_address_holder = request.getParameter("employee_emailaddU");
+                emp.phone_number_holder = request.getParameter("employee_phonenumberU");
+                emp.employment_end_date_temporary = request.getParameter("employee_enddateU");
+                emp.get_employee_record();
                 
             %>
             
@@ -47,16 +47,16 @@
                     <th> Employment End Date </th> &nbsp;
                 </tr>
                     <tr> 
-                     
-                     <td> <%=obj.last_name%> </td> &nbsp;
-                     <td><%=obj.first_name%> </td> &nbsp;
-                     <td><%=obj.middle_name %> </td>&nbsp;
-                     <td><%=obj.permanent_address%> </td>&nbsp;
-                     <td><%=obj.current_address %> </td>&nbsp;
-                     <td><%=obj.gender %>  </td>&nbsp;
-                     <td><%=obj.birthday %> </td>&nbsp;
-                     <td><%=obj.employment_start_date %> </td>&nbsp;
-                     <td><%=obj.employment_end_date %> </td> &nbsp;
+                     <td> <%=emp.last_name%> </td> &nbsp;
+                     <td><%=emp.first_name%> </td> &nbsp;
+                     <td><%=emp.middle_name %> </td>&nbsp;
+                     <td><%=emp.permanent_address%> </td>&nbsp;
+                     <td><%=emp.current_address %> </td>&nbsp;
+                     <td><%=emp.gender %>  </td>&nbsp;
+                     <td><%=emp.birthday %> </td>&nbsp;
+                     <td><%=emp.phone_number %> </td>&nbsp;
+                     <td><%=emp.employment_start_date %> </td>&nbsp;
+                     <td><%=emp.employment_end_date %> </td> &nbsp;
                     <tr>
             </table>
                     
@@ -77,15 +77,16 @@
                 </tr>
                     <tr> 
                      
-                     <td> <%=obj.last_name_holder%> </td> &nbsp;
-                     <td><%=obj.first_name_holder%> </td> &nbsp;
-                     <td><%=obj.middle_name_holder %> </td>&nbsp;
-                     <td><%=obj.permanent_address_holder%> </td>&nbsp;
-                     <td><%=obj.current_address_holder %> </td>&nbsp;
-                     <td><%=obj.gender_holder %>  </td>&nbsp;
-                     <td><%=obj.birthday_holder %> </td>&nbsp;
-                     <td><%=obj.employment_start_date %> </td>&nbsp;
-                     <td><%=obj.employment_end_date_temporary %> </td> &nbsp;
+                     <td> <%=emp.last_name_holder%> </td> &nbsp;
+                     <td><%=emp.first_name_holder%> </td> &nbsp;
+                     <td><%=emp.middle_name_holder %> </td>&nbsp;
+                     <td><%=emp.permanent_address_holder%> </td>&nbsp;
+                     <td><%=emp.current_address_holder %> </td>&nbsp;
+                     <td><%=emp.gender_holder %>  </td>&nbsp;
+                     <td><%=emp.birthday_holder %> </td>&nbsp;
+                     <td><%=emp.phone_number_holder %> </td>&nbsp;
+                     <td><%=emp.employment_start_date %> </td>&nbsp;
+                     <td><%=emp.employment_end_date_temporary %> </td> &nbsp;
                     <tr>
             </table>
             <input type="submit" value="Save changes">

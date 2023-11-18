@@ -11,24 +11,24 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Updating Supplier Record</title>
     </head>
     <body>
-        <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
-        <form action="employeeUpdate.jsp"> 
+        <jsp:useBean id="supp" class="supplierMgmt.supplier" scope="session" />
+        <form action="supplierUpdate.jsp"> 
             <%              
-                int status = emp.update_employee();
+                int status = supp.update_supplier();
                 if (status == 1){
             %>
-            <h1>Updating Inventory Employee Successful </h1>
+            <h1>Updating Supplier Successful </h1>
             <% } else { %>
-            <h1>Updating Inventory Employee Unsuccessful </h1>
+            <h1>Updating Supplier Unsuccessful </h1>
             <% } %>
             
 
             <input type="submit" value="Update a record again">
         </form>
         
-        <button onclick = "window.location.href = 'employee.html';"> Back to Main Menu </button>
+        <button onclick = "window.location.href = 'supplier.html';"> Back to Main Menu </button>
     </body>
 </html>

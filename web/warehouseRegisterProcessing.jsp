@@ -13,39 +13,39 @@
         <title>Register Warehouse Processing</title>
     </head>
     <body>
-        <jsp:useBean id="obj" class="warehouseMgmt.warehouse" scope="session" />
+        <jsp:useBean id="ware" class="warehouseMgmt.warehouse" scope="session" />
         <%
-            obj.warehouse_city  = request.getParameter("warehouse_city");
-            obj.warehouse_phonenumber = request.getParameter("warehouse_phonenumber");
-            obj.warehouse_first_address = request.getParameter("warehouse_first_address");
-            obj.warehouse_state = request.getParameter("warehouse_state");
-            obj.warehouse_country = request.getParameter("warehouse_country");
-            obj.warehouse_postalcode = request.getParameter("warehouse_postalcode");
-            obj.warehouse_maxrow_temporary = request.getParameter("warehouse_maxrow");
-            obj.warehouse_maxbay_temporary = request.getParameter("warehouse_maxbay");
-            obj.warehouse_maxlevel_temporary = request.getParameter("warehouse_maxlevel");
-            obj.warehouse_maxbin_temporary = request.getParameter("warehouse_maxbin");
+            ware.warehouse_city  = request.getParameter("warehouse_city");
+            ware.warehouse_phonenumber = request.getParameter("warehouse_phonenumber");
+            ware.warehouse_first_address = request.getParameter("warehouse_first_address");
+            ware.warehouse_state = request.getParameter("warehouse_state");
+            ware.warehouse_country = request.getParameter("warehouse_country");
+            ware.warehouse_postalcode = request.getParameter("warehouse_postalcode");
+            ware.warehouse_maxrow_temporary = request.getParameter("warehouse_maxrow");
+            ware.warehouse_maxbay_temporary = request.getParameter("warehouse_maxbay");
+            ware.warehouse_maxlevel_temporary = request.getParameter("warehouse_maxlevel");
+            ware.warehouse_maxbinNumber_temporary = request.getParameter("warehouse_maxbin");
             
-            obj.warehouse_maxrow = Integer.parseInt(obj.warehouse_maxrow_temporary);
-            obj.warehouse_maxbay = Integer.parseInt(obj.warehouse_maxbay_temporary);
-            obj.warehouse_maxlevel = Integer.parseInt(obj.warehouse_maxlevel_temporary);
-            obj.warehouse_maxbin = Integer.parseInt(obj.warehouse_maxbin_temporary);
+            ware.warehouse_maxrow = Integer.parseInt(ware.warehouse_maxrow_temporary);
+            ware.warehouse_maxbay = Integer.parseInt(ware.warehouse_maxbay_temporary);
+            ware.warehouse_maxlevel = Integer.parseInt(ware.warehouse_maxlevel_temporary);
+            ware.warehouse_maxbinNumber = Integer.parseInt(ware.warehouse_maxbinNumber_temporary);
             
-            int status = obj.register_warehouse();
+            int status = ware.register_warehouse();
             if (status==1) {
                 %>
                 <h1>Registering Warehouse Successful </h1>
-                New Warehouse ID: <%=obj.warehouse_ID %>  <br><br>
-                New Warehouse City: <%=obj.warehouse_city %>  <br>
-                New Warehouse Phone Number: <%=obj.warehouse_phonenumber %> <br>
-                New Warehouse First Address: <%=obj.warehouse_first_address %>  <br>
-                New Warehouse State: <%=obj.warehouse_state %> <br>
-                New Warehouse Country:  <%=obj.warehouse_country %> <br>
-                New Warehouse Postal Code: <%=obj.warehouse_postalcode %> <br>
-                New Warehouse Max Row: <%=obj.warehouse_maxrow%> <br>
-                New Warehouse Max Bay: <%=obj.warehouse_maxbay %>  <br>
-                New Warehouse Max Level: <%=obj.warehouse_maxlevel %>  <br>
-                New Warehouse Max Bin: <%=obj.warehouse_maxbin %>  <br>
+                New Warehouse ID: <%=ware.warehouse_ID %>  <br><br>
+                New Warehouse City: <%=ware.warehouse_city %>  <br>
+                New Warehouse Phone Number: <%=ware.warehouse_phonenumber %> <br>
+                New Warehouse First Address: <%=ware.warehouse_first_address %>  <br>
+                New Warehouse State: <%=ware.warehouse_state %> <br>
+                New Warehouse Country:  <%=ware.warehouse_country %> <br>
+                New Warehouse Postal Code: <%=ware.warehouse_postalcode %> <br>
+                New Warehouse Max Row: <%=ware.warehouse_maxrow%> <br>
+                New Warehouse Max Bay: <%=ware.warehouse_maxbay %>  <br>
+                New Warehouse Max Level: <%=ware.warehouse_maxlevel %>  <br>
+                New Warehouse Max Bin: <%=ware.warehouse_maxbinNumber %>  <br>
                 <br>
                 
                 <button onclick = "window.location.href = 'warehouse.html';"> Back to Warehouse Menu </button>

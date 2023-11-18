@@ -14,19 +14,19 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:useBean id="obj" class="invEmpMgmt.employee" scope="session" />
+        <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
         <form action="employeeUpdateProcessing.jsp"> 
      
             <% 
-                obj.last_name_holder  = request.getParameter("employee_lastnameS");
-                obj.first_name_holder = request.getParameter("employee_firstnameS");
-                obj.middle_name_holder = request.getParameter("employee_middlenameS");
-                obj.permanent_address_holder = request.getParameter("employee_permaddressS");
-                obj.current_address_holder = request.getParameter("employee_currddressS");
-                obj.gender_holder = request.getParameter("employee_genderS");
-                obj.birthday_temporary_holder = request.getParameter("employee_birthdayS");
+                emp.last_name_holder  = request.getParameter("employee_lastnameS");
+                emp.first_name_holder = request.getParameter("employee_firstnameS");
+                emp.middle_name_holder = request.getParameter("employee_middlenameS");
+                emp.permanent_address_holder = request.getParameter("employee_permaddressS");
+                emp.current_address_holder = request.getParameter("employee_currddressS");
+                emp.gender_holder = request.getParameter("employee_genderS");
+                emp.birthday_temporary_holder = request.getParameter("employee_birthdayS");
 
-                int status = obj.search_employees();
+                int status = emp.search_employees();
                 if (status == 1){
             %>
             <h1> Search Results </h1>
@@ -43,18 +43,18 @@
                     <th> Employment End Date </th> &nbsp;
                 </tr>
                     <% 
-                       for(int i=0;i<obj.search_count;i++)
+                       for(int i=0;i<emp.search_count;i++)
                        { %>
                        <tr> 
-                        <td> <%=obj.last_nameList.get(i) %> </td> &nbsp;
-                        <td><%=obj.first_nameList.get(i) %> </td> &nbsp;
-                        <td><%=obj.middle_nameList.get(i) %></td>&nbsp;
-                        <td><%=obj.permanent_addressList.get(i) %> </td>&nbsp;
-                        <td><%=obj.current_addressList.get(i) %> </td>&nbsp;
-                        <td><%=obj.genderList.get(i) %>  </td>&nbsp;
-                        <td><%=obj.birthdayList.get(i) %> </td>&nbsp;
-                        <td><%=obj.employment_start_dateList.get(i) %></td>&nbsp;
-                        <td><%=obj.employment_end_dateList.get(i) %></td> &nbsp;
+                        <td> <%=emp.last_nameList.get(i) %> </td> &nbsp;
+                        <td><%=emp.first_nameList.get(i) %> </td> &nbsp;
+                        <td><%=emp.middle_nameList.get(i) %></td>&nbsp;
+                        <td><%=emp.permanent_addressList.get(i) %> </td>&nbsp;
+                        <td><%=emp.current_addressList.get(i) %> </td>&nbsp;
+                        <td><%=emp.genderList.get(i) %>  </td>&nbsp;
+                        <td><%=emp.birthdayList.get(i) %> </td>&nbsp;
+                        <td><%=emp.employment_start_dateList.get(i) %></td>&nbsp;
+                        <td><%=emp.employment_end_dateList.get(i) %></td> &nbsp;
                        <tr>
                     <% } %> 
             </table>
@@ -63,7 +63,7 @@
             <% } else { %>
             <h1>Search Failed </h1>
             <% } %>
-            <%=obj.temp_employeeIDList.size() %>
+            <%=emp.temp_employeeIDList.size() %>
            
         </form>
         <input type="submit" value="Return too Menu">

@@ -10,6 +10,13 @@ public class supplier {
     public String supplier_contact_number;
     public String office_address;
     public String office_phone_number;
+    
+    //Temporary fields
+    public int supplier_ID_temporary;
+    public String supplier_name_temporary;
+    public String supplier_contact_number_temporary;
+    public String office_address_temporary;
+    public String office_phone_number_temporary;
 
     //Arraylists
     public ArrayList<Integer>   supplier_ID_list = new ArrayList<>();
@@ -59,17 +66,15 @@ public class supplier {
     public int update_supplier() { //It works.
         try {
             //1. Connect to database.
-            Connection conn;
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?zeroDateTimeBehavior=CONVERT_TO_NULL&user=root&password=12345678"); //Place the path.
-            System.out.println("Connection Successful");
+           
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
 
             //2. Update the supplier.
             PreparedStatement pstmt = conn.prepareStatement("UPDATE supplier SET supplierName=?, supplierContactNumber=?, officeAddress=?, officePhoneNumber=? WHERE supplierID=?"); //Place UPDATE statement.
-            pstmt.setString(1, supplier_name);
-            pstmt.setString(2, supplier_contact_number);
-            pstmt.setString(3, office_address);
-            pstmt.setString(4, office_phone_number);
+            pstmt.setString(1, supplier_name_temporary);
+            pstmt.setString(2, supplier_contact_number_temporary);
+            pstmt.setString(3, office_address_temporary);
+            pstmt.setString(4, office_phone_number_temporary);
             pstmt.setInt(5, supplier_ID);
 
             pstmt.executeUpdate();
@@ -87,10 +92,7 @@ public class supplier {
     public int delete_supplier() {
         try {
             //1. Connect to database.
-            Connection conn;
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?zeroDateTimeBehavior=CONVERT_TO_NULL&user=root&password=12345678"); //Place the path.
-            System.out.println("Connection Successful");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
 
             //2. Delete the supplier.
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM supplier WHERE supplierID=?"); //Place DELETE statement.
@@ -112,10 +114,8 @@ public class supplier {
         //It works.
         try {
             //1. Connect to database.
-            Connection conn;
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?zeroDateTimeBehavior=CONVERT_TO_NULL&user=root&password=12345678"); //Place the path.
-            System.out.println("Connection Successful");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+
 
             //Clear field arraylists.
             supplier_ID_list.clear();
@@ -154,10 +154,8 @@ public class supplier {
     public int get_supplier_IDs() { //Generalized function. For viewing products, stock_transfers, transfers to update or delete, etc.
         try {
             //1. Connect to database.
-            Connection conn;
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?zeroDateTimeBehavior=CONVERT_TO_NULL&user=root&password=12345678"); //Place the path.
-            System.out.println("Connection Successful");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+
 
             //Clear field arraylists.
             supplier_ID_list.clear();
@@ -190,10 +188,8 @@ public class supplier {
     public int get_supplier_record() { //It works.
         try {
             //1. Connect to database.
-            Connection conn;
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?zeroDateTimeBehavior=CONVERT_TO_NULL&user=root&password=12345678"); //Place the path.
-            System.out.println("Connection Successful");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+
 
             //2. Get warehouse record from the database.
             PreparedStatement pstmt = conn.prepareStatement("SELECT supplierID, supplierName, supplierContactNumber, officeAddress, officePhoneNumber FROM supplier WHERE supplierID=?"); //Place the SQL statement.

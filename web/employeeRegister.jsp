@@ -101,7 +101,7 @@ and open the template in the editor.
         <hr><br>
         
         <form action="employeeRegisterProcessing.jsp" onsubmit="return validateForm();" method="post" > 
-            <jsp:useBean id="obj2" class="warehouseMgmt.warehouse" scope="session" />
+            <jsp:useBean id="emp" class="warehouseMgmt.warehouse" scope="session" />
 
             Employee First Name: 
             <input type="text" id ="employee_firstname" name="employee_firstname" required><br><br>
@@ -143,9 +143,9 @@ and open the template in the editor.
             
             Warehouse:
             <select id="employee_warehouseID" name="employee_warehouseID" required>
-               <%obj2.get_functional_warehouses(); %>
-               <% for (int i=0;i< obj2.warehouse_IDList.size();i++) { %>
-                <option value ="<%= obj2.warehouse_IDList.get(i)%>"> <%=obj2.warehouse_IDList.get(i)%> </option>
+               <%emp.get_functional_warehouses(); %>
+               <% for (int i=0;i< emp.warehouse_IDList.size();i++) { %>
+                <option value ="<%= emp.warehouse_IDList.get(i)%>"> <%=emp.warehouse_IDList.get(i)%> </option>
                  <% } %>
             </select><br><br>
            

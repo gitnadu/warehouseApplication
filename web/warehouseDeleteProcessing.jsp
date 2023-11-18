@@ -1,6 +1,6 @@
 <%-- 
-    Document   : employeeUpdateProcessing
-    Created on : 11 15, 23, 8:11:11 AM
+    Document   : warehouseDeleteProcessing
+    Created on : 11 18, 23, 11:48:13 PM
     Author     : ccslearner
 --%>
 
@@ -15,21 +15,20 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
-        <form action="employeeDelete.jsp"> 
+        <jsp:useBean id="ware" class="warehouseMgmt.warehouse" scope="session" />
+        <form action="warehouseDelete.jsp"> 
             
             <% 
-                int status = emp.delete_employee();
+                int status = ware.delete_warehouse();
                 if (status == 1){
             %>
-            <h1>Record is successfully Deleted </h1>
+            <h1>Record is Deleted </h1>
             <% } else { %>
             <h1>Record is unsuccessfully Deleted </h1>
             <% } %>
-            <input type="submit" value="Delete again">    
+            <input type="submit" value="Delete again">
         </form>
-            
-        <button onclick = "window.location.href = 'index.jsp';"> Return to main menu</button>
+        <button onclick = "window.location.href = 'index.html';"> Back to Main Menu </button>
         
     </body>
 </html>
