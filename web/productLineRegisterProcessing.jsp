@@ -17,7 +17,7 @@
         <%
             prol.product_line_name = request.getParameter("product_line_name");
             prol.brand = request.getParameter("brand");
-            prol.isActive = 1;
+            prol.isActive = true;
             prol.category = request.getParameter("category");
             prol.product_line_description = request.getParameter("product_line_description");
 

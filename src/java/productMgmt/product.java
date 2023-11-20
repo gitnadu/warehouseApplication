@@ -97,7 +97,7 @@ public class product {
     public void get_binfrom_warehouses(){
         try{
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
-            PreparedStatement pstmt = conn.prepareStatement("SELECT binID FROM bin WHERE warehouseID = ?;");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT binID FROM bin WHERE warehouseID = ? AND isAvailable = 1;");
             pstmt.setInt(1, Integer.parseInt(product_warehouse_locator));
             
             ResultSet rst= pstmt.executeQuery();

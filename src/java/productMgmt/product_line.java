@@ -12,7 +12,7 @@ public class product_line {
     public int product_line_ID;
     public String product_line_name;
     public String brand;
-    public int isActive = 1;
+    public Boolean isActive = true;
     public String category;
     public String product_line_description;
     
@@ -22,31 +22,8 @@ public class product_line {
     public ArrayList isActiveList = new ArrayList<>();
     public ArrayList categoryList = new ArrayList<>();
     public ArrayList product_line_descriptionList = new ArrayList<>();
-    
-        public void get_abled_employees(){
-        try{
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
-            PreparedStatement pstmt = conn.prepareStatement("SELECT productLineID FROM productline WHERE isActive =1 ORDER BY employeeID ASC");
-            ResultSet rst= pstmt.executeQuery();
-            
-            int temp;
-            product_line_IDList.clear();
-            while (rst.next()){
-                temp = rst.getInt("employeeID");
-                employee_IDList.add(temp);
-            }
-            
-            // Closing Statements
-            pstmt.close();
-            conn.close();
-            
-            
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
-        
-    }
-        
+
+       
     // Method: Registration
     public int register_product_line() {
         try {
@@ -68,7 +45,10 @@ public class product_line {
             pstmt.setInt(1, product_line_ID);
             pstmt.setString(2, product_line_name);
             pstmt.setString(3, brand);
-            pstmt.setInt(4, isActive);
+            if (isActive)
+                pstmt.setInt(4, 1);
+            else
+                pstmt.setInt(4, 0);
             pstmt.setString(5, category);
             pstmt.setString(6, product_line_description);
 
@@ -95,7 +75,11 @@ public class product_line {
             
             pstmt.setString(1, product_line_name);
             pstmt.setString(2, brand);
-            pstmt.setInt(3, isActive);
+            if (isActive)
+                pstmt.setInt(3, 1);
+            else
+                pstmt.setInt(3, 0);
+            
             pstmt.setString(4, category);
             pstmt.setString(5, product_line_description);
             pstmt.setInt(6, product_line_ID);
@@ -109,6 +93,145 @@ public class product_line {
             return 1;
         } catch(SQLException e){
             e.printStackTrace();
+            return 0;
+        }
+    }
+    
+    public int delete_product_line() {
+        try {
+            //1. Connect to database.
+            Connection conn;
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?zeroDateTimeBehavior=CONVERT_TO_NULL&user=root&password=12345678"); //Place the path.
+            System.out.println("Connection Successful");
+
+            //2. Delete the product.
+            PreparedStatement pstmt = conn.prepareStatement("DELETE FROM productLine WHERE productLineID=?"); //Place DELETE statement.
+            pstmt.setInt(1, product_line_ID);
+
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
+
+            return 1;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+    
+    public int get_product_lines() {
+        //It works.
+        try {
+            //1. Connect to database.
+            Connection conn;
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?zeroDateTimeBehavior=CONVERT_TO_NULL&user=root&password=12345678"); //Place the path.
+            System.out.println("Connection Successful");
+
+            //Clear field arraylists.
+            product_line_IDList.clear();
+            product_line_nameList.clear();
+            brandList.clear();
+            isActiveList.clear();
+            categoryList.clear();
+            product_line_descriptionList.clear();
+
+            //2. Get warehouses from the database and put them in arraylists.
+            PreparedStatement pstmt = conn.prepareStatement("SELECT productLineID, productLineName, brand, isActive, cateogory, productLineDescription FROM productLine"); //Place the SQL statement.
+            ResultSet rst = pstmt.executeQuery();
+            while (rst.next()) {
+                product_line_ID = rst.getInt("productLineID");
+                product_line_name = rst.getString("productLineName");
+                brand = rst.getString("brand");
+                isActive = rst.getBoolean("isActive");
+                category = rst.getString("category");
+                product_line_description = rst.getString("productLineDescription");               
+
+                product_line_IDList.add(product_line_ID);
+                product_line_nameList.add(product_line_name);
+                brandList.add(brand);
+                isActiveList.add(isActive);
+                categoryList.add(category);
+                product_line_descriptionList.add(product_line_description);
+            }
+
+            pstmt.close();
+            conn.close();
+
+            return 1;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+    
+    public int get_product_line_IDs() {
+        //It works.
+        try {
+            //1. Connect to database.
+            Connection conn;
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?zeroDateTimeBehavior=CONVERT_TO_NULL&user=root&password=12345678"); //Place the path.
+            System.out.println("Connection Successful");
+
+            //Clear field arraylist.
+            product_line_IDList.clear();
+            
+            //Clear other field arraylists in case.
+            product_line_nameList.clear();
+            brandList.clear();
+            is_activeList.clear();
+            categoryList.clear();
+            descriptionList.clear();
+
+            //2. Get products from the database and put them in arraylists.
+            PreparedStatement pstmt = conn.prepareStatement("SELECT productLineID FROM productLine"); //Place the SQL statement.
+            ResultSet rst = pstmt.executeQuery();
+            while (rst.next()) {
+                product_line_ID = rst.getInt("productLineID");
+                product_line_IDList.add(product_line_ID);              
+            }
+
+            pstmt.close();
+            conn.close();
+
+            return 1;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+    
+    public int get_product_line_record() {
+        //It works.
+        try {
+            //1. Connect to database.
+            Connection conn;
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?zeroDateTimeBehavior=CONVERT_TO_NULL&user=root&password=12345678"); //Place the path.
+            System.out.println("Connection Successful");
+
+            //2. Get warehouses from the database and put them in arraylists.
+            PreparedStatement pstmt = conn.prepareStatement("SELECT productLineID, productLineName, brand, isActive, cateogory, productLineDescription FROM productLine WHERE productLineID=?"); //Place the SQL statement.
+            pstmt.setInt(1, product_line_ID);
+            
+            ResultSet rst = pstmt.executeQuery();
+            while (rst.next()) {
+                product_line_name = rst.getString("productLineName");
+                brand = rst.getString("brand");
+                isActive = rst.getBoolean("isActive");
+                category = rst.getString("category");
+                product_line_description = rst.getString("productLineDescription");               
+            }
+
+            pstmt.close();
+            conn.close();
+
+            return 1;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             return 0;
         }
     }

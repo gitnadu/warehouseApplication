@@ -16,14 +16,17 @@ and open the template in the editor.
             function updateBin() {
                 var selectedWarehouse = document.getElementById("product_warehouseID").value;
                 var xmlhttp = new XMLHttpRequest();
-                xmlhttp.open("GET", "get_bin.jsp?warehouse=" + selectedWarehouse, true);
-                xmlhttp.send();
+                
+                
                 
                 xmlhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
+                        console.log(xmlhttp.responseText);
                         document.getElementById("product_bin").innerHTML = xmlhttp.responseText;
                     }
                 };
+                xmlhttp.open("GET", "get_bin.jsp?warehouse=" + selectedWarehouse, true);
+                xmlhttp.send();
                 
             }
         
