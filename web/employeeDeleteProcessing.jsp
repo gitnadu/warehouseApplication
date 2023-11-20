@@ -26,7 +26,7 @@
             <% } else { %>
             <h1>Record is unsuccessfully Deleted </h1>
             <% } %>
-            <input type="submit" value="Delete again">    
+            <input type="submit" value="Delete again">   
         </form>
             
         <button onclick = "window.location.href = 'index.jsp';"> Return to main menu</button>

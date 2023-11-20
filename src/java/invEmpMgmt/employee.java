@@ -156,7 +156,7 @@ public class employee {
                 email_address = rst.getString("emailAddress");
                 employment_start_date = rst.getDate("employmentStartDate");
                 employment_end_date = rst.getDate("employmentEndDate");
-                phone_number = rst.getString("employeeRecord");
+                phone_number = rst.getString("phoneNumber");
             }
 
             // Closing Statements

@@ -23,10 +23,6 @@
             int status = emp.get_employee_record();
             if (status == 1){
         %>
-        <h2> Success </h2>
-        <% } else { %>
-        <h2> Nope </h2>
-        <% } %>
         <form action="employeeDeleteProcessing.jsp"> 
             Employee First Name: <%=emp.first_name %>  <br>
             Employee Last Name: <%=emp.last_name %> <br>
@@ -43,5 +39,7 @@
             Employee Phone Number: <%=emp.phone_number %>"> <br>
             <input type="submit" value="Submit">
         </form> 
+        <% } %>
+        
     </body>
 </html>
