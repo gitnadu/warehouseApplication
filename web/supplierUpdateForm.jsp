@@ -10,10 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update Supplier Form</title>
+        <title>Update Supplier</title>
     </head>
-    <body>
-        <h2> Update Supplier Form </h2>
+    <body><center>
+        <h2>Update a Supplier Form</h2>
+        <hr><br>
+
         <jsp:useBean id="supp" class="supplierMgmt.supplier" scope="session" />
         
         <% 
@@ -24,14 +26,28 @@
         %>
         <% } else { %>
         <% } %>
-        <form action="supplierUpdateCheck.jsp"> 
-            Supplier Name: <input type="text" id="supplier_nameU" name="supplier_nameU" value="<%=supp.supplier_name%>"><br>
-            Supplier Contact Number: <input type="text" id="supplier_contact_numberU" name="supplier_contact_numberU" value="<%=supp.supplier_contact_number%>"><br>
-            Office Address: <input type="text" id="office_addressU" name="office_addressU" value="<%=supp.office_address%>"><br>
-            Office Phone Number: <input type="text" id="office_phone_numberU" name="office_phone_numberU" value="<%=supp.office_phone_number%>"><br>
-            <br> <input type="submit" value="Next">
-        </form> 
-        <br>
+        <form action="supplierUpdateCheck.jsp">
+            <table>
+                <tr>
+                    <td>Supplier Name:</td>
+                    <td><input type="text" id="supplier_nameU" name="supplier_nameU" value="<%=supp.supplier_name%>"></td>
+                </tr>
+                <tr>
+                    <td>Supplier Contact Number:</td>
+                    <td><input type="text" id="supplier_contact_numberU" name="supplier_contact_numberU" value="<%=supp.supplier_contact_number%>"></td>
+                </tr>
+                <tr>
+                    <td>Office Address:</td>
+                    <td><input type="text" id="office_addressU" name="office_addressU" value="<%=supp.office_address%>"></td>
+                </tr>
+                <tr>
+                    <td>Office Phone Number:</td>
+                    <td><input type="text" id="office_phone_numberU" name="office_phone_numberU" value="<%=supp.office_phone_number%>"></td>
+                </tr>
+            </table><br>
+            <input type="submit" value="Next"><br><br>
+        </form>
+        <button onclick = "window.location.href = 'supplierUpdate.jsp';"> Go Back </button>
         <button onclick = "window.location.href = 'supplier.html';"> Cancel Update </button>
-    </body>
+    </center></body>
 </html>

@@ -89,56 +89,78 @@ and open the template in the editor.
         <hr><br>
         
         <form action="employeeRegisterProcessing.jsp" onsubmit="return validateForm();" method="post" > 
-            <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
+    <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
 
-            Employee First Name: 
-            <input type="text" id ="employee_firstname" name="employee_firstname" required><br><br>
-
-            Employee Last Name: 
-            <input type="text" id ="employee_lastname" name="employee_lastname" required><br><br>
-            
-            Employee Middle Name: 
-            <input type="text" id ="employee_middlename" name="employee_middlename" required><br><br>
-            
-            Employee Permanent Address: 
-            <input type="text" id ="employee_permaddress" name="employee_permaddress" required><br><br>
-            
-            Employee Current Address:  
-            <input type="text" id ="employee_currddress" name="employee_currddress" required><br><br>
-            
-            Employee Gender: 
-            <select id="employee_gender" name="employee_gender" required>
-                <option value =""></option>
-                <option value ="M">M</option>
-                <option value ="F">F</option>
-            </select><br><br>
-            
-            Employee Birthday:
-            <input type="date" id ="employee_birthday" name="employee_birthday" required><br><br>
-            
-            Employee Email Address:
-            <input type="text" id ="employee_emailadd" name="employee_emailadd" required><br><br>
-            
-            Employee Phone Number:
-            <input type="text" id ="employee_phonenumber" name="employee_phonenumber" required><br><br>
-            
-            Employee Job Title: 
-            <select id="employee_jobtitle" name="employee_jobtitle" required>
-                <option value =""></option>
-                <option value ="Worker">Worker</option>
-                <option value ="Manager">Manager</option>
-            </select><br><br>
-            
-            Warehouse:
-            <select id="employee_warehouseID" name="employee_warehouseID" required>
-               <%emp.get_functional_warehouses(); %>
-               <% for (int i=0;i< emp.employee_warehouse_IDList.size();i++) { %>
-                <option value ="<%= emp.employee_warehouse_IDList.get(i)%>"> <%=emp.employee_warehouse_IDList.get(i)%> </option>
-                 <% } %>
-            </select><br><br>
-           
-            <input type="submit" value="Proceed"><br><br>
-        </form>
-        <button onclick = "window.location.href = 'employee.html';">Cancel</button>
+    <center><table>
+        <tr>
+            <td>Employee First Name: </td>
+            <td><input type="text" id ="employee_firstname" name="employee_firstname" required></td>
+        </tr>
+        <tr>
+            <td>Employee Last Name: </td>
+            <td><input type="text" id ="employee_lastname" name="employee_lastname" required></td>
+        </tr>
+        <tr>
+            <td>Employee Middle Name: </td>
+            <td><input type="text" id ="employee_middlename" name="employee_middlename" required></td>
+        </tr>
+        <tr>
+            <td>Employee Permanent Address: </td>
+            <td><input type="text" id ="employee_permaddress" name="employee_permaddress" required></td>
+        </tr>
+        <tr>
+            <td>Employee Current Address:  </td>
+            <td><input type="text" id ="employee_currddress" name="employee_currddress" required></td>
+        </tr>
+        <tr>
+            <td>Employee Gender: </td>
+            <td>
+                <select id="employee_gender" name="employee_gender" required>
+                    <option value =""></option>
+                    <option value ="M">M</option>
+                    <option value ="F">F</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Employee Birthday:</td>
+            <td><input type="date" id ="employee_birthday" name="employee_birthday" required></td>
+        </tr>
+        <tr>
+            <td>Employee Email Address:</td>
+            <td><input type="text" id ="employee_emailadd" name="employee_emailadd" required></td>
+        </tr>
+        <tr>
+            <td>Employee Phone Number:</td>
+            <td><input type="text" id ="employee_phonenumber" name="employee_phonenumber" required></td>
+        </tr>
+        <tr>
+            <td>Employee Job Title: </td>
+            <td>
+                <select id="employee_jobtitle" name="employee_jobtitle" required>
+                    <option value =""></option>
+                    <option value ="Worker">Worker</option>
+                    <option value ="Manager">Manager</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Warehouse:</td>
+            <td>
+                <select id="employee_warehouseID" name="employee_warehouseID" required>
+                    <%emp.get_functional_warehouses(); %>
+                    <% for (int i=0;i< emp.employee_warehouse_IDList.size();i++) { %>
+                    <option value ="<%= emp.employee_warehouse_IDList.get(i)%>"> <%=emp.employee_warehouse_IDList.get(i)%> </option>
+                    <% } %>
+                </select>
+            </td>
+        </tr>
+    </table>
+    
+    
+    
+    <input type="submit" value="Proceed"><br><br>
+</form>
+<button onclick = "window.location.href = 'employee.html';">Cancel</button>
     </body>
 </html>

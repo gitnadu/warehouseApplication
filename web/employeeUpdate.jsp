@@ -10,10 +10,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Update Employee</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <h2> Update Employee </h2>
-        <form action="employeeUpdateForm.jsp"> 
+    <body><center>
+        <h1>Update an Employee</h1>
+        <hr><br>
+        
+       <form action="employeeUpdateForm.jsp"> 
             <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
             Employee ID: <select id="employee_idU" name="employee_idU" required> 
             <option value="" > </option>
@@ -22,8 +25,9 @@
             %>
             <option value="<%=emp.employee_IDList.get(i) %>" > <%=emp.employee_IDList.get(i) %> </option>
             <% } %>
-            </select> <br>
-            <input type="submit" value="Submit">
+            </select> <br><br>
+            <input type="submit" value="Submit"><br><br>
         </form>
+        <button onclick = "window.location.href = 'employee.html';">Cancel</button>
     </body>
 </html>

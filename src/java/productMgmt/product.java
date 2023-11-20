@@ -22,7 +22,7 @@ public class product {
     public int product_supplier_ID;
     public int product_bin_ID;
     // WHAT IS PRODUCT UNIT MEASURE
-    public int product_unit_measure;
+    public String product_unit_measure;
     public boolean product_is_received_from_warehouse;
     public String product_status;
     
@@ -36,7 +36,7 @@ public class product {
     public float product_stock_price_temporary;
     public int product_supplier_ID_temporary;
     public int product_bin_ID_temporary;
-    public int product_unit_measure_temporary;
+    public String product_unit_measure_temporary;
     public boolean product_is_received_from_warehouse_temporary;
     public String product_status_temporary;
 
@@ -62,7 +62,7 @@ public class product {
     public float product_stock_price_holder;
     public int product_supplier_ID_holder;
     public int product_bin_ID_holder;
-    public int product_unit_measure_holder;
+    public String product_unit_measure_holder;
     public boolean product_is_received_from_warehouse_holder;
     public String product_status_holder;
 
@@ -87,6 +87,27 @@ public class product {
                 temp = rst.getInt("warehouseID");
                 product_warehouse_IDList.add(temp);
             }
+            
+            pstmt.close();
+            conn.close();   
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void get_suppliers_products(){
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT supplierID FROM supplier");
+            ResultSet rst= pstmt.executeQuery();
+            
+            int temp;
+            product_supplier_IDList.clear();
+            
+            while (rst.next()){
+                temp = rst.getInt("supplierID");
+                product_supplier_IDList.add(temp);
+            }
             pstmt.close();
             conn.close();   
         } catch(SQLException e){
@@ -97,8 +118,8 @@ public class product {
     public void get_binfrom_warehouses(){
         try{
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
-            PreparedStatement pstmt = conn.prepareStatement("SELECT binID FROM bin WHERE warehouseID = ? AND isAvailable = 1;");
-            pstmt.setInt(1, Integer.parseInt(product_warehouse_locator));
+            PreparedStatement pstmt = conn.prepareStatement("SELECT binID FROM bin WHERE warehouseID = ? AND isAvailable = 1");
+            pstmt.setInt(1, Integer.valueOf(product_warehouse_locator));
             
             ResultSet rst= pstmt.executeQuery();
             
@@ -115,6 +136,27 @@ public class product {
             e.printStackTrace();
         }
     }
+    
+    public void get_productline_warehouses(){
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT productLineID FROM productline WHERE isActive = 1");
+            
+            ResultSet rst= pstmt.executeQuery();
+            
+            int temp;
+            product_product_line_IDList.clear();
+            
+            while (rst.next()){
+                temp = rst.getInt("productLineID");
+                product_product_line_IDList.add(temp);
+            }
+            pstmt.close();
+            conn.close();   
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 
     public void convert_date(String date) {
         try{
@@ -123,8 +165,71 @@ public class product {
             o.printStackTrace();
         }
     }
+    
+    public int get_product_IDs() {
+        //It works.
+        try {
+            //1. Connect to database.
+     
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            //Clear field arraylist.
+            product_product_IDList.clear();
 
-    public int register_warehouse() {
+            //2. Get products from the database and put them in arraylists.
+            PreparedStatement pstmt = conn.prepareStatement("SELECT productID FROM product ORDER BY productID ASC"); //Place the SQL statement.
+            ResultSet rst = pstmt.executeQuery();
+            while (rst.next()) {
+                product_product_ID = rst.getInt("productID");
+                product_product_IDList.add(product_product_ID);              
+            }
+
+            pstmt.close();
+            conn.close();
+
+            return 1;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+    
+
+        public int get_product_record() {
+        //It works.
+        try {
+            //1. Connect to database.
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+
+
+            //2. Get warehouses from the database and put them in arraylists.
+            PreparedStatement pstmt = conn.prepareStatement("SELECT productID, warehouseID, productLineID, productCondition, reason, stockPrice, supplierID, binID, unitMeasure, isReceivedFromWarehouse, status, dateReceived FROM product WHERE productID=?"); //Place the SQL statement.
+            pstmt.setInt(1, product_product_ID);
+            
+            ResultSet rst = pstmt.executeQuery();
+            while (rst.next()) {
+                product_warehouse_ID = rst.getInt("warehouseID");
+                product_product_line_ID = rst.getInt("productLineID");
+                product_product_condition = rst.getString("productCondition");
+                product_reason = rst.getString("reason");
+                product_stock_price = rst.getFloat("stockPrice");
+                product_supplier_ID = rst.getInt("supplierID");
+                product_bin_ID = rst.getInt("binID");
+                product_unit_measure = rst.getString("unitMeasure");
+                product_is_received_from_warehouse = rst.getBoolean("isReceivedFromWarehouse");
+                product_status = rst.getString("status");
+                product_date_received = rst.getDate("dateReceived");
+            }
+            pstmt.close();
+            conn.close();
+            return 1;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+
+        }
+    }
+
+    public int register_product() {
         try {
             
             // Instantiate Connection Variable and Connect to Database
@@ -140,25 +245,24 @@ public class product {
             }
 
             // Assign Values
-            pstmt = conn.prepareStatement("INSER INTO product (productID, warehouseID, dateReceived, productLineID, productCondition, reason, stockPrice, supplierID, binID, unitMeasure, isReceivedFromWarehouse, status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,)");
+            pstmt = conn.prepareStatement("INSERT INTO product (productID, warehouseID, dateReceived, productLineID, productCondition, reason, stockPrice, supplierID, binID, unitMeasure, isReceivedFromWarehouse, status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
             pstmt.setInt(1, product_product_ID);
             pstmt.setInt(2, product_warehouse_ID);
 
             convert_date(date_temporary);
 
-            pstmt.setDate(5, new java.sql.Date(product_date_received.getTime()));
+            pstmt.setDate(3, new java.sql.Date(product_date_received.getTime()));
             pstmt.setInt(4, product_product_line_ID);
             pstmt.setString(5, product_product_condition);
             pstmt.setString(6, product_reason);
             pstmt.setFloat(7, product_stock_price);
             pstmt.setInt(8, product_supplier_ID);
             pstmt.setInt(9, product_bin_ID);
-            pstmt.setInt(10, product_unit_measure);
+            pstmt.setString(10, product_unit_measure);
             product_is_received_from_warehouse = false;
             pstmt.setBoolean(11, product_is_received_from_warehouse);
             
             // What do we put here?
-            product_status = "HELP ME!";
             pstmt.setString(12, product_status);
 
             // Push Update to Database

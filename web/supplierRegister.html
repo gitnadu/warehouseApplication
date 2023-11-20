@@ -3,6 +3,7 @@
         <title>Register Supplier</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
         <script> 
         function getSupplierNumber()
          {
@@ -56,15 +57,31 @@
               }
         </script>
     </head>
-    <body>
-        <h2> Register Supplier </h2>
+    <body><center>
+        <h2>Register a New Supplier</h2>
+        <hr><br>
+        
         <form action="supplierRegisterProcessing.jsp" onsubmit="return validateForm();" method="post">
-            Supplier Name: <input type="text" id="supplier_name" name="supplier_name"><br>
-            Supplier Contact Number: <input type="text" id="supplier_contact_number" name="supplier_contact_number"><br>
-            Office Address: <input type="text" id="office_address" name="office_address"><br>
-            Office Phone Number: <input type="text" id="office_phone_number" name="office_phone_number"><br>
+            <table>
+                <tr>
+                    <td>Supplier Name:</td>
+                    <td><input type="text" id="supplier_name" name="supplier_name" required></td>
+                </tr>
+                <tr>
+                    <td>Supplier Contact Number:</td>
+                    <td><input type="text" id="supplier_contact_number" name="supplier_contact_number" required></td>
+                </tr>
+                <tr>
+                    <td>Office Address:</td>
+                    <td><input type="text" id="office_address" name="office_address" required></td>
+                </tr>
+                <tr>
+                    <td>Office Phone Number:</td>
+                    <td><input type="text" id="office_phone_number" name="office_phone_number" required></td>
+                </tr>
+            </table><br>
+            <button onclick = "window.location.href = 'supplier.html';">Cancel</button>
             <input type="submit" value="Proceed">
         </form>
-        <button onclick = "window.location.href = 'supplier.html';">Cancel</button>
-    </body>
+    </center></body>
 </html>

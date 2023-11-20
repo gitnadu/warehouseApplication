@@ -9,7 +9,6 @@ and open the template in the editor.
 <html>
     <head>
         <title> Register a new inventory employee </title>
-        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
         <script>
@@ -17,17 +16,32 @@ and open the template in the editor.
                 var selectedWarehouse = document.getElementById("product_warehouseID").value;
                 var xmlhttp = new XMLHttpRequest();
                 
-                
-                
                 xmlhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        console.log(xmlhttp.responseText);
-                        document.getElementById("product_bin").innerHTML = xmlhttp.responseText;
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        console.log(JSON.parse(xmlhttp.responseText));
+                        var binsData = JSON.parse(xmlhttp.responseText);
+                        populateDropdown(binsData);
                     }
                 };
+
                 xmlhttp.open("GET", "get_bin.jsp?warehouse=" + selectedWarehouse, true);
                 xmlhttp.send();
                 
+            }
+            
+            function populateDropdown(binsData) {
+                var selectElement = document.getElementById("product_bin");
+
+                // Clear existing options
+                selectElement.innerHTML = "";
+
+                // Add new options based on the data received
+                for (var i = 0; i < binsData.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = binsData[i]; // Set the appropriate property based on your JSON structure
+                    option.text = binsData[i]; // Set the appropriate property based on your JSON structure
+                    selectElement.appendChild(option);
+                }
             }
         
             function isDateFuture() {
@@ -61,7 +75,8 @@ and open the template in the editor.
             <jsp:useBean id="prod" class="productMgmt.product" scope="session" />
 
             Warehouse ID:
-            <select id="product_warehouseID" name="product_warehouseID"  onchange="updateBin() required>
+            <select id="product_warehouseID" name="product_warehouseID"  onchange="updateBin();" required>
+                <option value =""></option>
                 <% prod.get_functional_warehouses();
                     for (int i=0;i< prod.product_warehouse_IDList.size();i++) { %>
                  <option value ="<%= prod.product_warehouse_IDList.get(i)%>"> <%=prod.product_warehouse_IDList.get(i)%> </option>
@@ -69,39 +84,46 @@ and open the template in the editor.
              </select><br><br> 
 
             Product Line:
-            <select id="product_warehouseID" name="product_warehouseID" required>
-                <% prod.get_functional_warehouses();
-                    for (int i=0;i< prod.product_warehouse_IDList.size();i++) { %>
-                 <option value ="<%= prod.product_warehouse_IDList.get(i)%>"> <%=prod.product_warehouse_IDList.get(i)%> </option>
+            <select id="product_productlineID" name="product_productlineID" required>
+                <option value =""></option>
+                <% prod.get_productline_warehouses();
+                    for (int i=0;i< prod.product_product_line_IDList.size();i++) { %>
+                 <option value ="<%= prod.product_product_line_IDList.get(i)%>"> <%=prod.product_product_line_IDList.get(i)%> </option>
                   <% } %> 
              </select><br><br>
 
             Date Received:
             <input type="date" id ="product_date_received" name="product_date_received" required><br><br>
 
-            <!-- Product Condition: -->
-            <!-- product_product_condition -->
-
-            <!-- There is no reason input because the need for product condition is not initially needed. -->
+            Product Condition:
+            <select id="product_condition" name="product_condition" required>
+                <option value =""> </option>
+                <option value ="Good"> Good </option>
+                <option value ="Bad"> Bad </option>
+            </select>
 
             Product Stock Price:
-            <input type="number" id="product_stock_price" name="product_stock_price" required><br><br>
+            <input type="number" id="product_stock_price" name="product_stock_price" step="0.01" required><br><br>
 
-            <!-- Supplier -->
-            <!-- product_supplier_ID -->
+            Supplier:
+            <select id="product_supplierID" name="product_supplierID" required>
+                <option value =""></option>
+                <% prod.get_suppliers_products();
+                    for (int i=0;i< prod.product_supplier_IDList.size();i++) { %>
+                 <option value ="<%= prod.product_supplier_IDList.get(i)%>"> <%=prod.product_supplier_IDList.get(i)%> </option>
+                  <% } %> 
+             </select><br><br>
 
             Bin:
-            <select id="product_bin" name="product_bin"">
-            <option value=""> Select Bin </option>
-            </select><br>
+            <select id="product_bin" name="product_bin" required></select>
 
-            <!-- Unit Measure -->
-            <!-- product_unit_measure -->
 
-            <!-- There is no received from warehouse boolean because registering must come from supplier. -->
-
-            <!-- Product Status -->
-            <!-- product_status -->
+            Unit Measure:
+            <select id="product_unitmeasure" name="product_unitmeasure" required>
+                <option value =""> </option>
+                <option value ="Each"> Each </option>
+                <option value ="Group"> Group </option>
+            </select>
            
             <input type="submit" value="Proceed"><br><br>
         </form>

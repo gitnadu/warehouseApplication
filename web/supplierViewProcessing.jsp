@@ -11,10 +11,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Viewing Inventory Employee Record</title>
+        <title>View Supplier</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <h2> Viewing Inventory Employee Record </h2>
+    <body><center>
+        <h2>Success! Viewing Supplier Record..</h2>
+        <hr><br>
+        
         <jsp:useBean id="supp" class="supplierMgmt.supplier" scope="session" />
         
         <% 
@@ -23,17 +26,31 @@
             int status = supp.get_supplier_record();
             if (status == 1){
         %>
-        <h2> Success </h2>
+        <h2></h2>
         <% } else { %>
-        <h2> Nope </h2>
+        <h2></h2>
         <% } %>
         <form action="supplierView.jsp"> 
-            Supplier Name: <td> <%=supp.supplier_name%> </td> <br>
-            Supplier Contact Number: <td><%=supp.supplier_contact_number%> </td> <br>
-            Supplier Office Address: <td><%=supp.office_address %> </td> <br>
-            Supplier Office Phone Number <td><%=supp.office_phone_number%> </td> <br>
-            <input type="submit" value="View again">
+            <table>
+                <tr>
+                    <td>Supplier Name:</td>
+                    <td><%=supp.supplier_name%></td>
+                </tr>
+                <tr>
+                    <td>Supplier Contact Number:</td>
+                    <td><%=supp.supplier_contact_number%></td>
+                </tr>
+                <tr>
+                    <td>Office Address:</td>
+                    <td><%=supp.office_address %></td>
+                </tr>
+                <tr>
+                    <td>Office Phone Number:</td>
+                    <td><%=supp.office_phone_number%></td>
+                </tr>
+            </table><br>
+            <input type="submit" value="View Again"><br><br>
         </form> 
-            <button onclick = "window.location.href = 'index.html';"> Back to Main Menu </button>
+            <button onclick = "window.location.href = 'supplier.html';"> Back to Menu </button>
     </body>
 </html>

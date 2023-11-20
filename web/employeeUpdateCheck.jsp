@@ -12,8 +12,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Update Employee Check</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
+    <body><center>
+        <h1>Double Check Changes</h1>
+        <hr><br>
+
         <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
         <form action="employeeUpdateProcessing.jsp"> 
             <%  emp.last_name_holder  = request.getParameter("employee_lastnameU");
@@ -32,64 +36,66 @@
                 
             %>
             
-            <table>
-                <th> OLD RECORD
-                <tr> 
-                    <th> Last Name </th> &nbsp;
-                    <th> First Name </th> &nbsp;
-                    <th> Middle Name </th> &nbsp;
-                    <th> Permanent Address </th> &nbsp;
-                    <th> Current Address </th> &nbsp;
-                    <th> Gender </th> &nbsp;
-                    <th> Birthday </th> &nbsp;
-                    <th> Phone Number </th> &nbsp;
-                    <th> Employment Start Date </th> &nbsp;
-                    <th> Employment End Date </th> &nbsp;
+            <table style = "width: 100%">
+                <h2>Original Details:</h2>
+                <tr>
+                    <td> Last Name </td>
+                    <td> First Name </td>
+                    <td> Middle Name </td>
+                    <td> Permanent Address </td>
+                    <td> Current Address </td>
+                    <td> Gender </td>
+                    <td> Birthday </td>
+                    <td> Phone Number </td>
+                    <td> Employment Start Date </td>
+                    <td> Employment End Date </td>
+                </tr>
                 </tr>
                     <tr> 
-                     <td> <%=emp.last_name%> </td> &nbsp;
-                     <td><%=emp.first_name%> </td> &nbsp;
-                     <td><%=emp.middle_name %> </td>&nbsp;
-                     <td><%=emp.permanent_address%> </td>&nbsp;
-                     <td><%=emp.current_address %> </td>&nbsp;
-                     <td><%=emp.gender %>  </td>&nbsp;
-                     <td><%=emp.birthday %> </td>&nbsp;
-                     <td><%=emp.phone_number %> </td>&nbsp;
-                     <td><%=emp.employment_start_date %> </td>&nbsp;
-                     <td><%=emp.employment_end_date %> </td> &nbsp;
+                     <td> <%=emp.last_name%> </td>
+                     <td><%=emp.first_name%> </td>
+                     <td><%=emp.middle_name %> </td>
+                     <td><%=emp.permanent_address%> </td>
+                     <td><%=emp.current_address %> </td>
+                     <td><%=emp.gender %>  </td>
+                     <td><%=emp.birthday %> </td>
+                     <td><%=emp.phone_number %> </td>
+                     <td><%=emp.employment_start_date %> </td>
+                     <td><%=emp.employment_end_date %> </td>
                     <tr>
             </table>
                     
-                    <br>
-            <table>
-                <th> NEW RECORD </th>
+            <hr class = "short">
+
+            <table style = "width: 100%">
+                <h2> New Details: </h2>
                 <tr> 
-                    <th> Last Name </th> &nbsp;
-                    <th> First Name </th> &nbsp;
-                    <th> Middle Name </th> &nbsp;
-                    <th> Permanent Address </th> &nbsp;
-                    <th> Current Address </th> &nbsp;
-                    <th> Gender </th> &nbsp;
-                    <th> Birthday </th> &nbsp;
-                    <th> Phone Number </th> &nbsp;
-                    <th> Employment Start Date </th> &nbsp;
-                    <th> Employment End Date </th> &nbsp;
+                    <td> Last Name </td>
+                    <td> First Name </td>
+                    <td> Middle Name </td>
+                    <td> Permanent Address </td>
+                    <td> Current Address </td>
+                    <td> Gender </td>
+                    <td> Birthday </td>
+                    <td> Phone Number </td>
+                    <td> Employment Start Date </td>
+                    <td> Employment End Date </td>
                 </tr>
                     <tr> 
                      
-                     <td> <%=emp.last_name_holder%> </td> &nbsp;
-                     <td><%=emp.first_name_holder%> </td> &nbsp;
-                     <td><%=emp.middle_name_holder %> </td>&nbsp;
-                     <td><%=emp.permanent_address_holder%> </td>&nbsp;
-                     <td><%=emp.current_address_holder %> </td>&nbsp;
-                     <td><%=emp.gender_holder %>  </td>&nbsp;
-                     <td><%=emp.birthday_holder %> </td>&nbsp;
-                     <td><%=emp.phone_number_holder %> </td>&nbsp;
-                     <td><%=emp.employment_start_date %> </td>&nbsp;
-                     <td><%=emp.employment_end_date_temporary %> </td> &nbsp;
+                     <td> <%=emp.last_name_holder%> </td>
+                     <td><%=emp.first_name_holder%> </td>
+                     <td><%=emp.middle_name_holder %> </td>
+                     <td><%=emp.permanent_address_holder%> </td>
+                     <td><%=emp.current_address_holder %> </td>
+                     <td><%=emp.gender_holder %>  </td>
+                     <td><%=emp.birthday_holder %> </td>
+                     <td><%=emp.phone_number_holder %> </td>
+                     <td><%=emp.employment_start_date %> </td>
+                     <td><%=emp.employment_end_date_temporary %> </td>
                     <tr>
             </table>
-            <input type="submit" value="Save changes">
+                    <input type="submit" value="Save Changes"><br><br>
         </form>
         <button onclick = "window.location.href = 'employeeUpdate.jsp';"> Return </button>
         

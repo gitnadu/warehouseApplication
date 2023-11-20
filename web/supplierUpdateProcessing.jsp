@@ -11,24 +11,24 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Updating Supplier Record</title>
+        <title>Update Supplier</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
+    <body><center>
         <jsp:useBean id="supp" class="supplierMgmt.supplier" scope="session" />
         <form action="supplierUpdate.jsp"> 
             <%              
                 int status = supp.update_supplier();
                 if (status == 1){
             %>
-            <h1>Updating Supplier Successful </h1>
+            <h2>Record Successfully Updated!</h2>
             <% } else { %>
-            <h1>Updating Supplier Unsuccessful </h1>
+            <h2>Record Unsuccessfully Updated..</h2>
             <% } %>
-            
-
-            <input type="submit" value="Update a record again">
+            <hr><br><br>
+            <input type="submit" value="Update a Record Again"><br><br>
         </form>
         
         <button onclick = "window.location.href = 'supplier.html';"> Back to Main Menu </button>
-    </body>
+    </center></body>
 </html>

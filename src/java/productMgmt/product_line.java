@@ -100,10 +100,7 @@ public class product_line {
     public int delete_product_line() {
         try {
             //1. Connect to database.
-            Connection conn;
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?zeroDateTimeBehavior=CONVERT_TO_NULL&user=root&password=12345678"); //Place the path.
-            System.out.println("Connection Successful");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
 
             //2. Delete the product.
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM productLine WHERE productLineID=?"); //Place DELETE statement.
@@ -125,10 +122,7 @@ public class product_line {
         //It works.
         try {
             //1. Connect to database.
-            Connection conn;
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?zeroDateTimeBehavior=CONVERT_TO_NULL&user=root&password=12345678"); //Place the path.
-            System.out.println("Connection Successful");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
 
             //Clear field arraylists.
             product_line_IDList.clear();
@@ -139,7 +133,7 @@ public class product_line {
             product_line_descriptionList.clear();
 
             //2. Get warehouses from the database and put them in arraylists.
-            PreparedStatement pstmt = conn.prepareStatement("SELECT productLineID, productLineName, brand, isActive, cateogory, productLineDescription FROM productLine"); //Place the SQL statement.
+            PreparedStatement pstmt = conn.prepareStatement("SELECT productLineID, productLineName, brand, isActive, category, productLineDescription FROM productline"); //Place the SQL statement.
             ResultSet rst = pstmt.executeQuery();
             while (rst.next()) {
                 product_line_ID = rst.getInt("productLineID");
@@ -171,23 +165,19 @@ public class product_line {
         //It works.
         try {
             //1. Connect to database.
-            Connection conn;
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?zeroDateTimeBehavior=CONVERT_TO_NULL&user=root&password=12345678"); //Place the path.
-            System.out.println("Connection Successful");
-
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
             //Clear field arraylist.
             product_line_IDList.clear();
             
             //Clear other field arraylists in case.
             product_line_nameList.clear();
             brandList.clear();
-            is_activeList.clear();
+            isActiveList.clear();
             categoryList.clear();
-            descriptionList.clear();
+            product_line_descriptionList.clear();
 
             //2. Get products from the database and put them in arraylists.
-            PreparedStatement pstmt = conn.prepareStatement("SELECT productLineID FROM productLine"); //Place the SQL statement.
+            PreparedStatement pstmt = conn.prepareStatement("SELECT productLineID FROM productline"); //Place the SQL statement.
             ResultSet rst = pstmt.executeQuery();
             while (rst.next()) {
                 product_line_ID = rst.getInt("productLineID");
@@ -208,13 +198,10 @@ public class product_line {
         //It works.
         try {
             //1. Connect to database.
-            Connection conn;
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?zeroDateTimeBehavior=CONVERT_TO_NULL&user=root&password=12345678"); //Place the path.
-            System.out.println("Connection Successful");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
 
             //2. Get warehouses from the database and put them in arraylists.
-            PreparedStatement pstmt = conn.prepareStatement("SELECT productLineID, productLineName, brand, isActive, cateogory, productLineDescription FROM productLine WHERE productLineID=?"); //Place the SQL statement.
+            PreparedStatement pstmt = conn.prepareStatement("SELECT productLineID, productLineName, brand, isActive, category, productLineDescription FROM productline WHERE productLineID=?"); //Place the SQL statement.
             pstmt.setInt(1, product_line_ID);
             
             ResultSet rst = pstmt.executeQuery();

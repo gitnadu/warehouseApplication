@@ -1,6 +1,6 @@
 <%-- 
-    Document   : supplierUpdateCheck
-    Created on : 11 18, 23, 9:29:11 AM
+    Document   : productLineUpdateCheck
+    Created on : 11 21, 23, 6:43:15 AM
     Author     : ccslearner
 --%>
 
@@ -19,8 +19,8 @@
         <hr><br>
         
         <jsp:useBean id="supp" class="supplierMgmt.supplier" scope="session" />
-        <form action="supplierUpdateProcessing.jsp"> 
-            <%  supp.supplier_name_temporary  = request.getParameter("supplier_nameU");
+        <form action="productLineUpdateProcessing.jsp"> 
+            <%  supp.supplier_name_temporary  = request.getParameter("product_line_nameU");
                 supp.supplier_contact_number_temporary = request.getParameter("supplier_contact_numberU");
                 supp.office_address_temporary = request.getParameter("office_addressU");
                 supp.office_phone_number_temporary = request.getParameter("office_phone_numberU");

@@ -11,21 +11,25 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> View Employee</title>
+        <title>View Supplier</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <h2> View Supplier </h2>
+    <body><center>
+        <h2>View a Supplier</h2>
+        <hr><br>
+        
         <form action="supplierViewProcessing.jsp"> 
             <jsp:useBean id="supp" class="supplierMgmt.supplier" scope="session" />
-            Employee ID: <select id="supplier_idV" name="supplier_idV"> 
+            Supplier ID: <select id="supplier_idV" name="supplier_idV"> 
             <%  supp.get_supplier_IDs();
                 for(int i=0;i<supp.supplier_ID_list.size();i++){
             %>
             <option value="<%=supp.supplier_ID_list.get(i) %>" > <%=supp.supplier_ID_list.get(i) %> </option>
             <% } %>
-            </select> <br>
-            <input type="submit" value="Submit">
+            </select> <br><br>
+            <input type="submit" value="Submit"><br><br>
         </form>
-    </body>
+        <button onclick = "window.location.href = 'supplier.html';">Cancel</button>
+    </center></body>
 </html>
 

@@ -6,23 +6,27 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title> Search For Supplier </title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Search Suppliers</title>
         <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <h2> Search For Supplier </h2>
+    <body><center>
+        <h2>Search Suppliers</h2>
         <hr><br>
+        
         <form action="supplierSearchProcessing.jsp"> 
-            Supplier Name: 
-            <input type="text" id ="supplier_nameS" name="supplier_nameS"> <br><br>
-            
-            Supplier Office Address: 
-            <input type="text" id ="supplier_addressS" name="supplier_addressS"> <br><br>
-
-            <input type="submit" value="Submit">
+            <table>
+                <tr>
+                    <td>Supplier Name: </td>
+                    <td><input type="text" id ="supplier_nameS" name="supplier_nameS"></td>
+                </tr>
+                <tr>
+                    <td>Supplier Office Address: </td>
+                    <td><input type="text" id ="supplier_addressS" name="supplier_addressS"></td>
+                </tr>
+            </table><br><br>
+            <input type="submit" value="Submit"><br><br>
         </form>
         <button onclick = "window.location.href = 'supplier.html';">Go Back</button>
-    </body>
+    </center></body>
 </html>

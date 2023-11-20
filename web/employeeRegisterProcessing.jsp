@@ -13,7 +13,7 @@
         <title>Register Inventory Employee Processing</title>
         <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
+    <body><center>
         <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
         <%
             emp.last_name  = request.getParameter("employee_lastname");
@@ -32,24 +32,62 @@
             if (status==1) {
                 %>
                 <h1>You have successfully registered a new inventory employee!</h1>
+                <hr>
                 <% if (emp.job_title.equals("Worker")){ %>
-                <h2>The new employee's worker ID is <%=emp.employee_ID %></h2> <% } else { %>
-                <h2>The new employee's manager ID is <%=emp.employee_ID %></h2> <% } %>
+                <h2>The new employee's worker ID is <%=emp.employee_ID %>.</h2> <% } else { %>
+                <h2>The new employee's manager ID is <%=emp.employee_ID %>.</h2> <% } %>
                 <br><br>
-                New Employee Employee ID: <%=emp.employee_ID %>  <br><br>
-                New Employee First Name: <%=emp.first_name %>  <br><br>
-                New Employee Last Name: <%=emp.last_name %> <br><br>
-                New Employee Middle Name: <%=emp.middle_name %> <br><br>
-                New Employee Permanent Address: <%=emp.permanent_address %> <br><br>
-                New Employee Current Address:  <%=emp.current_address %> <br><br>
-                New Employee Gender:<%=emp.gender %> <br><br>
-                New Employee Birthday:<%=emp.birthday%> <br><br>
-                New Employee Email Address: <%=emp.email_address %>  <br><br>
-                New Employee Phone Number: <% if(emp.phone_number.length() == 10) {%> 0<%=emp.phone_number%> <% } else {%> <%=emp.phone_number%> <%} %> <br><br>
-                New Employee Start of Employment Date: <%=emp.employment_start_date %>  <br><br>
-                New Employee End of Employment Date: 
-                <% if (emp.employment_end_date == null) { %> 
-                --- <% } %> <br><br>
+                <table>
+                    <tr>
+                        <td>New Employee ID:</td>
+                        <td><%=emp.employee_ID %></td>
+                    </tr>
+                    <tr>
+                        <td>New Employee First Name:</td>
+                        <td><%=emp.first_name %></td>
+                    </tr>
+                    <tr>
+                        <td>New Employee Last Name:</td>
+                        <td><%=emp.last_name %></td>
+                    </tr>
+                    <tr>
+                        <td>New Employee Middle Name:</td>
+                        <td><%=emp.middle_name %></td>
+                    </tr>
+                    <tr>
+                        <td>New Employee Permanent Address:</td>
+                        <td><%=emp.permanent_address %></td>
+                    </tr>
+                    <tr>
+                        <td>New Employee Current Address:</td>
+                        <td><%=emp.current_address %></td>
+                    </tr>
+                    <tr>
+                        <td>New Employee Gender:</td>
+                        <td><%=emp.gender %></td>
+                    </tr>
+                    <tr>
+                        <td>New Employee Birthday:</td>
+                        <td><%=emp.birthday%></td>
+                    </tr>
+                    <tr>
+                        <td>New Employee Email Address:</td>
+                        <td><%=emp.email_address %></td>
+                    </tr>
+                    <tr>
+                        <td>New Employee Phone Number:</td>
+                        <td><% if(emp.phone_number.length() == 10) {%> 0<%=emp.phone_number%> <% } else {%> <%=emp.phone_number%> <%} %></td>
+                    </tr>
+                    <tr>
+                        <td>New Employee Start of Employment Date:</td>
+                        <td><%=emp.employment_start_date %></td>
+                    </tr>
+                    <tr>
+                        <td>New Employee End of Employment Date:</td>
+                        <td><% if (emp.employment_end_date == null) { %> 
+                --- <% } %></td>
+                    </tr>
+                </table><br><br>
                 
                 <button onclick = "window.location.href = 'employee.html';"> Back to Employee Menu </button>
                 <button onclick = "window.location.href = 'employeeRegister.jsp';"> Register Another Employee </button>
