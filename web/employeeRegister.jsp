@@ -7,72 +7,66 @@ and open the template in the editor.
 <%@page import="java.util.*, invEmpMgmt.*, java.text.*, java.text.SimpleDateFormat"%>
 <html>
     <head>
-        <title> Register a new inventory employee </title>
+        <title>Register New Inventory Employee</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-
         <script type="text/javascript"> 
-              function getCurrentDate() {
+            function getCurrentDate() {
                 const today = new Date();
                 const year = today.getFullYear();
                 const month = String(today.getMonth()).padStart(2, '0');
                 const day = String(today.getDate()).padStart(2, '0');
                 return '${year}-${month}-${day}';
-              }
+            }
 
-              function getEmail(){
-                  let text = document.getElementById('employee_emailadd').value;
-                  const array = text.split(".");
-
-                  if (array[array.length - 1].localeCompare("com") == 0 || array[array.length - 1].localeCompare("org") == 0 || array[array.length - 1].length == 2)
-                      return true;
-                  
-                  alert("Invalid email address");
-                  return false;
-              }
-              
-             function getPhoneNumber()
-             {
-                 let number = document.getElementById("employee_phonenumber").value;
-                 
-                 if((number.length == 11 && number[0] == 0)|| (number.length == 10 && number[0] != 0))
-                 {
-                    for(let i=0 ;i < number.length;i++)
-                        if (isNaN(number[i]))
-                        {
-                            alert("Invalid phone number");
-                            return false;
-                        }
-                           
-                    
-                    return true;
-                 }
-                 
-                 alert("Invalid phone number");
-                 return false;
-             }
-              
-              
-              function validateForm(){
-                  
-                if(!getEmail())
-                    return false;
-                  
-                if(!getPhoneNumber())
-                    return false;
+            function getEmail(){
+                let text = document.getElementById('employee_emailadd').value;
+                text = text.toLowerCase();
+                const array = text.split(".");
                 
-                if(!isAbove18())
-                {
-                    alert("Person is not above 18 years old");
+                if (!text.include("@")) {
+                    alert("Invalid Email Address");
                     return false;
                 }
-                    
-                  return true;
-              }
+
+                if (array[array.length - 1].localeCompare("com") == 0 || array[array.length - 1].localeCompare("org") == 0 || array[array.length - 1].length == 2) {
+                    return true;
+                }
+                
+                alert("Invalid Email Address");
+                return false;
+            }
               
-              function isAbove18() {
-                // Parse the entered birthday string into a Date object
+            function getPhoneNumber() {
+                let number = document.getElementById("employee_phonenumber").value;
+                
+                if((number.length == 11 && number[0] == 0)|| (number.length == 10 && number[0] != 0)) {
+                    for(let i=0 ;i < number.length;i++)
+                        if (isNaN(number[i])) {
+                            alert("Invalid phone number");
+                            return false;
+                    }
+                    return true;
+                }
+
+                alert("Invalid Phone Number");
+                return false;
+            }
+
+            function validateForm() {
+                if(!getEmail()) return false;
+                if(!getPhoneNumber()) return false;
+                
+                if(!isAbove18()) {
+                    alert("The person must not be below 18 nor above 64.");
+                    return false;
+                }
+
+                return true;
+            }
+
+            function isAbove18() {
                 birthday =  document.getElementById("employee_birthday").value;
                 let birthDate = new Date(birthday);
 
@@ -80,25 +74,18 @@ and open the template in the editor.
 
                 let age = currentDate.getFullYear() - birthDate.getFullYear();
 
-                if (
-                  currentDate.getMonth() < birthDate.getMonth() ||
-                  (currentDate.getMonth() === birthDate.getMonth() &&
-                    currentDate.getDate() < birthDate.getDate())
-                ) {
-                  // If birthday hasn't occurred yet, subtract 1 from the age
-                  return age - 1 >= 18 && age - 1 < 65;
+                if (currentDate.getMonth() < birthDate.getMonth() ||
+                (currentDate.getMonth() === birthDate.getMonth() &&
+                    currentDate.getDate() < birthDate.getDate())) {
+                    return age - 1 >= 18 && age - 1 < 65;
                 } else {
-                  // If birthday has occurred, check if the age is 18 or older
-                  return age >= 18 && age < 65;
+                return age >= 18 && age < 65;
                 }
-}
-              
-              
-
+            }
         </script>
     </head>    
     <body>
-        <h2> Register a New Inventory Employee </h2>
+        <h2>Register a New Inventory Employee</h2>
         <hr><br>
         
         <form action="employeeRegisterProcessing.jsp" onsubmit="return validateForm();" method="post" > 
@@ -106,7 +93,7 @@ and open the template in the editor.
 
             Employee First Name: 
             <input type="text" id ="employee_firstname" name="employee_firstname" required><br><br>
-            S
+
             Employee Last Name: 
             <input type="text" id ="employee_lastname" name="employee_lastname" required><br><br>
             

@@ -10,10 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Register Inventory Employee Form</title>
+        <title>View Inventory Employees Processing</title>
     </head>
     <body>
-        <h2> Register Inventory Employee Form </h2>
+        <h2>View Inventory Employee</h2>
+        <hr><br>
         <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
         
         <% 
@@ -27,20 +28,22 @@
         <h2> Nope </h2>
         <% } %>
         <form action="employee.html"> 
-            Employee First Name: <%=emp.first_name %>  <br>
-            Employee Last Name: <%=emp.last_name %> <br>
-            Employee Middle Name: <%=emp.middle_name %>  <br>
-            Employee Permanent Address: <%=emp.permanent_address %> <br>
-            Employee Current Address:  <%=emp.current_address %> <br>
-            Employee Gender:<%=emp.gender %> <br>
-            Employee Birthday:<%=emp.birthday%> <br>
-            Employee Email Address: <%=emp.email_address %>  <br>
-            Employee Start of Employment Date: <%=emp.employment_start_date %>  <br>
+            Employee First Name: <%=emp.first_name %>  <br><br>
+            Employee Last Name: <%=emp.last_name %> <br><br>
+            Employee Middle Name: <%=emp.middle_name %>  <br><br>
+            Employee Permanent Address: <%=emp.permanent_address %> <br><br>
+            Employee Current Address:  <%=emp.current_address %> <br><br>
+            Employee Gender:<%=emp.gender %> <br><br>
+            Employee Birthday:<%=emp.birthday%> <br><br>
+            Employee Email Address: <%=emp.email_address %>  <br><br>
+            Employee Start of Employment Date: <%=emp.employment_start_date %>  <br><br>
             Employee End of Employment Date: 
             <% if (emp.employment_end_date == null) { %>
             --- <% } else { %> <%=emp.employment_end_date%> <% } %>
-            Employee Phone Number: <%=emp.phone_number %>"> <br>
+            Employee Phone Number: <%=emp.phone_number %>"> <br><br>
             <input type="submit" value="Go back">
-        </form> 
+        </form>
+        <button onclick = "window.location.href = 'employee.html';">Go Home</button> <br><br>
+        <button onclick = "window.location.href = 'employeeView.jsp';">Cancel</button>
     </body>
 </html>

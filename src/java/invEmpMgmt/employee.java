@@ -222,7 +222,7 @@ public class employee {
             }
             
             pstmt.setDate(7, new java.sql.Date(birthday.getTime()));
-            pstmt.setString(8, email_address);
+            pstmt.setString(8, email_address.toLowerCase());
             
             // converts to actual end date
             convert_end_date(employment_end_date_temporary_holder);
@@ -330,7 +330,7 @@ public class employee {
             employment_end_date = new Date();
 
             pstmt.setDate(8, new java.sql.Date(birthday.getTime()));
-            pstmt.setString(9, email_address);
+            pstmt.setString(9, email_address.toLowerCase());
             
             pstmt.setDate(10, new java.sql.Date(employment_start_date.getTime()));
             employment_end_date = null;
