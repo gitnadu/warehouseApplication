@@ -9,25 +9,38 @@ and open the template in the editor.
         <title> Register a New Product Line </title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <script>
+        function ensureExit() {
+            var product_line_name = document.forms["main_form"]["product_line_name"].value;
+            var brand = document.forms["main_form"]["brand"].value;
+            var category = document.forms["main_form"]["category"].value;
+            var product_line_description = document.forms["main_form"]["product_line_description"].value;
+
+            if (product_line_name != "" || brand != "" || category != "" || product_line_description != "") {
+                confirm("The data you've inputted will be unsaved. Are you sure you want to go back?");
+            }
+        }
+        </script>
     </head>
     <body>
         <h2> Register a New Product Line </h2>
-        <form action="productLineRegisterProcessing.jsp"> 
+        <form name="main_form" action="productLineRegisterProcessing.jsp"> 
             Product Line Name:
-            <input type="text" id="product_line_name" name="product_line_name"><br>
+            <input type="text" id="product_line_name" name="product_line_name" required><br><br>
 
             Brand Name:
-            <input type="text" id="brand" name="brand"><br>
+            <input type="text" id="brand" name="brand" required><br><br>
 
             Category:
-            <input type="text" id="category" name="category"><br>
+            <input type="text" id="category" name="category" required><br><br>
             <!-- We can display a list of unique categories here. -->
 
             Product Line Description:
-            <input type="text" id="product_line_description" name="product_line_description"><br>
+            <input type="text" id="product_line_description" name="product_line_description" required><br><br>
             
-            <input type="submit" value="Proceed">
+            <input type="submit" value="Proceed"><br><br>
         </form>
-        <button onclick = "window.location.href = 'productLine.html';">Cancel</button>
+        <button onclick = "ensureExit(); window.location.href = 'productLine.html';">Cancel</button>
     </body>
 </html>

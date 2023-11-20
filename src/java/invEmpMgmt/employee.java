@@ -48,6 +48,7 @@ public class employee {
     public ArrayList<Date> birthdayList = new ArrayList<>();
     public ArrayList<Date> employment_start_dateList = new ArrayList<>();
     public ArrayList<Date> employment_end_dateList = new ArrayList<>();
+    public ArrayList employee_warehouse_IDList = new ArrayList<>();
     
     // for search function
     public String last_name_holder;
@@ -167,6 +168,30 @@ public class employee {
         } catch(SQLException e){
             e.printStackTrace();
             return 0;
+        }
+        
+    }
+    
+        public void get_functional_warehouses(){
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT warehouseID AS warehouseID FROM warehouse WHERE isFunctional= 1 ORDER BY warehouseID ASC");
+            ResultSet rst= pstmt.executeQuery();
+            
+            int temp;
+            employee_warehouse_IDList.clear();
+            while (rst.next()){
+                temp = rst.getInt("warehouseID");
+                employee_warehouse_IDList.add(temp);
+            }
+            
+            // Closing Statements
+            pstmt.close();
+            conn.close();
+            
+            
+        } catch(SQLException e){
+            e.printStackTrace();
         }
         
     }

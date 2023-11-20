@@ -1,11 +1,7 @@
-<%-- 
-    Document   : warehouseDeleteForm
-    Created on : 11 18, 23, 11:45:22 PM
-    Author     : ccslearner
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.*, java.lang.*, invEmpMgmt.*, java.text.*"%>
+<%@page import="java.util.*, warehouseMgmt.*, java.text.*, java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
     <head>

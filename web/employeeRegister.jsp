@@ -4,6 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<%@page import="java.util.*, invEmpMgmt.*, java.text.*, java.text.SimpleDateFormat"%>
 <html>
     <head>
         <title> Register a new inventory employee </title>
@@ -101,11 +102,11 @@ and open the template in the editor.
         <hr><br>
         
         <form action="employeeRegisterProcessing.jsp" onsubmit="return validateForm();" method="post" > 
-            <jsp:useBean id="emp" class="warehouseMgmt.warehouse" scope="session" />
+            <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
 
             Employee First Name: 
             <input type="text" id ="employee_firstname" name="employee_firstname" required><br><br>
-            
+            S
             Employee Last Name: 
             <input type="text" id ="employee_lastname" name="employee_lastname" required><br><br>
             
@@ -144,8 +145,8 @@ and open the template in the editor.
             Warehouse:
             <select id="employee_warehouseID" name="employee_warehouseID" required>
                <%emp.get_functional_warehouses(); %>
-               <% for (int i=0;i< emp.warehouse_IDList.size();i++) { %>
-                <option value ="<%= emp.warehouse_IDList.get(i)%>"> <%=emp.warehouse_IDList.get(i)%> </option>
+               <% for (int i=0;i< emp.employee_warehouse_IDList.size();i++) { %>
+                <option value ="<%= emp.employee_warehouse_IDList.get(i)%>"> <%=emp.employee_warehouse_IDList.get(i)%> </option>
                  <% } %>
             </select><br><br>
            

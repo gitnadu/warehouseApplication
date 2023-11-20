@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.*, invEmpMgmt.*"%>
+<%@page import="java.util.*, warehouseMgmt.*, java.text.*, java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,12 +15,8 @@
     <body>
         <jsp:useBean id="ware" class="warehouseMgmt.warehouse" scope="session" />
         <%
-            ware.warehouse_city  = request.getParameter("warehouse_city");
             ware.warehouse_phonenumber = request.getParameter("warehouse_phonenumber");
-            ware.warehouse_first_address = request.getParameter("warehouse_first_address");
-            ware.warehouse_state = request.getParameter("warehouse_state");
-            ware.warehouse_country = request.getParameter("warehouse_country");
-            ware.warehouse_postalcode = request.getParameter("warehouse_postalcode");
+            ware.warehouse_address = request.getParameter("warehouse_address");
             ware.warehouse_maxrow_temporary = request.getParameter("warehouse_maxrow");
             ware.warehouse_maxbay_temporary = request.getParameter("warehouse_maxbay");
             ware.warehouse_maxlevel_temporary = request.getParameter("warehouse_maxlevel");
@@ -36,12 +32,8 @@
                 %>
                 <h1>Registering Warehouse Successful </h1>
                 New Warehouse ID: <%=ware.warehouse_ID %>  <br><br>
-                New Warehouse City: <%=ware.warehouse_city %>  <br>
                 New Warehouse Phone Number: <%=ware.warehouse_phonenumber %> <br>
-                New Warehouse First Address: <%=ware.warehouse_first_address %>  <br>
-                New Warehouse State: <%=ware.warehouse_state %> <br>
-                New Warehouse Country:  <%=ware.warehouse_country %> <br>
-                New Warehouse Postal Code: <%=ware.warehouse_postalcode %> <br>
+                New Warehouse First Address: <%=ware.warehouse_address %>  <br>
                 New Warehouse Max Row: <%=ware.warehouse_maxrow%> <br>
                 New Warehouse Max Bay: <%=ware.warehouse_maxbay %>  <br>
                 New Warehouse Max Level: <%=ware.warehouse_maxlevel %>  <br>

@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.*, java.lang.*, invEmpMgmt.*, java.text.*"%>
+<%@page import="java.util.*, java.lang.*, warehouseMgmt.*, java.text.*, java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,12 +23,8 @@
         %>
         <form action="warehouseUpdateCheck.jsp"> 
             Warehouse ID: <%=ware.warehouse_ID %> <br>
-            City: <input type="text" id="city" name="city" value="<%=ware.warehouse_city %>"> <br>
             Phone Number: <input type="text" id="phone_number" name="phone_number" value="<%=ware.warehouse_phonenumber %>"> <br>
-            First Address:<input type="text" id="first_address" name="first_address" value="<%=ware.warehouse_first_address %>"><br>
-            State: <input type="text" id="state" name="state" value="<%=ware.warehouse_state %>"> <br>
-            Country:<input type="text" id="country" name="country" value="<%=ware.warehouse_country %>"> <br>
-            Postal Code:<input type="text" id="postal_code" name="postal_code" value="<%=ware.warehouse_postalcode %>"> <br>
+            First Address:<input type="text" id="address" name="address" value="<%=ware.warehouse_address %>"><br>
 
             Is it functional?: <input type="checkbox" id="is_functional" name="is_functional" checked="1">
 

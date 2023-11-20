@@ -36,38 +36,26 @@
         
         <form action="warehouseRegisterProcessing.jsp" onsubmit="return validateForm();" method="post" > 
 
-            City: 
-            <input type="text" id ="warehouse_city" name="warehouse_city" required><br><br>
-            
             Warehouse Phone Number:
-            <input type="text" id ="warehouse_phonenumber" name="warehouse_phonenumber" required><br><br>
+            <input type="text" id ="warehouse_phonenumber" name="warehouse_phonenumber" required ><br><br>
 
-            First Address: 
-            <input type="text" id ="warehouse_first_address" name="warehouse_first_address" required><br><br>
-
-            State: 
-            <input type="text" id ="warehouse_state" name="warehouse_state" required><br><br>
-
-            Country: 
-            <input type="text" id ="warehouse_country" name="warehouse_country" required><br><br>
-
-            Postal Code: 
-            <input type="text" id ="warehouse_postalcode" name="warehouse_postalcode" required min="1000" max="9999"><br><br>
+            Address: 
+            <input type="text" id ="warehouse_address" name="warehouse_address" required ><br><br>
 
             Max Capacity Rows:
-            <input type="number" id="warehouse_maxrow" name="warehouse_maxrow" required min="0" max="9"><br><br>
+            <input type="number" id="warehouse_maxrow" name="warehouse_maxrow" required min="0" max="9" ><br><br>
 
             Max Capacity Bays:
-            <input type="number" id="warehouse_maxbay" name="warehouse_maxbay" required min="0" max="9"><br><br>
+            <input type="number" id="warehouse_maxbay" name="warehouse_maxbay" required min="0" max="9" ><br><br>
 
             Max Capacity Levels:
-            <input type="number" id="warehouse_maxlevel" name="warehouse_maxlevel" required min="0" max="9"><br><br>
+            <input type="number" id="warehouse_maxlevel" name="warehouse_maxlevel" required min="0" max="9" ><br><br>
 
             Max Capacity Bins:
             <input type="number" id="warehouse_maxbin" name="warehouse_maxbin" required min="0" max="9"><br><br>
            
             <input type="submit" value="Proceed"><br><br>
         </form>
-        <button onclick = "window.location.href = 'warehouse.html';">Cancel</button>
+        <button onclick = "window.location.href = 'warehouse.html';"> Cancel </button>
     </body>
 </html>

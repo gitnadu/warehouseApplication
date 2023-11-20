@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.*, java.lang.*, invEmpMgmt.*, java.text.*"%>
+<%@page import="java.util.*, java.lang.*, warehouseMgmt.*, java.text.*, java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,12 +24,8 @@
         %>
         <form action="warehouseView.jsp"> 
             Warehouse ID: <%=ware.warehouse_ID %>  <br><br>
-            Warehouse City: <%=ware.warehouse_city %>  <br>
             Warehouse Phone Number: <%=ware.warehouse_phonenumber %> <br>
-            Warehouse First Address: <%=ware.warehouse_first_address %>  <br>
-            Warehouse State: <%=ware.warehouse_state %> <br>
-            Warehouse Country:  <%=ware.warehouse_country %> <br>
-            Warehouse Postal Code: <%=ware.warehouse_postalcode %> <br>
+            Warehouse First Address: <%=ware.warehouse_address %>  <br>
             Warehouse Max Row: <%=ware.warehouse_maxrow%> <br>
             Warehouse Max Bay: <%=ware.warehouse_maxbay %>  <br>
             Warehouse Max Level: <%=ware.warehouse_maxlevel %>  <br>
