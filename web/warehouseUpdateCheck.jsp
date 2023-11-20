@@ -36,12 +36,11 @@
                     <th> Warehouse Max Bin: <%=ware.warehouse_maxbinNumber %>  </td> &nbsp;
                 </tr>
             </table>
-                    
                     <br>
             <table>
                 <th> NEW RECORD </th>
                 <tr> 
-                    <th> Warehouse ID: <%=ware.warehouse_ID_temporary %>  </td> &nbsp;
+                    <th> Warehouse ID: <%=ware.warehouse_ID %>  </td> &nbsp;
                     <th> Warehouse Phone Number: <%=ware.warehouse_phonenumber_temporary %> </td> &nbsp;
                     <th> Warehouse First Address: <%=ware.warehouse_address_temporary %>  </td> &nbsp;
                     <th> Warehouse Max Row: <%=ware.warehouse_maxrow_temporary%> </td> &nbsp;

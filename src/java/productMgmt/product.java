@@ -8,6 +8,10 @@ import java.util.*;
 
 public class product {
     
+    
+    public String product_warehouse_locator;
+    public ArrayList<Integer> product_warehouse_locatorList = new ArrayList<>();
+    
     public int product_product_ID;
     public int product_warehouse_ID;
     public Date product_date_received;
@@ -82,6 +86,28 @@ public class product {
             while (rst.next()){
                 temp = rst.getInt("warehouseID");
                 product_warehouse_IDList.add(temp);
+            }
+            pstmt.close();
+            conn.close();   
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void get_binfrom_warehouses(){
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT binID FROM bin WHERE warehouseID = ?;");
+            pstmt.setInt(1, Integer.parseInt(product_warehouse_locator));
+            
+            ResultSet rst= pstmt.executeQuery();
+            
+            int temp;
+            product_warehouse_locatorList.clear();
+            
+            while (rst.next()){
+                temp = rst.getInt("binID");
+                product_warehouse_locatorList.add(temp);
             }
             pstmt.close();
             conn.close();   

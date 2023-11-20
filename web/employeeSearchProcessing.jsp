@@ -11,11 +11,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Search Inventory Employee Results</title>
     </head>
     <body>
         <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
-        <form action="employeeUpdateProcessing.jsp"> 
+        <form action="employeeSearch.html"> 
      
             <% 
                 emp.last_name_holder  = request.getParameter("employee_lastnameS");
@@ -29,7 +29,7 @@
                 int status = emp.search_employees();
                 if (status == 1){
             %>
-            <h1> Search Results </h1>
+            <h1> Search Inventory Employee Results </h1>
             <table>
                 <tr> 
                     <th> Last Name </th> &nbsp;
@@ -63,9 +63,8 @@
             <% } else { %>
             <h1>Search Failed </h1>
             <% } %>
-            <%=emp.temp_employeeIDList.size() %>
-           
+           <input type="submit" value="Search Again">
         </form>
-        <input type="submit" value="Return too Menu">
+        <button onclick = "window.location.href = 'employee.html';"> Back to Main Menu </button>
     </body>
 </html>

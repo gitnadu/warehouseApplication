@@ -4,6 +4,7 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class product_line {
     
@@ -15,6 +16,37 @@ public class product_line {
     public String category;
     public String product_line_description;
     
+    public ArrayList product_line_IDList = new ArrayList<>();
+    public ArrayList product_line_nameList = new ArrayList<>();
+    public ArrayList brandList = new ArrayList<>();
+    public ArrayList isActiveList = new ArrayList<>();
+    public ArrayList categoryList = new ArrayList<>();
+    public ArrayList product_line_descriptionList = new ArrayList<>();
+    
+        public void get_abled_employees(){
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT productLineID FROM productline WHERE isActive =1 ORDER BY employeeID ASC");
+            ResultSet rst= pstmt.executeQuery();
+            
+            int temp;
+            product_line_IDList.clear();
+            while (rst.next()){
+                temp = rst.getInt("employeeID");
+                employee_IDList.add(temp);
+            }
+            
+            // Closing Statements
+            pstmt.close();
+            conn.close();
+            
+            
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+    }
+        
     // Method: Registration
     public int register_product_line() {
         try {
@@ -52,6 +84,33 @@ public class product_line {
         } catch (SQLException e) {
             return 0;
         }         
+    }
+    
+    public int update_productline(){
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE productline"
+                    + "SET productLineName=?, brand=?, isActive =?, category=?, productLineDescription brand WHERE productLineID =?");
+            
+            pstmt.setString(1, product_line_name);
+            pstmt.setString(2, brand);
+            pstmt.setInt(3, isActive);
+            pstmt.setString(4, category);
+            pstmt.setString(5, product_line_description);
+            pstmt.setInt(6, product_line_ID);
+            
+            pstmt.executeUpdate();   
+   
+            // Closing Statements
+            pstmt.close();
+            conn.close();
+            
+            return 1;
+        } catch(SQLException e){
+            e.printStackTrace();
+            return 0;
+        }
     }
     
     public static void main(String args[]) {

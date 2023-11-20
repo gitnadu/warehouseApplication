@@ -13,6 +13,20 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
         <script>
+            function updateBin() {
+                var selectedWarehouse = document.getElementById("product_warehouseID").value;
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET", "get_bin.jsp?warehouse=" + selectedWarehouse, true);
+                xmlhttp.send();
+                
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("product_bin").innerHTML = xmlhttp.responseText;
+                    }
+                };
+                
+            }
+        
             function isDateFuture() {
                 let dateReceived = new Date(document.getElementById("product_date_received").value);
                 let currentDate = new Date();
@@ -37,22 +51,27 @@ and open the template in the editor.
         </script>
     </head>    
     <body>
-        <h2> Register a New Inventory Employee </h2>
+        <h2> Register a Product </h2>
         <hr><br>
 
         <form action="productRegisterProcessing.jsp" onsubmit="return validateForm();" method="post" > 
             <jsp:useBean id="prod" class="productMgmt.product" scope="session" />
 
             Warehouse ID:
+            <select id="product_warehouseID" name="product_warehouseID"  onchange="updateBin() required>
+                <% prod.get_functional_warehouses();
+                    for (int i=0;i< prod.product_warehouse_IDList.size();i++) { %>
+                 <option value ="<%= prod.product_warehouse_IDList.get(i)%>"> <%=prod.product_warehouse_IDList.get(i)%> </option>
+                  <% } %> 
+             </select><br><br> 
+
+            Product Line:
             <select id="product_warehouseID" name="product_warehouseID" required>
                 <% prod.get_functional_warehouses();
                     for (int i=0;i< prod.product_warehouse_IDList.size();i++) { %>
                  <option value ="<%= prod.product_warehouse_IDList.get(i)%>"> <%=prod.product_warehouse_IDList.get(i)%> </option>
                   <% } %> 
-             </select><br><br> -
-
-            <!-- Product Line: -->
-            <!-- warehouse_product_line_ID -->
+             </select><br><br>
 
             Date Received:
             <input type="date" id ="product_date_received" name="product_date_received" required><br><br>
@@ -68,8 +87,10 @@ and open the template in the editor.
             <!-- Supplier -->
             <!-- product_supplier_ID -->
 
-            <!-- Bin -->
-            <!-- product_bin_ID -->
+            Bin:
+            <select id="product_bin" name="product_bin"">
+            <option value=""> Select Bin </option>
+            </select><br>
 
             <!-- Unit Measure -->
             <!-- product_unit_measure -->

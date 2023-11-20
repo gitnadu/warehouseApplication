@@ -560,6 +560,8 @@ public class employee {
                 "WHERE employeeID IN (");
             
             addString(sql);
+            
+            sql.append(" ORDER BY lastName,firstName ASC");
            
             pstmt = conn.prepareStatement(sql.toString());
             
