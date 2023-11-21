@@ -10,11 +10,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Viewing Product Line</title>
+        <title>View Product Line Record</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <h2>View Product Line</h2>
-        <jsp:useBean id="prol" class="productMgmt.product_line" scope="session" />
+    <body><center>
+        <h2>Success! Viewing Product Line Record..</h2>
+        <hr><br>
+        
+         <jsp:useBean id="prol" class="productMgmt.product_line" scope="session" />
         
         <% 
             String temp = request.getParameter("product_line_IDV");
@@ -23,11 +26,32 @@
             if (status == 1){
         %>
         <form action="productLineView.jsp"> 
-            Product Line Name: <td><%=prol.product_line_name%></td> <br><br>
-            Product Line Brand: <td><%=prol.brand%></td> <br><br>
-            Product Line isActive: <td><%=prol.isActive%></td> <br><br>
-            Product Line Category: <td><%=prol.category%></td> <br><br>
-            Product Line Description: <td><%=prol.product_line_description%></td> <br><br>
+            <table>
+                <tr>
+                    <td>Product Line Name: </td>
+                    <td><%=prol.product_line_name%></td>
+                </tr>
+                
+                <tr>
+                    <td>Product Line Brand: </td>
+                    <td><%=prol.brand%></td>
+                </tr>
+                
+                <tr>
+                    <td>Product Line isActive: </td>
+                    <td><%=prol.isActive%></td>
+                </tr>
+                
+                <tr>
+                    <td>Product Line Category: </td>
+                    <td><%=prol.category%></td>
+                </tr>
+                
+                <tr>
+                    <td>Product Line Description: </td>
+                    <td><%=prol.product_line_description%></td>
+                </tr>
+            </table>
             <input type="submit" value="View Again">
         </form>
         <% } else { %>
@@ -35,6 +59,6 @@
         <% } %>
         
          
-            <button onclick = "window.location.href = 'index.html';"> Back to Main Menu </button>
+            <button onclick = "window.location.href = 'productLine.html';"> Back to Menu </button>
     </body>
 </html>

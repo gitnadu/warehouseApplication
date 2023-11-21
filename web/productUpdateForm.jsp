@@ -106,7 +106,9 @@
             <input type="date" id ="product_date_receivedU" name="product_date_receivedU" value="<%= prod.product_date_received%>" required><br><br>
             <br><br>
             
-            
+            Reason:
+            <input type="text" id="product_reasonU" name="product_reasonU" value="<% if (prod.product_reason == null) { %> <% } else { %> <%= prod.product_reason %> <% } %>" required><br><br>
+
             Product Condition:
             <select id="product_conditionU" name="product_conditionU" required>
                 <% if (prod. product_product_condition.equals("Good")) { %>
@@ -116,8 +118,9 @@
                 <option value ="<%= prod. product_product_condition%>"><%= prod. product_product_condition%> </option>
                 <option value ="Good"> Good </option>
                 <% } %>
-                
             </select>
+                
+                
 
             Product Stock Price:
             <input type="number" id="product_stock_priceU" name="product_stock_priceU" step="0.01" value="<%= prod.product_stock_price%>" required><br><br>
@@ -135,6 +138,8 @@
             <select id="product_binU" name="product_binU" value="<%= prod.product_bin_ID%>" required>
             <option value="<%= prod.product_bin_ID%>"> <%= prod.product_bin_ID%> </option>
             </select><br>
+            
+
 
             Unit Measure:
             <select id="product_unitmeasureU" name="product_unitmeasureU" required>

@@ -33,6 +33,6 @@
             </table><br>
             <input type="submit" value="Submit"><br><br>
         </form>
-        <button onclick = "window.location.href = 'supplier.html';">Cancel</button>
+        <button onclick = "window.location.href = 'productLine.html';">Cancel</button>
     </center></body>
 </html>

@@ -63,7 +63,7 @@
         <% } else { %>
         <% } %>
         
-        <button onclick = "window.location.href = 'supplierUpdate.jsp';"> Go Back </button>
-        <button onclick = "window.location.href = 'supplier.html';"> Cancel Update </button>
+        <button onclick = "window.location.href = 'productLineUpdate.jsp';"> Go Back </button>
+        <button onclick = "window.location.href = 'productLine.html';"> Cancel Update </button>
     </center></body>
 </html>

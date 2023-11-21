@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<%-- 
+    Document   : stockTransfer
+    Created on : 11 21, 23, 10:26:42 PM
+    Author     : ccslearner
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*, productMgmt.*"%>
 <html>
@@ -12,7 +12,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
         <script>
-            function updateBin() {
+            function updateDestinationWarehouse() {
                 var selectedWarehouse = document.getElementById("product_warehouseID").value;
                 var xmlhttp = new XMLHttpRequest();
                 
@@ -20,7 +20,6 @@ and open the template in the editor.
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                         console.log(JSON.parse(xmlhttp.responseText));
                         var binsData = JSON.parse(xmlhttp.responseText);
-                        console.log(binsData);
                         populateDropdown(binsData);
                     }
                 };
@@ -73,23 +72,23 @@ and open the template in the editor.
         <hr><br>
 
         <form action="productRegisterProcessing.jsp" onsubmit="return validateForm();" method="post" > 
-            <jsp:useBean id="prod" class="productMgmt.product" scope="session" />
+            <jsp:useBean id="transfer" class="productMgmt.product" scope="session" />
 
-            Warehouse ID:
-            <select id="product_warehouseID" name="product_warehouseID"  onchange="updateBin();" required>
+            Warehouse Origin ID:
+            <select id="transfer_warehouseID" name="product_warehouseID"  onchange="updateDestinationWarehouse();" required>
                 <option value =""></option>
-                <% prod.get_functional_warehouses();
-                    for (int i=0;i< prod.product_warehouse_IDList.size();i++) { %>
-                 <option value ="<%= prod.product_warehouse_IDList.get(i)%>"> <%=prod.product_warehouse_IDList.get(i)%> </option>
+                <% transfer.get_functional_warehouses();
+                    for (int i=0;i< transfer.product_warehouse_IDList.size();i++) { %>
+                 <option value ="<%= transfer.product_warehouse_IDList.get(i)%>"> <%=transfer.product_warehouse_IDList.get(i)%> </option>
                   <% } %> 
              </select><br><br> 
 
-            Product Line:
+            Warehouse Destination ID;
             <select id="product_productlineID" name="product_productlineID" required>
                 <option value =""></option>
-                <% prod.get_productline_warehouses();
-                    for (int i=0;i< prod.product_product_line_IDList.size();i++) { %>
-                 <option value ="<%= prod.product_product_line_IDList.get(i)%>"> <%=prod.product_product_line_IDList.get(i)%> </option>
+                <% transfer.get_productline_warehouses();
+                    for (int i=0;i< transfer.product_product_line_IDList.size();i++) { %>
+                 <option value ="<%= transfer.product_product_line_IDList.get(i)%>"> <%=transfer.product_product_line_IDList.get(i)%> </option>
                   <% } %> 
              </select><br><br>
 
@@ -109,9 +108,9 @@ and open the template in the editor.
             Supplier:
             <select id="product_supplierID" name="product_supplierID" required>
                 <option value =""></option>
-                <% prod.get_suppliers_products();
-                    for (int i=0;i< prod.product_supplier_IDList.size();i++) { %>
-                 <option value ="<%= prod.product_supplier_IDList.get(i)%>"> <%=prod.product_supplier_IDList.get(i)%> </option>
+                <% transfer.get_suppliers_products();
+                    for (int i=0;i< transfer.product_supplier_IDList.size();i++) { %>
+                 <option value ="<%= transfer.product_supplier_IDList.get(i)%>"> <%=transfer.product_supplier_IDList.get(i)%> </option>
                   <% } %> 
              </select><br><br>
 
@@ -131,4 +130,3 @@ and open the template in the editor.
         <button onclick = "window.location.href = 'product.html';">Cancel</button>
     </body>
 </html>
-

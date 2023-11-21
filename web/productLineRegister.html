@@ -23,22 +23,32 @@ and open the template in the editor.
         }
         </script>
     </head>
-    <body>
-        <h2> Register a New Product Line </h2>
+    <body><center>
+        <h2>Register a New Product Line</h2>
+        <hr><br>
+        
         <form name="main_form" action="productLineRegisterProcessing.jsp"> 
-            Product Line Name:
-            <input type="text" id="product_line_name" name="product_line_name" required><br><br>
-
-            Brand Name:
-            <input type="text" id="brand" name="brand" required><br><br>
-
-            Category:
-            <input type="text" id="category" name="category" required><br><br>
-
-            Product Line Description:
-            <input type="text" id="product_line_description" name="product_line_description" required><br><br>
             
-            <input type="submit" value="Proceed"><br><br>
+            <table>
+                <tr>
+                    <td>Product Line Name:</td>
+                    <td><input type="text" id="product_line_name" name="product_line_name" required></td>
+                </tr>
+                <tr>
+                    <td>Brand Name:</td>
+                    <td><input type="text" id="brand" name="brand" required></td>
+                </tr>
+                <tr>
+                    <td>Category:</td>
+                    <td><input type="text" id="category" name="category" required></td>
+                </tr>
+                <tr>
+                    <td>Product Line Description:</td>
+                    <td><input type="text" id="product_line_description" name="product_line_description" required></td>
+                </tr>
+            </table><br>
+            
+            <input type="submit" value="Proceed">
         </form>
         <button onclick = "ensureExit(); window.location.href = 'productLine.html';">Cancel</button>
     </body>

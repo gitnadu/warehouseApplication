@@ -10,10 +10,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Viewing Product Line</title>
+        <title>View Product Line</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <h2>View Product Line</h2>
+    <body><center>
+        <h2>View a Product Line</h2>
+        <hr><br>
+        
         <form action="productLineViewProcessing.jsp"> 
             <jsp:useBean id="prol" class="productMgmt.product_line" scope="session" />
             Product Line ID: <select id="product_line_IDV" name="product_line_IDV"> 
@@ -26,6 +29,7 @@
             </select> <br>
             <input type="submit" value="Submit">
         </form>
+        <button onclick = "window.location.href = 'productLine.html';">Cancel</button>
     </body>
 </html>  
 

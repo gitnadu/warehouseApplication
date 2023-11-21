@@ -10,10 +10,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Viewing Warehouse Record</title>
+        <title>View Warehouse Record</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <h2> Viewing Warehouse Record </h2>
+    <body><center>
+        <h2>Success! Viewing Warehouse Record..</h2>
+        <hr><br>
+        
         <jsp:useBean id="ware" class="warehouseMgmt.warehouse" scope="session" />
         
         <% 
@@ -23,17 +26,36 @@
             if (status == 1){
         %>
         <form action="warehouseView.jsp"> 
-            Warehouse ID: <%=ware.warehouse_ID %>  <br><br>
-            Warehouse Phone Number: <%=ware.warehouse_phonenumber %> <br>
-            Warehouse Name: <%=ware.warehouse_name %> <br>
-            Warehouse First Address: <%=ware.warehouse_address %>  <br>
-            Warehouse Max Row: <%=ware.warehouse_maxrow%> <br>
-            Warehouse Max Bay: <%=ware.warehouse_maxbay %>  <br>
-            Warehouse Max Level: <%=ware.warehouse_maxlevel %>  <br>
-            Warehouse Max Bin: <%=ware.warehouse_maxbinNumber %>  <br>
-            <input type="submit" value="View again">
+            
+            <table>
+                <tr><td>Warehouse ID: </td>
+                <td><%=ware.warehouse_ID %> </td></tr>
+                
+                <tr><td>Warehouse Phone Number: </td>
+                <td><%=ware.warehouse_phonenumber %></td></tr>
+                
+                <tr><td>Warehouse Name: </td>
+                <td><%=ware.warehouse_name %></td></tr>
+                
+                <tr><td>Warehouse First Address: </td>
+                <td><%=ware.warehouse_address %> </td></tr>
+                
+                <tr><td>Warehouse Max Row: </td>
+                <td><%=ware.warehouse_maxrow%></td></tr>
+                
+                <tr><td>Warehouse Max Bay: </td>
+                <td><%=ware.warehouse_maxbay %> </td></tr>
+                
+                <tr><td>Warehouse Max Level: </td>
+                <td><%=ware.warehouse_maxlevel %> </td></tr>
+                
+                <tr><td>Warehouse Max Bin: </td>
+                <td><%=ware.warehouse_maxbinNumber %> </td></tr>
+            </table><br>
+            
+            <input type="submit" value="View Again"><br><br>
         </form> 
-            <button onclick = "window.location.href = 'index.html';"> Back to Main Menu </button>
+            <button onclick = "window.location.href = 'warehouse.html';"> Back to Menu </button>
         <% } else { %>
         <h2> Nope </h2>
         <% } %>

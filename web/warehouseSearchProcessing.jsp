@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Search Suppliers</title>
+        <title>Search Warehouses</title>
         <link rel="stylesheet" href="styles.css">
     </head>
     <body><center>
@@ -72,6 +72,6 @@
             <% } %>
             <br><input type="submit" value="Search Again"><br><br>
         </form>
-        <button onclick = "window.location.href = 'supplier.html';"> Back to Menu </button>
+        <button onclick = "window.location.href = 'warehouse.html';"> Back to Menu </button>
     </body>
 </html>

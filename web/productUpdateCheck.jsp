@@ -24,7 +24,7 @@
                 prod.product_warehouse_ID_temporary = request.getParameter("product_warehouseIDU");
                 
                 prod.product_date_received_temporary = request.getParameter("product_date_receivedU");
-                prod.product_product_line_ID_temporary = request.getParameter("product_productlineID");
+                prod.product_product_line_ID_temporary = request.getParameter("product_productlineIDU");
                 prod.product_product_condition_temporary = request.getParameter("product_conditionU");
 
                 prod.product_stock_price_temporary = request.getParameter("product_stock_priceU");

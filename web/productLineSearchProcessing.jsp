@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Search Suppliers</title>
+        <title>Search Product Line</title>
         <link rel="stylesheet" href="styles.css">
     </head>
     <body><center>
