@@ -22,7 +22,23 @@ public class product_line {
     public ArrayList isActiveList = new ArrayList<>();
     public ArrayList categoryList = new ArrayList<>();
     public ArrayList product_line_descriptionList = new ArrayList<>();
+    
+    // for searching
+    public ArrayList<String> temp_product_line_IDList = new ArrayList<>();
+    public int productline_temp_container;
+    public int productline_search_count;
 
+    
+    public int product_line_ID_temporary;
+    public String product_line_name_temporary;
+    public String brand_temporary;
+    public Boolean isActive_temporary = true;
+    public String category_temporary;
+    public String product_line_description_temporary;
+    
+    public String product_line_name_holder;
+    public String brand_holder;
+    public String category_holder;
        
     // Method: Registration
     public int register_product_line() {
@@ -70,18 +86,18 @@ public class product_line {
         try{
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
             
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE productline"
-                    + "SET productLineName=?, brand=?, isActive =?, category=?, productLineDescription brand WHERE productLineID =?");
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE productline "
+                    + "SET productLineName=?, brand=?, isActive =?, category=?, productLineDescription = ? WHERE productLineID =?");
             
-            pstmt.setString(1, product_line_name);
-            pstmt.setString(2, brand);
-            if (isActive)
+            pstmt.setString(1, product_line_name_temporary);
+            pstmt.setString(2, brand_temporary);
+            if (isActive_temporary)
                 pstmt.setInt(3, 1);
             else
                 pstmt.setInt(3, 0);
             
-            pstmt.setString(4, category);
-            pstmt.setString(5, product_line_description);
+            pstmt.setString(4, category_temporary);
+            pstmt.setString(5, product_line_description_temporary);
             pstmt.setInt(6, product_line_ID);
             
             pstmt.executeUpdate();   
@@ -220,6 +236,174 @@ public class product_line {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return 0;
+        }
+    }
+    
+    public int search_productline(){
+        
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            
+            temp_product_line_IDList.clear();
+            
+
+            PreparedStatement pstmt = conn.prepareStatement("SELECT productLineID FROM productline WHERE (CASE WHEN ? = 0 THEN productLineName LIKE CONCAT('%', ?, '%') ELSE productLineName != '' END)");
+
+            if(product_line_name_holder.equals(""))
+            {
+                pstmt.setInt(1, 1);
+                pstmt.setString(2, null);
+            }
+            else
+            {
+                pstmt.setInt(1, 0);
+                pstmt.setString(2, product_line_name_holder);
+            }
+                
+            ResultSet rst = pstmt.executeQuery();
+
+            containList(rst);
+            
+            // 2
+            StringBuilder sql = new StringBuilder("SELECT productLineID FROM productline WHERE (CASE WHEN ? = 0 THEN brand LIKE CONCAT('%', ?, '%') ELSE brand != '' END) AND productLineID IN (");
+            
+            addString(sql);
+            
+            pstmt = conn.prepareStatement(sql.toString());
+
+            if(brand_holder.equals(""))
+            {
+                pstmt.setInt(1, 1);
+                pstmt.setNull(2, java.sql.Types.VARCHAR);   
+            }
+            else
+            {
+                pstmt.setInt(1, 0);
+                pstmt.setString(2, brand_holder);
+            }
+            
+            set_idList(pstmt);
+            
+            temp_product_line_IDList.clear();
+         
+            rst = pstmt.executeQuery();
+
+            containList(rst);
+            
+            // 3
+            sql = new StringBuilder("SELECT productLineID FROM productline WHERE (CASE WHEN ? = 0 THEN category LIKE CONCAT('%', ?, '%') ELSE category != '' END) AND productLineID IN (");
+            
+            addString(sql);
+            
+            pstmt = conn.prepareStatement(sql.toString());
+
+            if(category_holder.equals(""))
+            {
+                pstmt.setInt(1, 1);
+                pstmt.setNull(2, java.sql.Types.VARCHAR);   
+            }
+            else
+            {
+                pstmt.setInt(1, 0);
+                pstmt.setString(2, category_holder);
+            }
+            
+            set_idList(pstmt);
+            
+            temp_product_line_IDList.clear();
+         
+            rst = pstmt.executeQuery();
+
+            containList(rst);
+
+            sql = new StringBuilder("SELECT productLineName, brand, isActive, category, productLineDescription " +
+                "FROM productline " +
+                "WHERE productLineID IN (");
+            
+            addString(sql);
+            
+            sql.append(" ORDER BY productLineName ASC");
+           
+            pstmt = conn.prepareStatement(sql.toString());
+            
+            for (int i = 0; i < temp_product_line_IDList.size(); i++) 
+                pstmt.setString(i+1,temp_product_line_IDList.get(i));
+                    
+            
+            rst= pstmt.executeQuery();
+            
+            productline_search_count = 0;
+            
+            product_line_nameList.clear();
+            brandList.clear();
+            isActiveList.clear();
+            categoryList.clear();
+            product_line_descriptionList.clear();
+            
+            while (rst.next()) {
+                
+                product_line_name = rst.getString("productLineName");
+                brand = rst.getString("brand");
+                isActive = rst.getBoolean("isActive");
+                category= rst.getString("category");
+                product_line_description = rst.getString("productLineDescription");
+                
+                
+                product_line_nameList.add(product_line_name);
+                brandList.add(brand);
+                isActiveList.add(isActive);
+                categoryList.add(category);
+                product_line_descriptionList.add(product_line_description);
+                
+                productline_search_count++;
+            }
+
+           
+            // Closing Statements
+            pstmt.close();
+            conn.close();
+            return 1;
+            
+        } catch(SQLException e){
+            e.printStackTrace();
+            return 0;
+        }
+        
+        
+        
+    }
+    public void containList(ResultSet rst) throws SQLException
+    {
+        while (rst.next())
+        {
+            productline_temp_container = rst.getInt("productLineID");
+            temp_product_line_IDList.add(Integer.toString(productline_temp_container));
+        }
+
+    }
+    
+    public void addString(StringBuilder sql)
+    {
+        for (int i = 0; i < temp_product_line_IDList.size(); i++) {
+        sql.append("?");
+            if (i < temp_product_line_IDList.size() - 1) 
+            {
+                sql.append(",");
+            }
+        }
+        sql.append(")");
+    }
+    
+    public void set_idList(PreparedStatement pstmt)
+    {
+        try
+        {
+            for (int i = 0; i < temp_product_line_IDList.size(); i++) 
+            {
+                pstmt.setString(i+3,temp_product_line_IDList.get(i));
+            } 
+        }catch(SQLException e){
+            e.printStackTrace();
         }
     }
     

@@ -25,6 +25,7 @@
         <form action="warehouseView.jsp"> 
             Warehouse ID: <%=ware.warehouse_ID %>  <br><br>
             Warehouse Phone Number: <%=ware.warehouse_phonenumber %> <br>
+            Warehouse Name: <%=ware.warehouse_name %> <br>
             Warehouse First Address: <%=ware.warehouse_address %>  <br>
             Warehouse Max Row: <%=ware.warehouse_maxrow%> <br>
             Warehouse Max Bay: <%=ware.warehouse_maxbay %>  <br>

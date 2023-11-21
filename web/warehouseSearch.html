@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Search Suppliers</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body><center>
+        <h2>Search Suppliers</h2>
+        <hr><br>
+        
+        <form action="warehouseSearchProcessing.jsp"> 
+            <table>
+                <tr>
+                    <td>Warehouse Name: </td>
+                    <td><input type="text" id ="warehouse_nameS" name="warehouse_nameS"></td>
+                </tr>
+                <tr>
+                    <td>Warehouse Address: </td>
+                    <td><input type="text" id ="warehouse_addressS" name="warehouse_addressS"></td>
+                </tr>
+                <tr>
+                    <td>Is it functional? </td>
+                    <td><select id="isFunctionalS" name="isFunctionalS">
+                        <option value =""> </option>
+                        <option value ="true"> True </option>
+                        <option value ="false"> False </option>
+                </select></td>
+                </tr>
+            </table><br><br>
+            <input type="submit" value="Submit"><br><br>
+        </form>
+        <button onclick = "window.location.href = 'warehouse.html';">Go Back</button>
+    </center></body>
+</html>
+

@@ -17,6 +17,7 @@
         <form action="warehouseViewProcessing.jsp"> 
             <jsp:useBean id="ware" class="warehouseMgmt.warehouse" scope="session" />
             Employee ID: <select id="warehouse_idV" name="warehouse_idV"> 
+                <option value=""> </option>
             <%  ware.get_warehouses(); 
                 for(int i=0;i<ware.warehouse_IDList.size();i++){
             %>

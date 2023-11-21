@@ -34,6 +34,19 @@
                 <tr>
                     <td>Brand:</td>
                     <td><input type="text" id="brandU" name="brandU" value="<%=prol.brand%>"required><br><br></td>
+                </tr> 
+                <tr>
+                    <td>isActive:</td>
+                    <td><select id="isActiveU" name="isActiveU">
+                    <% if (prol.isActive){ %>
+                    <option value ="<%=prol.isActive%>"> True </option>
+                    <option value ="false"> False </option>
+                    <% } else { %>
+                    <option value ="<%=prol.isActive%>"> False </option>
+                    <option value ="true"> True </option>
+
+                    <% } %>
+                        </select> </td>
                 </tr>
                 <tr>
                     <td>Category:</td>

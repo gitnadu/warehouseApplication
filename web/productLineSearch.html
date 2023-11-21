@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Search Suppliers</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body><center>
+        <h2>Search Suppliers</h2>
+        <hr><br>
+        
+        <form action="productLineSearchProcessing.jsp"> 
+            <table>
+                <tr>
+                    <td>Product Line Name: </td>
+                    <td><input type="text" id ="product_linenameS" name="product_linenameS"></td>
+                </tr>
+                <tr>
+                    <td>Brand: </td>
+                    <td><input type="text" id ="brandS" name="brandS"></td>
+                </tr>
+                <tr>
+                    <td>Category: </td>
+                    <td><input type="text" id ="categoryS" name="categoryS"></td>
+                </tr>
+            </table><br><br>
+            <input type="submit" value="Submit"><br><br>
+        </form>
+        <button onclick = "window.location.href = 'productLine.html';">Go Back</button>
+    </center></body>
+</html>

@@ -16,6 +16,7 @@
         <jsp:useBean id="ware" class="warehouseMgmt.warehouse" scope="session" />
         <%
             ware.warehouse_phonenumber = request.getParameter("warehouse_phonenumber");
+            ware.warehouse_name = request.getParameter("warehouse_name");
             ware.warehouse_address = request.getParameter("warehouse_address");
             ware.warehouse_maxrow_temporary = request.getParameter("warehouse_maxrow");
             ware.warehouse_maxbay_temporary = request.getParameter("warehouse_maxbay");
@@ -33,6 +34,7 @@
                 <h1>Registering Warehouse Successful </h1>
                 New Warehouse ID: <%=ware.warehouse_ID %>  <br><br>
                 New Warehouse Phone Number: <%=ware.warehouse_phonenumber %> <br>
+                New Warehouse Name: <%=ware.warehouse_name %>  <br><br>
                 New Warehouse First Address: <%=ware.warehouse_address %>  <br>
                 New Warehouse Max Row: <%=ware.warehouse_maxrow%> <br>
                 New Warehouse Max Bay: <%=ware.warehouse_maxbay %>  <br>

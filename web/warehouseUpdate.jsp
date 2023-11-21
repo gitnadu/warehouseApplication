@@ -10,13 +10,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update Employee</title>
+        <title>Update Warehouse</title>
     </head>
     <body>
-        <h2> Update Employee </h2>
+        <h2> Update Warehouse </h2>
         <form action="warehouseUpdateForm.jsp"> 
             <jsp:useBean id="ware" class="warehouseMgmt.warehouse" scope="session" />
-            Supplier ID: <select id="warehouse_idU" name="warehouse_idU"> 
+            Warehouse ID: <select id="warehouse_idU" name="warehouse_idU"> 
             <%  ware.get_warehouses();
                 for(int i=0;i<ware.warehouse_IDList.size();i++){
             %>

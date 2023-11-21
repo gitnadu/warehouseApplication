@@ -6,7 +6,7 @@
 
 <%@page import="java.text.ParseException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.*, supplierMgmt.*, java.text.*, java.text.SimpleDateFormat"%>
+<%@page import="java.util.*, productMgmt.*, java.text.*, java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,28 +18,35 @@
         <h2>Double Check Changes</h2>
         <hr><br>
         
-        <jsp:useBean id="supp" class="supplierMgmt.supplier" scope="session" />
+        <jsp:useBean id="prol" class="productMgmt.product_line" scope="session" />
         <form action="productLineUpdateProcessing.jsp"> 
-            <%  supp.supplier_name_temporary  = request.getParameter("product_line_nameU");
-                supp.supplier_contact_number_temporary = request.getParameter("supplier_contact_numberU");
-                supp.office_address_temporary = request.getParameter("office_addressU");
-                supp.office_phone_number_temporary = request.getParameter("office_phone_numberU");
-                int status = supp.get_supplier_record();
+            <%  prol.product_line_name_temporary  = request.getParameter("product_line_nameU");
+                prol.brand_temporary = request.getParameter("brandU");
+                prol.category_temporary = request.getParameter("categoryU");
+                prol.product_line_description_temporary = request.getParameter("product_line_descriptionU");
+                
+                String temp = request.getParameter("isActiveU");
+                if (temp.equals("true"))
+                    prol.isActive_temporary = true;
+                else
+                    prol.isActive_temporary = false;
             %>
             
             <table style = "width: 100%">
                 <h2>Original Details: </h2>
                 <tr>
-                    <td>Supplier Name:</td>
-                    <td>Contact Number:</td>
-                    <td>Office Address:</td>
-                    <td>Office Phone Number:</td>
+                    <td>Product Line Name:</td>
+                    <td>Brand:</td>
+                    <td>isActive:</td>
+                    <td>Category:</td>
+                    <td>Product Line Description:</td>
                 </tr>
                 <tr>
-                    <td> <%=supp.supplier_name%> </td>
-                    <td><%=supp.supplier_contact_number%> </td>
-                    <td><%=supp.office_address %> </td>
-                    <td><%=supp.office_phone_number%> </td>
+                    <td> <%=prol.product_line_name%> </td>
+                    <td><%=prol.brand%> </td>
+                    <td><%=prol.isActive%> </td>
+                    <td><%=prol.category %> </td>
+                    <td><%=prol.product_line_description%> </td>
                 </tr>
             </table>
                 
@@ -48,20 +55,22 @@
             <table style = "width: 100%">
                 <h2>New Details: </h2>
                 <tr>
-                    <td>Supplier Name:</td>
-                    <td>Contact Number:</td>
-                    <td>Office Address:</td>
-                    <td>Office Phone Number:</td>
+                    <td>Product Line Name:</td>
+                    <td>Brand:</td>
+                    <td>isActive:</td>
+                    <td>Category:</td>
+                    <td>Product Line Description:</td>
                 </tr>
                 <tr>
-                    <td> <%=supp.supplier_name_temporary%> </td>
-                    <td><%=supp.supplier_contact_number_temporary%> </td>
-                    <td><%=supp.office_address_temporary %> </td>
-                    <td><%=supp.office_phone_number_temporary%> </td>
+                    <td> <%=prol.product_line_name_temporary%> </td>
+                    <td><%=prol.brand_temporary%> </td>
+                    <td><%=prol.isActive_temporary%> </td>
+                    <td><%=prol.category_temporary %> </td>
+                    <td><%=prol.product_line_description_temporary%> </td>
                 </tr>
             </table><br>
             <input type="submit" value="Save Changes!"><br><br>
         </form>
-        <button onclick = "window.location.href = 'supplierUpdate.jsp';"> Cancel Update </button>
+        <button onclick = "window.location.href = 'productLineUpdate.jsp';"> Cancel Update </button>
     </center></body>
 </html>

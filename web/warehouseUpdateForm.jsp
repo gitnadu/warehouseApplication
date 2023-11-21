@@ -10,10 +10,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update Supplier Form</title>
+        <title>Update Warehouse</title>
     </head>
     <body>
-        <h2> Update Supplier Form </h2>
+        <h2> Update Warehouse </h2>
         <jsp:useBean id="ware" class="warehouseMgmt.warehouse" scope="session" />
         
         <% 
@@ -24,9 +24,20 @@
         <form action="warehouseUpdateCheck.jsp"> 
             Warehouse ID: <%=ware.warehouse_ID %> <br>
             Phone Number: <input type="text" id="phone_number" name="phone_number" value="<%=ware.warehouse_phonenumber %>"> <br>
+            Name: <input type="text" id="name" name="name" value="<%=ware.warehouse_name %>"> <br>
             First Address:<input type="text" id="address" name="address" value="<%=ware.warehouse_address %>"><br>
 
-            Is it functional?: <input type="checkbox" id="is_functional" name="is_functional" checked="1">
+            Is it functional?:
+            <select id="isFunctionalU" name="isFunctionalU">
+            <% if (ware.isFunctional){ %>
+                <option value ="<%=ware.isFunctional%>"> True </option>
+                <option value ="false"> False </option>
+            <% } else { %>
+                <option value ="<%=ware.isFunctional%>"> False </option>
+                <option value ="true"> True </option>
+
+            <% } %>
+                </select> 
 
             Max Row:<input type="number" id="max_row" name="max_row" value="<%=ware.warehouse_maxrow %>"> <br>
             Max Bay:<input type="number" id="max_bay" name="max_bay" value="<%=ware.warehouse_maxbay %>"> <br>

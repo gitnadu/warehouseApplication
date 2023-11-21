@@ -6,7 +6,7 @@
 
 <%@page import="java.text.ParseException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.*, java.lang.*, invEmpMgmt.*, java.text.SimpleDateFormat"%>
+<%@page import="java.util.*, java.lang.*, warehouseMgmt.*, java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,7 +15,7 @@
     </head>
     <body>
         <jsp:useBean id="ware" class="warehouseMgmt.warehouse" scope="session" />
-        <form action="supplierUpdate.jsp"> 
+        <form action="warehouseUpdate.jsp"> 
             <%              
                 int status = ware.update_warehouse();
                 if (status == 1){
