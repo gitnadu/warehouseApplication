@@ -10,11 +10,13 @@
 
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> Register Product Processing </title>
+        <title>Register Product Processing</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <jsp:useBean id="prod" class="productMgmt.product" scope="session" />
+    <body><center>
+            <jsp:useBean id="prod" class="productMgmt.product" scope="session" />
         <%
             DateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
             
@@ -53,25 +55,74 @@
             if (status == 1) {
                 %>
    
-             <h1>Registering Product Line Successful</h1>
-            Product Warehouse ID: <td><%=prod.product_warehouse_ID%></td><br><br>
-            Product Date Received: <td><%=prod.product_date_received%></td><br><br>
-            Product Line ID: <td><%=prod.product_product_line_ID%></td><br><br>
-            Product Condition: <td><%=prod.product_product_condition%></td><br><br>
-            Product Reason: <td><%=prod.product_reason%></td><br><br>
-            Product Stock Price: <td><%=prod.product_stock_price%></td><br><br>
-            Product Supplier ID: <td><%=prod.product_supplier_ID%></td><br><br>
-            Product Bin ID: <td><%=prod.product_bin_ID%></td><br><br>
-            Product Unit Measure: <td><%=prod.product_unit_measure%></td><br><br>
-            Product isReceivedFromWarehouse: <td><%=prod.product_is_received_from_warehouse%></td><br><br>
-            Product Status: <td><%=prod.product_status%></td><br><br>
-            <button onclick = "window.location.href = 'productLine.html';"> Back to Supplier Menu </button>
-            <button onclick = "window.location.href = 'productLineRegister.html';"> Register Another Supplier </button>
+             <h1>Success! Registered New Warehouse!</h1>
+                <hr><br>
+            
+            <table>
+                <tr>
+                    <td>Product Warehouse ID: </td>
+                    <td><%=prod.product_warehouse_ID%></td>
+                </tr>
+                
+                <tr>
+                    <td>Product Date Received: </td>
+                    <td><%=prod.product_date_received%></td>
+                </tr>
+                
+                <tr>
+                    <td>Product Line ID: </td>
+                    <td><%=prod.product_product_line_ID%></td>
+                </tr>
+                
+                <tr>
+                    <td>Product Condition: </td>
+                    <td><%=prod.product_product_condition%></td>
+                </tr>
+                
+                <tr>
+                    <td>Product Reason: </td>
+                    <td><%=prod.product_reason%></td>
+                </tr>
+                
+                <tr>
+                    <td>Product Stock Price: </td>
+                    <td><%=prod.product_stock_price%></td>
+                </tr>
+                
+                <tr>
+                    <td>Product Supplier ID: </td>
+                    <td><%=prod.product_supplier_ID%></td>
+                </tr>
+                
+                <tr>
+                    <td>Product Bin ID: </td>
+                    <td><%=prod.product_bin_ID%></td>
+                </tr>
+                
+                <tr>
+                    <td>Product Unit Measure: </td>
+                    <td><%=prod.product_unit_measure%></td>
+                </tr>
+                
+                <tr>
+                    <td>Product isReceivedFromWarehouse: </td>
+                    <td><%=prod.product_is_received_from_warehouse%></td>
+                </tr>
+                
+                <tr>
+                    <td>Product Status: </td>
+                    <td><%=prod.product_status%></td>
+                </tr>
+            </table><br>
+
+
+            <button onclick = "window.location.href = 'product.html';"> Back to Supplier Menu </button>
+            <button onclick = "window.location.href = 'productRegister.html';"> Register Another Supplier </button>
                 <% 
             } else { 
                 %>
                 <h1>Registering Product Line Unsuccessful </h1>
-                <button onclick = "window.location.href = 'productLineRegister.html';"> Retry </button>
+                <button onclick = "window.location.href = 'productRegister.html';"> Retry </button>
             <% }
         %>
     </body>

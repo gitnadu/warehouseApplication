@@ -20,7 +20,7 @@
             
             String temp = request.getParameter("employee_idD");
             emp.employee_ID = Integer.valueOf(temp); 
-            int status = emp.get_employee_record();
+            int status = emp.delete_employee();
             if (status == 1){
         %>
         <form action="employeeDeleteProcessing.jsp"> 

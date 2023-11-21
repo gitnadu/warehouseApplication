@@ -17,7 +17,7 @@
         <form action="supplierDeleteForm.jsp"> 
             <jsp:useBean id="supp" class="supplierMgmt.supplier" scope="session" />
             Employee ID: <select id="supplier_idD" name="supplier_idD"> 
-            <%  supp.get_supplier_IDs();
+            <%  supp.get_suppliers_delete();
                 for(int i=0;i<supp.supplier_ID_list.size();i++){
             %>
             <option value="<%=supp.supplier_ID_list.get(i) %>" > <%=supp.supplier_ID_list.get(i) %> </option>

@@ -11,10 +11,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View Products</title>
+        <title>View Product</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <h2>View Products</h2>
+    <body><center>
+        <h2>View a Product</h2>
+        <hr><br>
+        
         <form action="productViewProcessing.jsp"> 
             <jsp:useBean id="prod" class="productMgmt.product" scope="session" />
             
@@ -25,8 +28,9 @@
             <option value="<%=prod.product_product_IDList.get(i) %>" > <%=prod.product_product_IDList.get(i) %> </option>
             <% } %>
             </select> <br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit"><br>
         </form>
+        <button onclick = "window.location.href = 'supplier.html';">Cancel</button>
     </body>
 </html>
 

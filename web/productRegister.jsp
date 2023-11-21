@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*, productMgmt.*"%>
 <html>
     <head>
-        <title> Register a new inventory employee </title>
+        <title> Register a New Product </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
         <script>
@@ -67,64 +62,84 @@ and open the template in the editor.
                 return true;
             }
         </script>
-    </head>    
+    </head>
     <body>
-        <h2> Register a Product </h2>
+        <h2>Register a New Product</h2>
         <hr><br>
-
+        
         <form action="productRegisterProcessing.jsp" onsubmit="return validateForm();" method="post" > 
             <jsp:useBean id="prod" class="productMgmt.product" scope="session" />
 
-            Warehouse ID:
-            <select id="product_warehouseID" name="product_warehouseID"  onchange="updateBin();" required>
-                <option value =""></option>
-                <% prod.get_functional_warehouses();
-                    for (int i=0;i< prod.product_warehouse_IDList.size();i++) { %>
-                 <option value ="<%= prod.product_warehouse_IDList.get(i)%>"> <%=prod.product_warehouse_IDList.get(i)%> </option>
-                  <% } %> 
-             </select><br><br> 
-
-            Product Line:
-            <select id="product_productlineID" name="product_productlineID" required>
-                <option value =""></option>
-                <% prod.get_productline_warehouses();
-                    for (int i=0;i< prod.product_product_line_IDList.size();i++) { %>
-                 <option value ="<%= prod.product_product_line_IDList.get(i)%>"> <%=prod.product_product_line_IDList.get(i)%> </option>
-                  <% } %> 
-             </select><br><br>
-
-            Date Received:
-            <input type="date" id ="product_date_received" name="product_date_received" required><br><br>
-
-            Product Condition:
-            <select id="product_condition" name="product_condition" required>
-                <option value =""> </option>
-                <option value ="Good"> Good </option>
-                <option value ="Bad"> Bad </option>
-            </select>
-
-            Product Stock Price:
-            <input type="number" id="product_stock_price" name="product_stock_price" step="0.01" required><br><br>
-
-            Supplier:
-            <select id="product_supplierID" name="product_supplierID" required>
-                <option value =""></option>
-                <% prod.get_suppliers_products();
-                    for (int i=0;i< prod.product_supplier_IDList.size();i++) { %>
-                 <option value ="<%= prod.product_supplier_IDList.get(i)%>"> <%=prod.product_supplier_IDList.get(i)%> </option>
-                  <% } %> 
-             </select><br><br>
-
-            Bin:
-            <select id="product_bin" name="product_bin" required></select>
-
-
-            Unit Measure:
-            <select id="product_unitmeasure" name="product_unitmeasure" required>
-                <option value =""> </option>
-                <option value ="Each"> Each </option>
-                <option value ="Group"> Group </option>
-            </select>
+            <table>
+                <tr>
+                    <td>Warehouse ID:</td>
+                    <td>
+                        <select id="product_warehouseID" name="product_warehouseID"  onchange="updateBin();" required>
+                            <option value =""></option>
+                            <% prod.get_functional_warehouses();
+                                for (int i=0;i< prod.product_warehouse_IDList.size();i++) { %>
+                             <option value ="<%= prod.product_warehouse_IDList.get(i)%>"> <%=prod.product_warehouse_IDList.get(i)%> </option>
+                              <% } %>
+                         </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Product Line:</td>
+                    <td>
+                        <select id="product_productlineID" name="product_productlineID" required>
+                            <option value =""></option>
+                            <% prod.get_productline_warehouses();
+                                for (int i=0;i< prod.product_product_line_IDList.size();i++) { %>
+                             <option value ="<%= prod.product_product_line_IDList.get(i)%>"> <%=prod.product_product_line_IDList.get(i)%> </option>
+                              <% } %>
+                         </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Date Received:</td>
+                    <td><input type="date" id ="product_date_received" name="product_date_received" required></td>
+                </tr>
+                <tr>
+                    <td>Product Condition:</td>
+                    <td>
+                        <select id="product_condition" name="product_condition" required>
+                            <option value =""> </option>
+                            <option value ="Good"> Good </option>
+                            <option value ="Bad"> Bad </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Product Stock Price:</td>
+                    <td><input type="number" id="product_stock_price" name="product_stock_price" step="0.01" required></td>
+                </tr>
+                <tr>
+                    <td>Supplier:</td>
+                    <td>
+                        <select id="product_supplierID" name="product_supplierID" required>
+                            <option value =""></option>
+                            <% prod.get_suppliers_products();
+                                for (int i=0;i< prod.product_supplier_IDList.size();i++) { %>
+                             <option value ="<%= prod.product_supplier_IDList.get(i)%>"> <%=prod.product_supplier_IDList.get(i)%> </option>
+                              <% } %>
+                         </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Bin:</td>
+                    <td><select id="product_bin" name="product_bin" required></select></td>
+                </tr>
+                <tr>
+                    <td>Unit Measure:</td>
+                    <td>
+                        <select id="product_unitmeasure" name="product_unitmeasure" required>
+                            <option value =""> </option>
+                            <option value ="Each"> Each </option>
+                            <option value ="Group"> Group </option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
            
             <input type="submit" value="Proceed"><br><br>
         </form>

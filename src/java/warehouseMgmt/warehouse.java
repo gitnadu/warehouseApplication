@@ -56,6 +56,11 @@ public class warehouse {
     public int warehouse_maxbay_holder;
     public int warehouse_maxlevel_holder;
     public int warehouse_maxbin_holder;
+    
+    public int countOfBin;
+    public int countOfproduct;
+    public int countOfworker;
+    public int countOfmanager;
 
     public int temp_container;
     public int warehouse_search_count = 0;
@@ -93,6 +98,36 @@ public class warehouse {
         }
         
     }
+    
+    public void get_warehouses_delete(){
+        
+        try{
+            warehouse_IDList.clear();
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT w.warehouseID FROM warehouse w "
+                    + "WHERE NOT EXISTS (SELECT b.binID FROM bin b WHERE b.warehouseID = w.warehouseID)"
+                    + "AND NOT EXISTS (SELECT wk.employeeNumber FROM worker wk WHERE wk.warehouseID = w.warehouseID)"
+                    + "AND NOT EXISTS (SELECT m.employeeID FROM manager m WHERE m.warehouseID = w.warehouseID)");
+                    
+            ResultSet rst= pstmt.executeQuery();
+            
+            int temp;
+            while (rst.next()){
+                temp = rst.getInt("employeeID");
+                warehouse_IDList.add(temp);
+            }
+            
+            // Closing Statements
+            pstmt.close();
+            conn.close();
+            
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+    }
+    
+
     
         public int delete_warehouse() {
         try {
@@ -379,6 +414,181 @@ public class warehouse {
             }
 
            
+            // Closing Statements
+            pstmt.close();
+            conn.close();
+            return 1;
+            
+        } catch(SQLException e){
+            e.printStackTrace();
+            return 0;
+        }
+        
+        
+        
+    }
+    
+    public int search_warehouse_report() throws SQLException{
+        try{
+            
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            
+
+            temp_warehouse_IDList.clear();
+
+            PreparedStatement pstmt = conn.prepareStatement("SELECT warehouseID FROM warehouse WHERE (CASE WHEN ? = 0 THEN name LIKE CONCAT('%', ?, '%') ELSE name != '' END)");
+
+            if(warehouse_name_holder.equals(""))
+            {
+                pstmt.setInt(1, 1);
+                pstmt.setNull(2, java.sql.Types.VARCHAR);
+            }
+            else
+            {
+                pstmt.setInt(1, 0);
+                pstmt.setString(2, warehouse_name_holder);
+            }
+                
+            ResultSet rst = pstmt.executeQuery();
+
+            containList(rst);
+            
+            // 2
+            StringBuilder sql = new StringBuilder("SELECT warehouseID FROM warehouse WHERE (CASE WHEN ? = 0 THEN address LIKE CONCAT('%', ?, '%') ELSE address != '' END) AND warehouseID IN (");
+            
+            addString(sql);
+            
+            pstmt = conn.prepareStatement(sql.toString());
+
+            if(warehouse_address_holder.equals(""))
+            {
+                pstmt.setInt(1, 1);
+                pstmt.setNull(2, java.sql.Types.VARCHAR);   
+            }
+            else
+            {
+                pstmt.setInt(1, 0);
+                pstmt.setString(2, warehouse_address_holder);
+            }
+            
+            set_idList(pstmt);
+            temp_warehouse_IDList.clear();
+         
+            rst = pstmt.executeQuery();
+
+            containList(rst);
+
+
+             // 3
+            sql = new StringBuilder("SELECT warehouseID FROM warehouse WHERE (CASE WHEN ? = 0 THEN isFunctional = ? ELSE isFunctional > -1 END) AND warehouseID IN (");
+            
+            addString(sql);
+            
+            pstmt = conn.prepareStatement(sql.toString());
+
+            if(isFunctional_holder.equals(""))
+            {
+                pstmt.setInt(1, 1);
+                pstmt.setInt(2, 0);   
+            }
+            else
+            {
+                pstmt.setInt(1, 0);
+                if (isFunctional_holder.equals("true"))
+                   pstmt.setInt(2, 1);
+                else 
+                   pstmt.setInt(2, 0);  
+            }
+            
+            set_idList(pstmt);
+            temp_warehouse_IDList.clear();
+         
+            rst = pstmt.executeQuery();
+
+            containList(rst);
+            
+            // final
+            
+            sql = new StringBuilder("SELECT COUNT(w.warehouseID) AS phoneCount FROM warehouse w WHERE w.warehouseID IN (");
+
+            addString(sql);
+            
+           
+            pstmt = conn.prepareStatement(sql.toString());
+            
+            for (int i = 0; i < temp_warehouse_IDList.size(); i++) 
+                pstmt.setString(i+1,temp_warehouse_IDList.get(i));
+            
+            rst= pstmt.executeQuery();
+            
+            warehouse_search_count = rst.getInt("phoneCount");
+            
+            
+            
+//            sql = new StringBuilder("SELECT COUNT(binID) AS cbin FROM bin WHERE warehouseID IN (");
+//            
+//            addString(sql);
+//
+//            pstmt = conn.prepareStatement(sql.toString());
+//            
+//            for (int i = 0; i < temp_warehouse_IDList.size(); i++) 
+//                pstmt.setString(i+1,temp_warehouse_IDList.get(i));
+//            
+//            rst= pstmt.executeQuery();
+//            
+//            countOfBin = rst.getInt("cbin");
+//            
+//            
+//            
+//            
+//            sql = new StringBuilder("SELECT COUNT(productID) AS cprod FROM product WHERE warehouseID IN (");
+//            
+//            addString(sql);
+//            
+//           
+//            pstmt = conn.prepareStatement(sql.toString());
+//            
+//            for (int i = 0; i < temp_warehouse_IDList.size(); i++) 
+//                pstmt.setString(i+1,temp_warehouse_IDList.get(i));
+//            
+//            rst= pstmt.executeQuery();
+//            
+//            countOfproduct = rst.getInt("cprod");
+//            
+//            
+//            
+//            
+//            
+//            sql = new StringBuilder("SELECT COUNT(employeeNumber) AS cemp FROM worker WHERE warehouseID IN (");
+//            
+//            addString(sql);
+//           
+//            pstmt = conn.prepareStatement(sql.toString());
+//            
+//            for (int i = 0; i < temp_warehouse_IDList.size(); i++) 
+//                pstmt.setString(i+1,temp_warehouse_IDList.get(i));
+//            
+//            rst= pstmt.executeQuery();
+//            
+//            countOfworker = rst.getInt("cemp");
+//            
+//            
+//            
+//            
+//            
+//            sql = new StringBuilder("SELECT COUNT(employeeID) AS cman FROM manager WHERE warehouseID IN (");
+//            
+//            addString(sql);
+//
+//            pstmt = conn.prepareStatement(sql.toString());
+//            
+//            for (int i = 0; i < temp_warehouse_IDList.size(); i++) 
+//                pstmt.setString(i+1,temp_warehouse_IDList.get(i));
+//            
+//            rst= pstmt.executeQuery();
+//            
+//            countOfmanager = rst.getInt("cman");
+
             // Closing Statements
             pstmt.close();
             conn.close();

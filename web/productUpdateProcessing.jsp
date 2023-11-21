@@ -33,7 +33,7 @@
             <input type="submit" value="Update a Record Again"><br><br>
         </form>
         
-        <button onclick = "window.location.href = 'employee.html';"> Back to Menu </button>
+        <button onclick = "window.location.href = 'product.html';"> Back to Menu </button>
     </body>
 </html>
 

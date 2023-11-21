@@ -10,7 +10,7 @@ public class inventory_physical_checking {
     public int inventory_check_ID;
     public int checking_warehouse_ID;
     public int product_line_ID;
-    public Date date_checked;
+    public Date date_checked = new Date();
     public int employee_in_charge_ID;
     public int quantity_checked;
     public int quantity_disposed;
@@ -23,9 +23,20 @@ public class inventory_physical_checking {
     public ArrayList<Integer> quantity_checkedList = new ArrayList<>();
     public ArrayList<Integer> quantity_disposedList = new ArrayList<>();
     
+    public ArrayList<Integer> products_warehouse = new ArrayList<>();
+    public ArrayList<String> products_status = new ArrayList<>();
+    
+    public ArrayList<Integer> productLine_warehouse = new ArrayList<>();
+    
+    public ArrayList<Integer> products_checked = new ArrayList<>();
+    public ArrayList<Integer> products_disposed = new ArrayList<>();
+    
+    
     public String date_checked_str;
     private DateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
     public Exception err;
+    
+    
     
     public inventory_physical_checking() {}
 
@@ -37,6 +48,62 @@ public class inventory_physical_checking {
         }
     }
     
+    public int get_products() {
+        try {
+            
+            products_warehouse.clear();
+            products_status.clear();
+            
+            
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+    
+            PreparedStatement pstmt = conn.prepareStatement("SELECT productID, status FROM product WHERE warehouseID = ? AND productLineID = ?"); //Place the SQL statement.
+            pstmt.setInt(1, checking_warehouse_ID);
+            pstmt.setInt(2, product_line_ID);
+            
+            ResultSet rst = pstmt.executeQuery();
+            while (rst.next()) {
+                
+                int temp = rst.getInt("productID");
+                String tempo = rst.getString("status");
+                products_warehouse.add(temp);
+                products_status.add(tempo);
+                
+            }
+            pstmt.close();
+            conn.close();
+            return 1;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+    
+    public int get_productline_fromwarehouse() {
+        try {
+            
+            productLine_warehouse.clear();
+            
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+    
+            PreparedStatement pstmt = conn.prepareStatement("SELECT DISTINCT p.productLineID AS productLineID FROM warehouse w LEFT JOIN product p ON p.warehouseID = w.warehouseID WHERE p.warehouseID = ?");
+            pstmt.setInt(1, checking_warehouse_ID);
+    
+            ResultSet rst = pstmt.executeQuery();
+            while (rst.next()) {
+                int temp = rst.getInt("productLineID");
+                productLine_warehouse.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+            return 1;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+    
+
     public int get_workers() {
         try {
             //1. Connect to database.
@@ -80,11 +147,13 @@ public class inventory_physical_checking {
     
     public int get_workers_for_warehouse() {
         try {
+            
+            employeeInCharge_IDList.clear();
             //1. Connect to database.
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
 
             //2. Get warehouseID from the database and put them in an arraylist.
-            PreparedStatement pstmt = conn.prepareStatement("SELECT wo.employeeNumber FROM warehouse wa JOIN worker wo ON wa.warehouseID = wo.warehouseID WHERE wa.warehouseID = ? AND isFunctional = TRUE"); //Place the SQL statement.
+            PreparedStatement pstmt = conn.prepareStatement("SELECT wo.employeeNumber FROM warehouse wa JOIN worker wo ON wa.warehouseID = wo.warehouseID WHERE wa.warehouseID = ? AND wa.isFunctional = TRUE"); //Place the SQL statement.
             pstmt.setInt(1, checking_warehouse_ID); //employee_in_charge_ID is used as a worker employeeNumber.
             ResultSet rst = pstmt.executeQuery();
 
@@ -186,23 +255,24 @@ public class inventory_physical_checking {
 
             //2. To get the next physical_checking_inventory_ID.
             //2.1 Get the next physical_checking_inventory_ID.
-            PreparedStatement pstmt = conn.prepareStatement("SELECT MAX(inventoryCheckID) + 1 AS newID FROM inventoryPhysicalChecking"); //Place the SQL statement.
+            PreparedStatement pstmt = conn.prepareStatement("SELECT MAX(inventoryCheckID) + 1 AS newID FROM inventoryphysicalchecking"); //Place the SQL statement.
             ResultSet rst = pstmt.executeQuery();
             while (rst.next()) {
                 inventory_check_ID = rst.getInt("newID");
             }
 
             //2.2 Save the new warehouse.
-            pstmt = conn.prepareStatement("INSERT INTO inventoryPhysicalChecking (inventoryCheckID, warehouseID, productLineID, dateChecked, employeeInChargeID, quantityChecked, quantityDisposed) VALUES (?,?,?,?,?,?,?)"); //Place INSERT INTO statement.
+            pstmt = conn.prepareStatement("INSERT INTO inventoryphysicalchecking (inventoryCheckID, warehouseID, productLineID, dateChecked, employeeInChargeID, quantityChecked, quantityDisposed) VALUES (?,?,?,?,?,?,?)"); //Place INSERT INTO statement.
             pstmt.setInt(1, inventory_check_ID);
             pstmt.setInt(2, checking_warehouse_ID);
             pstmt.setInt(3, product_line_ID);
-            convert_date_checked(); //To convert a data checked string to Date.
             pstmt.setDate(4, new java.sql.Date(date_checked.getTime()));
             pstmt.setInt(5, employee_in_charge_ID);
+            quantity_checked = products_checked.size();
+            quantity_disposed = products_disposed.size(); 
             pstmt.setInt(6, quantity_checked);
             pstmt.setInt(7, quantity_disposed);
-
+            
             pstmt.executeUpdate();
 
             pstmt.close();
@@ -214,6 +284,31 @@ public class inventory_physical_checking {
             System.out.println(e.getMessage());
             return 0;
         }
+    }
+    
+    public int add_stock_checked() {
+        try {
+            
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+        
+            PreparedStatement pstmt;
+            
+            for (int i=0;i < products_checked.size();i++)
+            {
+                pstmt = conn.prepareStatement("INSERT INTO stockforchecking (productID, warehouseID, inventoryCheckID) VALUES (?,?,?)");
+                pstmt.setInt(1, products_checked.get(i));
+                pstmt.setInt(2, checking_warehouse_ID); 
+                pstmt.setInt(3, inventory_check_ID); 
+                pstmt.executeUpdate();
+                pstmt.close();
+                
+            }
+            conn.close();
+            return 1;
+
+        } catch (SQLException e) {
+            return 0;
+        }         
     }
 
     public int update_inventory_physical_checking() { //It works.
@@ -233,6 +328,8 @@ public class inventory_physical_checking {
             pstmt.setInt(5, quantity_checked);
             pstmt.setInt(6, quantity_disposed);
             pstmt.setInt(7, inventory_check_ID);
+            
+
 
             pstmt.executeUpdate();
 
@@ -242,6 +339,45 @@ public class inventory_physical_checking {
             return 1;
         } catch (Exception e) {
             err = e;
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+    
+    public int update_stocktransfer() { //It works.
+        try {
+            //1. Connect to database.
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+
+            StringBuilder sql = new StringBuilder("UPDATE product SET status=? WHERE productID IN (");
+            
+            for (int i = 0; i < products_disposed.size(); i++) {
+            sql.append("?");
+                if (i < products_disposed.size() - 1) 
+                {
+                    sql.append(",");
+                }
+            }
+            sql.append(")");
+            
+            PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+            
+            pstmt.setString(1, "disposed");
+
+            for (int i = 0; i < products_disposed.size(); i++) 
+            {
+                pstmt.setInt(i+2,products_disposed.get(i));
+            } 
+            
+
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
+
+            return 1;
+        } catch (Exception e) {
+
             System.out.println(e.getMessage());
             return 0;
         }

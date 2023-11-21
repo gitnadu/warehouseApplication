@@ -1,6 +1,6 @@
 <%-- 
-    Document   : productTransferRegister
-    Created on : 11 22, 23, 12:05:29 AM
+    Document   : productChecking
+    Created on : 11 22, 23, 3:03:27 AM
     Author     : ccslearner
 --%>
 
@@ -13,7 +13,7 @@
         <title> Register New Transfer </title>
         <script>
             function updateEmployee() {
-                var selectedWarehouse = document.getElementById("transfer_warehouse").value;
+                var selectedWarehouse = document.getElementById("checking_warehouse").value;
                 var xmlhttp = new XMLHttpRequest();
                 
                 xmlhttp.onreadystatechange = function () {
@@ -25,13 +25,13 @@
                     }
                 };
 
-                xmlhttp.open("GET", "get_employee.jsp?warehouse=" + selectedWarehouse, true);
+                xmlhttp.open("GET", "get_employee_checking.jsp?warehouse=" + selectedWarehouse, true);
                 xmlhttp.send();
                 
             }
             
             function populateDropdown(employeesData) {
-                var selectElement = document.getElementById("transfer_employee");
+                var selectElement = document.getElementById("checking_employee");
 
                 // Clear existing options
                 selectElement.innerHTML = "";
@@ -48,24 +48,24 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body><center>
-        <h2> Register New Transfer </h2>
+        <h2> Register New Inventory Physical Checking Record </h2>
         <hr><br>
         
-        <form action="productTransferForm.jsp"> 
-            <jsp:useBean id="transfer" class="productMgmt.transfer" scope="session" />
+        <form action="productCheckingForm.jsp"> 
+            <jsp:useBean id="check" class="warehouseMgmt.inventory_physical_checking" scope="session" />
             
-            Warehouse Origin ID <select id="transfer_warehouse" name="transfer_warehouse" onchange="updateEmployee();"> <br><br>
+            Warehouse ID <select id="checking_warehouse" name="checking_warehouse" onchange="updateEmployee();"> <br><br>
                 <option value=""> </option>
-            <%  transfer.get_warehouses();
-                for(int i=0;i<transfer.transfer_warehouse_origin_ID_list.size();i++){
+            <%  check.get_functional_warehouses();
+                for(int i=0;i<check.checking_warehouse_IDList.size();i++){
             %>
-            <option value="<%=transfer.transfer_warehouse_origin_ID_list.get(i) %>" > <%=transfer.transfer_warehouse_origin_ID_list.get(i) %> </option>
+            <option value="<%=check.checking_warehouse_IDList.get(i) %>" > <%=check.checking_warehouse_IDList.get(i) %> </option>
             <% } %>
             
             </select> <br>
             
             Employee In Charge:
-            <select id="transfer_employee" name="transfer_employee"></select>
+            <select id="checking_employee" name="checking_employee"></select>
             
             <input type="submit" value="Submit">
         </form>

@@ -18,7 +18,7 @@
             <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
             Employee ID: <select id="employee_idD" name="employee_idD"> 
             <%  
-                emp.get_employees();
+                emp.get_employees_delete();
                 for(int i=0;i<emp.employee_IDList.size();i++){
             %>
             <option value="<%=emp.employee_IDList.get(i) %>" > <%=emp.employee_IDList.get(i) %> </option>

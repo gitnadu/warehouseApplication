@@ -254,6 +254,34 @@ public class employee {
         }
     }
     
+    public int get_employees_delete(){
+        
+        try{
+            employee_IDList.clear();
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT employeeID AS employeeID FROM inventoryemployees ie "
+                    + "WHERE NOT EXISTS (SELECT employeeNumber FROM worker w WHERE w.employeeNumber = ie.employeeID)"
+                    + "AND NOT EXISTS (SELECT employeeID FROM manager m WHERE m.employeeID = ie.employeeID)");
+            ResultSet rst= pstmt.executeQuery();
+            
+            int temp;
+            while (rst.next()){
+                temp = rst.getInt("employeeID");
+                employee_IDList.add(temp);
+            }
+            
+            // Closing Statements
+            pstmt.close();
+            conn.close();
+            return 1;
+            
+        } catch(SQLException e){
+            e.printStackTrace();
+            return 0;
+        }
+        
+    }
+    
     public int delete_employee(){
         try{
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
