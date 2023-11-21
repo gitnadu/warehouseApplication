@@ -11,10 +11,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Update Warehouse</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <h2> Update Warehouse </h2>
-        <form action="warehouseUpdateForm.jsp"> 
+    <body><center>
+        <h2>Update a Warehouse</h2>
+        <hr><br>
+        
+       <form action="warehouseUpdateForm.jsp"> 
             <jsp:useBean id="ware" class="warehouseMgmt.warehouse" scope="session" />
             Warehouse ID: <select id="warehouse_idU" name="warehouse_idU"> 
             <%  ware.get_warehouses();
@@ -23,7 +26,8 @@
             <option value="<%=ware.warehouse_IDList.get(i) %>" > <%=ware.warehouse_IDList.get(i) %> </option>
             <% } %>
             </select> <br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit"><br><br>
         </form>
+        <button onclick = "window.location.href = 'warehouse.html';">Cancel</button>
     </body>
 </html>

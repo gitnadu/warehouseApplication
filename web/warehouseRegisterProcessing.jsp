@@ -9,11 +9,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register Warehouse Processing</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <jsp:useBean id="ware" class="warehouseMgmt.warehouse" scope="session" />
+    <body><center>
+            <jsp:useBean id="ware" class="warehouseMgmt.warehouse" scope="session" />
         <%
             ware.warehouse_phonenumber = request.getParameter("warehouse_phonenumber");
             ware.warehouse_name = request.getParameter("warehouse_name");
@@ -31,23 +33,49 @@
             int status = ware.register_warehouse();
             if (status==1) {
                 %>
-                <h1>Registering Warehouse Successful </h1>
-                New Warehouse ID: <%=ware.warehouse_ID %>  <br><br>
-                New Warehouse Phone Number: <%=ware.warehouse_phonenumber %> <br>
-                New Warehouse Name: <%=ware.warehouse_name %>  <br><br>
-                New Warehouse First Address: <%=ware.warehouse_address %>  <br>
-                New Warehouse Max Row: <%=ware.warehouse_maxrow%> <br>
-                New Warehouse Max Bay: <%=ware.warehouse_maxbay %>  <br>
-                New Warehouse Max Level: <%=ware.warehouse_maxlevel %>  <br>
-                New Warehouse Max Bin: <%=ware.warehouse_maxbinNumber %>  <br>
-                <br>
-                
+                <h1>Success! Registered New Warehouse!</h1>
+                <hr><br>
+            
+                <table>
+                    <tr>
+                        <td>New Warehouse ID: </td>
+                        <td><%=ware.warehouse_ID %></td>
+                    </tr>
+                    <tr>
+                        <td>New Warehouse Phone Number: </td>
+                        <td><%=ware.warehouse_phonenumber %></td>
+                    </tr>
+                    <tr>
+                        <td>New Warehouse Name:</td>
+                        <td><%=ware.warehouse_name %></td>
+                    </tr>
+                    <tr>
+                        <td>New Warehouse First Address:</td>
+                        <td><%=ware.warehouse_address %></td>
+                    </tr>
+                    <tr>
+                        <td>New Warehouse Max Row: </td>
+                        <td><%=ware.warehouse_maxrow%></td>
+                    </tr>
+                    <tr>
+                        <td>New Warehouse Max Bay: </td>
+                        <td><%=ware.warehouse_maxbay %> </td>
+                    </tr>
+                    <tr>
+                        <td>New Warehouse Max Level: </td>
+                        <td><%=ware.warehouse_maxlevel %> </td>
+                    </tr>
+                    <tr>
+                        <td>New Warehouse Max Bin: </td>
+                        <td><%=ware.warehouse_maxbinNumber %> </td>
+                    </tr>
+                </table><br>
                 <button onclick = "window.location.href = 'warehouse.html';"> Back to Warehouse Menu </button>
                 <button onclick = "window.location.href = 'warehouseRegister.html';"> Register Another Warehouse </button>
                 <% 
             } else { 
                 %>
-                <h1>Registering Inventory Employee Unsuccessful </h1>
+                <h1>Registering Warehouse Failed</h1>
                 <button onclick = "window.location.href = 'warehouseRegister.html';"> Retry </button>
             <% } 
         %>

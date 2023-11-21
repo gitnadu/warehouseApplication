@@ -11,22 +11,22 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Updating Warehouse Record</title>
+        <title>Update Supplier</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
+    <body><center>
         <jsp:useBean id="ware" class="warehouseMgmt.warehouse" scope="session" />
         <form action="warehouseUpdate.jsp"> 
             <%              
                 int status = ware.update_warehouse();
                 if (status == 1){
             %>
-            <h1>Updating Warehouse Successful </h1>
+            <h1>Record Successfully Updated!</h1>
             <% } else { %>
-            <h1>Updating Warehouse Unsuccessful </h1>
+            <h1>Record Unsuccessfully Updated..</h1>
             <% } %>
-            
-
-            <input type="submit" value="Update a record again">
+            <hr><br><br>
+            <input type="submit" value="Update a Record Again"><br><br>
         </form>
         
         <button onclick = "window.location.href = 'warehouse.html';"> Back to Main Menu </button>

@@ -6,39 +6,57 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title> Search For Inventory Employee </title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Search Employee</title>
         <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <h2> Search For Inventory Employee </h2>
+    <body><center>
+        <h1>Search for an Employee</h1>
         <hr><br>
-        <form action="employeeSearchProcessing.jsp"> 
-            Employee First Name: 
-            <input type="text" id ="employee_firstnameS" name="employee_firstnameS"> <br><br>
-            
-            Employee Last Name: 
-            <input type="text" id ="employee_lastnameS" name="employee_lastnameS"> <br><br>
-            
-            Employee Middle Name: 
-            <input type="text" id ="employee_middlenameS" name="employee_middlenameS"> <br><br>
-            
-            Employee Permanent Address: 
-            <input type="text" id ="employee_permaddressS" name="employee_permaddressS"> <br><br>
-            
-            Employee Current Address:  
-            <input type="text" id ="employee_currddressS" name="employee_currddressS"> <br><br>
-            
-            Employee Gender: 
-            <select id="employee_genderS" name="employee_genderS"> 
-                <option value ="">  </option>
-                <option value ="M"> M </option>
-                <option value ="F"> F </option>
-            </select> <br><br>
-            
-            Employee Birthday:
-            <input type="date" id ="employee_birthdayS" name="employee_birthdayS"> <br>
+        
+       <form action="employeeSearchProcessing.jsp">
+            <table>
+            <tr>
+                <td>Employee First Name:</td>
+                <td><input type="text" id ="employee_firstnameS" name="employee_firstnameS"></td>
+            </tr>
+
+            <tr>
+                <td>Employee Last Name:</td>
+                <td><input type="text" id ="employee_lastnameS" name="employee_lastnameS"></td>
+            </tr>
+
+            <tr>
+                <td>Employee Middle Name:</td>
+                <td><input type="text" id ="employee_middlenameS" name="employee_middlenameS"></td>
+            </tr>
+
+            <tr>
+                <td>Employee Permanent Address:</td>
+                <td><input type="text" id ="employee_permaddressS" name="employee_permaddressS"></td>
+            </tr>
+
+            <tr>
+                <td>Employee Current Address:</td>
+                <td><input type="text" id ="employee_currddressS" name="employee_currddressS"></td>
+            </tr>
+
+            <tr>
+                <td>Employee Gender:</td>
+                <td>
+                    <select id="employee_genderS" name="employee_genderS">
+                        <option value ="">  </option>
+                        <option value ="M"> M </option>
+                        <option value ="F"> F </option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Employee Birthday:</td>
+                <td><input type="date" id ="employee_birthdayS" name="employee_birthdayS"></td>
+            </tr>
+        </table>
 
             <input type="submit" value="Submit">
         </form>

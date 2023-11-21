@@ -11,7 +11,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update Warehouse Check</title>
+        <title>Update Supplier</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body><center>
+        <h2>Double Check Changes</h2>
+        <hr><br>
+        
         <jsp:useBean id="ware" class="warehouseMgmt.warehouse" scope="session" />
         <form action="warehouseUpdateProcessing.jsp"> 
             <%  
@@ -26,39 +32,61 @@
                 ware.get_warehouse_record();
             %>
             
-            <table>
-                <th> OLD RECORD
+            <table style = "width: 100%">
+                <h2>Original Details: </h2>
                 <tr> 
-                    <th> Warehouse ID: <%=ware.warehouse_ID %>  </td> &nbsp;
-                    <th> Warehouse Phone Number: <%=ware.warehouse_phonenumber %> </td> &nbsp;
-                    <th> Warehouse Name: <%=ware.warehouse_name %> </td> &nbsp;
-                    <th> Warehouse Address: <%=ware.warehouse_address %>  </td> &nbsp;
-                        <th> Warehouse Address: <%=ware.isFunctional %>  </td> &nbsp;
-                    <th> Warehouse Max Row: <%=ware.warehouse_maxrow%> </td> &nbsp;
-                    <th> Warehouse Max Bay: <%=ware.warehouse_maxbay %>  </td> &nbsp;
-                    <th> Warehouse Max Level: <%=ware.warehouse_maxlevel %>  </td> &nbsp;
-                    <th> Warehouse Max Bin: <%=ware.warehouse_maxbinNumber %>  </td> &nbsp;
+                    <td> Warehouse ID:</td>
+                    <td> Warehouse Phone Number:</td>
+                    <td> Warehouse Name: </td>
+                    <td> Warehouse Address: </td>
+                    <td> Warehouse Address: </td>
+                    <td> Warehouse Max Row: </td>
+                    <td> Warehouse Max Bay: </td>
+                    <td> Warehouse Max Level: </td>
+                    <td> Warehouse Max Bin: </td>
+                </tr>
+                <tr>
+                    <td><%=ware.warehouse_ID %></td>
+                    <td><%=ware.warehouse_phonenumber %></td>
+                    <td><%=ware.warehouse_name %></td>
+                    <td><%=ware.warehouse_address %></td>
+                    <td><%=ware.isFunctional %></td>
+                    <td><%=ware.warehouse_maxrow%></td>
+                    <td><%=ware.warehouse_maxbay %></td>
+                    <td><%=ware.warehouse_maxlevel %></td>
+                    <td><%=ware.warehouse_maxbinNumber %></td>
                 </tr>
             </table>
-                    <br>
-            <table>
-                <th> NEW RECORD </th>
+            
+            <hr class="short">
+
+            <table style = "width: 100%">
+                <h2>New Details: </h2>
                 <tr> 
-                    <th> Warehouse ID: <%=ware.warehouse_ID %>  </td> &nbsp;
-                    <th> Warehouse Phone Number: <%=ware.warehouse_phonenumber_temporary %> </td> &nbsp;
-                        <th> Warehouse Name: <%=ware.warehouse_name_temporary %> </td> &nbsp;
-                    <th> Warehouse First Address: <%=ware.warehouse_address_temporary %>  </td> &nbsp;
-                        <th> Warehouse Address: <%=ware.isFunctional_temporary %>  </td> &nbsp;
-                    <th> Warehouse Max Row: <%=ware.warehouse_maxrow_temporary%> </td> &nbsp;
-                    <th> Warehouse Max Bay: <%=ware.warehouse_maxbay_temporary %>  </td> &nbsp;
-                    <th> Warehouse Max Level: <%=ware.warehouse_maxlevel_temporary %>  </td> &nbsp;
-                    <th> Warehouse Max Bin: <%=ware.warehouse_maxbinNumber_temporary %>  </td> &nbsp;
+                    <td> Warehouse ID:</td>
+                    <td> Warehouse Phone Number:</td>
+                    <td> Warehouse Name: </td>
+                    <td> Warehouse Address: </td>
+                    <td> Warehouse Address: </td>
+                    <td> Warehouse Max Row: </td>
+                    <td> Warehouse Max Bay: </td>
+                    <td> Warehouse Max Level: </td>
+                    <td> Warehouse Max Bin: </td>
+                </tr>
+                <tr>
+                    <td><%=ware.warehouse_ID %>  </td>
+                    <td><%=ware.warehouse_phonenumber_temporary %> </td>
+                    <td><%=ware.warehouse_name_temporary %> </td>
+                    <td><%=ware.warehouse_address_temporary %>  </td>
+                    <td><%=ware.isFunctional_temporary %>  </td>
+                    <td><%=ware.warehouse_maxrow_temporary%> </td>
+                    <td><%=ware.warehouse_maxbay_temporary %>  </td>
+                    <td><%=ware.warehouse_maxlevel_temporary %>  </td>
+                    <td><%=ware.warehouse_maxbinNumber_temporary %>  </td>
                 </tr>
             </table>
-            <input type="submit" value="Save changes">
+            <input type="submit" value="Save Changes!">
         </form>
-        <button onclick = "window.location.href = 'warehouseUpdateForm.jsp';"> Return </button>
-        
-        
+        <button onclick = "window.location.href = 'warehouseUpdate.jsp';"> Cancel Update </button>
     </body>
 </html>

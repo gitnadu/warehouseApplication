@@ -11,6 +11,7 @@ public class product {
     
     public String product_warehouse_locator;
     public ArrayList<Integer> product_warehouse_locatorList = new ArrayList<>();
+    public ArrayList<Integer> product_warehouse_locatorList_exclude = new ArrayList<>();
     
     public int product_product_ID;
     public int product_warehouse_ID;
@@ -27,27 +28,36 @@ public class product {
     public String product_status;
     
     // Temporary Values to Get HTML Inputs
-    public int product_product_ID_temporary;
-    public int product_warehouse_ID_temporary;
-    public Date product_date_received_temporary;
-    public int product_product_line_ID_temporary;
+    public String product_product_ID_temporary;
+    public String product_warehouse_ID_temporary;
+    public String product_date_received_temporary;
+    public String product_product_line_ID_temporary;
     public String product_product_condition_temporary;
     public String product_reason_temporary;
-    public float product_stock_price_temporary;
-    public int product_supplier_ID_temporary;
-    public int product_bin_ID_temporary;
+    public String product_stock_price_temporary;
+    public String product_supplier_ID_temporary;
+    public String product_bin_ID_temporary;
     public String product_unit_measure_temporary;
-    public boolean product_is_received_from_warehouse_temporary;
+    public String product_is_received_from_warehouse_temporary;
     public String product_status_temporary;
 
     public ArrayList product_product_IDList = new ArrayList<>();
+    
     public ArrayList product_warehouse_IDList = new ArrayList<>();
+    public ArrayList product_warehouse_IDList_exclude = new ArrayList<>();
+    
     public ArrayList product_date_receivedList= new ArrayList<>();
+    
     public ArrayList product_product_line_IDList= new ArrayList<>();
+    public ArrayList product_product_line_IDList_exclude= new ArrayList<>();
+    
     public ArrayList product_product_conditionList= new ArrayList<>();
     public ArrayList product_reasonList= new ArrayList<>();
     public ArrayList product_stock_priceList= new ArrayList<>();
+    
     public ArrayList product_supplier_IDList= new ArrayList<>();
+    public ArrayList product_supplier_IDList_exclude= new ArrayList<>();
+    
     public ArrayList product_bin_IDList= new ArrayList<>();
     public ArrayList product_unit_measureList= new ArrayList<>();
     public ArrayList product_is_received_from_warehouseList= new ArrayList<>();
@@ -95,6 +105,29 @@ public class product {
         }
     }
     
+    public void get_functional_warehouses_exclude(){
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT warehouseID AS warehouseID FROM warehouse WHERE isFunctional= 1 AND warehouseID != ? ORDER BY warehouseID ASC");
+            pstmt.setInt(1, product_warehouse_ID);
+            
+            ResultSet rst= pstmt.executeQuery();
+            
+            int temp;
+            product_warehouse_IDList_exclude.clear();
+            
+            while (rst.next()){
+                temp = rst.getInt("warehouseID");
+                product_warehouse_IDList_exclude.add(temp);
+            }
+            
+            pstmt.close();
+            conn.close();   
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
     public void get_suppliers_products(){
         try{
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
@@ -107,6 +140,28 @@ public class product {
             while (rst.next()){
                 temp = rst.getInt("supplierID");
                 product_supplier_IDList.add(temp);
+            }
+            pstmt.close();
+            conn.close();   
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void get_suppliers_products_exclude(){
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT supplierID FROM supplier WHERE supplierID != ?");
+            pstmt.setInt(1, product_supplier_ID);
+            
+            ResultSet rst= pstmt.executeQuery();
+            
+            int temp;
+            product_supplier_IDList_exclude.clear();
+            
+            while (rst.next()){
+                temp = rst.getInt("supplierID");
+                product_supplier_IDList_exclude.add(temp);
             }
             pstmt.close();
             conn.close();   
@@ -137,6 +192,29 @@ public class product {
         }
     }
     
+    public void get_binfrom_warehouses_exclude(){
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT binID FROM bin WHERE warehouseID = ? AND isAvailable = 1");
+            pstmt.setInt(1, Integer.valueOf(product_warehouse_locator));
+            //pstmt.setInt(2, product_warehouse_ID);
+            
+            ResultSet rst= pstmt.executeQuery();
+            
+            int temp;
+            product_warehouse_locatorList_exclude.clear();
+            
+            while (rst.next()){
+                temp = rst.getInt("binID");
+                product_warehouse_locatorList_exclude.add(temp);
+            }
+            pstmt.close();
+            conn.close();   
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
     public void get_productline_warehouses(){
         try{
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
@@ -150,6 +228,28 @@ public class product {
             while (rst.next()){
                 temp = rst.getInt("productLineID");
                 product_product_line_IDList.add(temp);
+            }
+            pstmt.close();
+            conn.close();   
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void get_productline_warehouses_exclude(){
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbwarehouse?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT productLineID FROM productline WHERE productLineID != ? AND isActive = 1");
+            pstmt.setInt(1, this.product_product_line_ID);
+            
+            ResultSet rst= pstmt.executeQuery();
+            
+            int temp;
+            product_product_line_IDList_exclude.clear();
+            
+            while (rst.next()){
+                temp = rst.getInt("productLineID");
+                product_product_line_IDList_exclude.add(temp);
             }
             pstmt.close();
             conn.close();   

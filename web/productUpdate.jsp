@@ -17,12 +17,12 @@
         <h2>Update a Product</h2>
         <hr><br>
         
-       <form action="supplierUpdateForm.jsp"> 
+       <form action="productUpdateForm.jsp"> 
             <jsp:useBean id="prod" class="productMgmt.product" scope="session" />
             <table>
                 <tr>
                     <td>Supplier ID: </td>
-                    <td><select id="supplier_idU" name="supplier_idU"> 
+                    <td><select id="product_idU" name="product_idU"> 
             <%  prod.get_product_IDs();
                 for(int i=0;i<prod.product_product_IDList.size();i++){
             %>

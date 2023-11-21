@@ -11,10 +11,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Search Inventory Employee Results</title>
+        <title>Search Employee</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
+    <body><center>
+        <h1>Search Results:</h1>
+        <hr><br>
+        
+       <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
         <form action="employeeSearch.html"> 
      
             <% 
@@ -29,42 +33,47 @@
                 int status = emp.search_employees();
                 if (status == 1){
             %>
-            <h1> Search Inventory Employee Results </h1>
             <table>
                 <tr> 
-                    <th> Last Name </th> &nbsp;
-                    <th> First Name </th> &nbsp;
-                    <th> Middle Name </th> &nbsp;
-                    <th> Permanent Address </th> &nbsp;
-                    <th> Current Address </th> &nbsp;
-                    <th> Gender </th> &nbsp;
-                    <th> Birthday </th> &nbsp;
-                    <th> Employment Start Date </th> &nbsp;
-                    <th> Employment End Date </th> &nbsp;
+                    <td> Last Name </td> 
+                    <td> First Name </td> 
+                    <td> Middle Name </td> 
+                    <td> Permanent Address </td> 
+                    <td> Current Address </td> 
+                    <td> Gender </td> 
+                    <td> Birthday </td> 
+                    <td> Employment Start Date </td> 
+                    <td> Employment End Date </td> 
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                     <% 
                        for(int i=0;i<emp.search_count;i++)
                        { %>
                        <tr> 
-                        <td> <%=emp.last_nameList.get(i) %> </td> &nbsp;
-                        <td><%=emp.first_nameList.get(i) %> </td> &nbsp;
-                        <td><%=emp.middle_nameList.get(i) %></td>&nbsp;
-                        <td><%=emp.permanent_addressList.get(i) %> </td>&nbsp;
-                        <td><%=emp.current_addressList.get(i) %> </td>&nbsp;
-                        <td><%=emp.genderList.get(i) %>  </td>&nbsp;
-                        <td><%=emp.birthdayList.get(i) %> </td>&nbsp;
-                        <td><%=emp.employment_start_dateList.get(i) %></td>&nbsp;
-                        <td><%=emp.employment_end_dateList.get(i) %></td> &nbsp;
+                        <td> <%=emp.last_nameList.get(i) %> </td> 
+                        <td><%=emp.first_nameList.get(i) %> </td> 
+                        <td><%=emp.middle_nameList.get(i) %></td>
+                        <td><%=emp.permanent_addressList.get(i) %> </td>
+                        <td><%=emp.current_addressList.get(i) %> </td>
+                        <td><%=emp.genderList.get(i) %>  </td>
+                        <td><%=emp.birthdayList.get(i) %> </td>
+                        <td><%=emp.employment_start_dateList.get(i) %></td>
+                        <td><%=emp.employment_end_dateList.get(i) %></td> 
                        <tr>
                     <% } %> 
             </table>
             
             
             <% } else { %>
-            <h1>Search Failed </h1>
+            <h1>There is no record that matches your search query..</h1>
             <% } %>
            <input type="submit" value="Search Again">
         </form>
-        <button onclick = "window.location.href = 'employee.html';"> Back to Main Menu </button>
+        <button onclick = "window.location.href = 'employee.html';"> Back to Menu </button>
     </body>
 </html>
