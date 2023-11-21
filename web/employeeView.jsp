@@ -9,23 +9,23 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View Inventory Employees</title>
+        <title>Update Employee</title>
         <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <h2>View Inventory Employees</h2>
+    <body><center>
+        <h1>View an Employee</h1>
         <hr><br>
         
-        <form action="employeeViewProcessing.jsp"> 
+       <form action="employeeViewProcessing.jsp"> 
             <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
-            Employee ID: <select id="employee_idV" name="employee_idV"> 
+            Employee ID: <select id="employee_idV" name="employee_idV" required>  
             <%  emp.get_employees();
                 for(int i=0;i<emp.employee_IDList.size();i++){
             %>
             <option value="<%=emp.employee_IDList.get(i) %>" > <%=emp.employee_IDList.get(i) %> </option>
             <% } %>
-            </select> <br>
-            <input type="submit" value="Submit">
+            </select> <br><br>
+            <input type="submit" value="Submit"> <br><br>
         </form>
         <button onclick = "window.location.href = 'employee.html';">Cancel</button>
     </body>

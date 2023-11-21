@@ -10,29 +10,29 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update Supplier</title>
+        <title>Update a Product</title>
         <link rel="stylesheet" href="styles.css">
     </head>
     <body><center>
-        <h2>Update a Supplier</h2>
+        <h2>Update a Product</h2>
         <hr><br>
         
        <form action="supplierUpdateForm.jsp"> 
-            <jsp:useBean id="supp" class="supplierMgmt.supplier" scope="session" />
+            <jsp:useBean id="prod" class="productMgmt.product" scope="session" />
             <table>
                 <tr>
                     <td>Supplier ID: </td>
                     <td><select id="supplier_idU" name="supplier_idU"> 
-            <%  supp.get_suppliers();
-                for(int i=0;i<supp.supplier_ID_list.size();i++){
+            <%  prod.get_product_IDs();
+                for(int i=0;i<prod.product_product_IDList.size();i++){
             %>
-            <option value="<%=supp.supplier_ID_list.get(i) %>" > <%=supp.supplier_ID_list.get(i) %>: <%=supp.supplier_name_list.get(i) %> </option>
+            <option value="<%=prod.product_product_IDList.get(i) %>" > <%=prod.product_product_IDList.get(i) %> </option>
             <% } %>
             </select> </td>
                 </tr>
             </table><br>
             <input type="submit" value="Submit"><br><br>
         </form>
-        <button onclick = "window.location.href = 'supplier.html';">Cancel</button>
+        <button onclick = "window.location.href = 'product.html';">Cancel</button>
     </center></body>
 </html>

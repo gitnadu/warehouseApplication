@@ -10,12 +10,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View Inventory Employees Processing</title>
+        <title>Update Employee</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <h2>View Inventory Employee</h2>
+    <body><center>
+        <h1>View an Employee</h1>
         <hr><br>
-        <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
+        
+       <jsp:useBean id="emp" class="invEmpMgmt.employee" scope="session" />
         
         <% 
             String temp = request.getParameter("employee_idV");
@@ -27,23 +29,71 @@
         <% } else { %>
         <h2> Nope </h2>
         <% } %>
-        <form action="employee.html"> 
-            Employee First Name: <%=emp.first_name %>  <br><br>
-            Employee Last Name: <%=emp.last_name %> <br><br>
-            Employee Middle Name: <%=emp.middle_name %>  <br><br>
-            Employee Permanent Address: <%=emp.permanent_address %> <br><br>
-            Employee Current Address:  <%=emp.current_address %> <br><br>
-            Employee Gender:<%=emp.gender %> <br><br>
-            Employee Birthday:<%=emp.birthday%> <br><br>
-            Employee Email Address: <%=emp.email_address %>  <br><br>
-            Employee Start of Employment Date: <%=emp.employment_start_date %>  <br><br>
-            Employee End of Employment Date: 
-            <% if (emp.employment_end_date == null) { %>
-            --- <% } else { %> <%=emp.employment_end_date%> <% } %>
-            Employee Phone Number: <%=emp.phone_number %>"> <br><br>
-            <input type="submit" value="Go back">
+        <form action="employeeView.jsp"> 
+            <table>
+                <tr>
+                    <td>Employee First Name:</td>
+                    <td><%=emp.first_name %></td>
+                </tr>
+                <tr>
+                    <td>Employee Last Name:</td>
+                    <td><%=emp.last_name %></td>
+                </tr>
+                <tr>
+                    <td>Employee Middle Name:</td>
+                    <td><%=emp.middle_name %></td>
+                </tr>
+                <tr>
+                    <td>Employee Middle Name:</td>
+                    <td><%=emp.middle_name %></td>
+                </tr>
+
+                <tr>
+                    <td>Employee Permanent Address:</td>
+                    <td><%=emp.permanent_address %></td>
+                </tr>
+
+                <tr>
+                    <td>Employee Current Address:</td>
+                    <td><%=emp.current_address %></td>
+                </tr>
+
+                <tr>
+                    <td>Employee Gender:</td>
+                    <td><%=emp.gender %></td>
+                </tr>
+
+                <tr>
+                    <td>Employee Birthday:</td>
+                    <td><%=emp.birthday%></td>
+                </tr>
+
+                <tr>
+                    <td>Employee Email Address:</td>
+                    <td><%=emp.email_address %> </td>
+                </tr>
+
+                <tr>
+                    <td>Employee Start of Employment Date:</td>
+                    <td><%=emp.employment_start_date %> </td>
+                </tr>
+
+                <tr>
+                    <td>Employee End of Employment Date: </td>
+                    <td>
+                        <% if (emp.employment_end_date == null) { %>
+                        --- <% } else { %> <%=emp.employment_end_date%> <% } %>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Employee Phone Number: </td>
+                    <td><%=emp.phone_number %></td>
+                </tr>
+
+            </table><br>
+            <input type="submit" value="View Again"><br><br>
         </form>
-        <button onclick = "window.location.href = 'employee.html';">Go Home</button> <br><br>
-        <button onclick = "window.location.href = 'employeeView.jsp';">Cancel</button>
+        <button onclick = "window.location.href = 'employee.html';">Go Home</button>
     </body>
 </html>
